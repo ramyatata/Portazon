@@ -1,0 +1,33 @@
+{
+  "name": "portazon",
+  "version": "1.0.0",
+  "description": "amazon clone project for Portents thesis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Portazon/Portazon.git"
+  },
+  "author": "portents",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Portazon/Portazon/issues"
+  },
+  "homepage": "https://github.com/Portazon/Portazon#readme",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "jquery": "^3.2.1",
+    "nodemon": "^1.13.3",
+    "path": "^0.12.7",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "webpack": "^3.10.0"
+  }
+}
