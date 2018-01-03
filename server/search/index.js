@@ -1,5 +1,4 @@
 const express = require('express');
-const db = require('../database/index.js');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const elasticsearch = require('elasticsearch');
@@ -9,9 +8,13 @@ const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
 
-// ElasticSearch Client (i.e. need JDK installed to run)
+//*************
+// ElasticSearch
+// (i.e. need JDK installed to run)
+//*************
+
 const client = new elasticsearch.Client({
-  host: 'http://localhost:9200',
+  host: process.env.PORT || 'http://localhost:9200',
   log: 'trace'
 });
 
@@ -25,10 +28,76 @@ client.ping({
   }
 });
 
+// Create Index
+let initIndex = () => {
+  return client.indices.create({
+    index: 'carsindex'
+  });
+}
+
+// Check if 'Index' exists
+let indexExist = (name) => {
+  return client.indices.exists({
+    index: 'carsindex'
+  });
+}
+
+// Create Mapping
+let initMapping = () => {
+  return client.indices.putMapping({
+    index: 'carsindex',
+    type: 'cars',
+    body: {
+      properties: {
+        title: { type: 'text' },
+        brand: { type: 'text' },
+        description: { type: 'string' },
+        price: { type: 'float'}
+      }
+    }
+  });
+}
+
+// Add Document (ie. equivalent to a 'row' in RDMS)
+let addDocument = (doc) => {
+  return client.index({
+    index: 'carsindex',
+    type: 'cars',
+    body: {
+      properties: {
+        title: '328',
+        brand: 'bmw',
+        description: 'tremendous car, believe me',
+        price: 50000
+      }
+    }
+  });
+}
+
+// Search query suggestions
+let searchResults = (input) => {
+  console.log('this is the input inside searchResults', input)
+  return client.search({
+    index: 'carsindex',
+    type: 'cars',
+  });
+}
+
+
+//*************
 // Search API
+//*************
+
 router.get('/', (req, res) => {
-  console.log(req.query);
-  res.status(200).send('Search Routing is working!');
-})
+  searchResults(req.query.q).then((result) => {
+    res.status(200).send('Here are some search results!', result);
+  })
+});
+
+router.post('/', (req, res) => {
+  addDocument(req.body).then((result) => {
+    res.status(201).send(result);
+  })
+});
 
 module.exports = router;
