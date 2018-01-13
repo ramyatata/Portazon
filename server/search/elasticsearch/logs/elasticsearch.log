@@ -1,100 +1,27 @@
-[2018-01-03T18:32:15,487][INFO ][o.e.n.Node               ] [oAC8eqy] stopping ...
-[2018-01-03T18:32:15,891][INFO ][o.e.n.Node               ] [oAC8eqy] stopped
-[2018-01-03T18:32:15,892][INFO ][o.e.n.Node               ] [oAC8eqy] closing ...
-[2018-01-03T18:32:15,919][INFO ][o.e.n.Node               ] [oAC8eqy] closed
-[2018-01-03T18:33:17,868][INFO ][o.e.n.Node               ] [] initializing ...
-[2018-01-03T18:33:17,999][INFO ][o.e.e.NodeEnvironment    ] [oAC8eqy] using [1] data paths, mounts [[/ (/dev/disk1)]], net usable_space [67.8gb], net total_space [232.5gb], types [hfs]
-[2018-01-03T18:33:17,999][INFO ][o.e.e.NodeEnvironment    ] [oAC8eqy] heap size [990.7mb], compressed ordinary object pointers [true]
-[2018-01-03T18:33:18,065][INFO ][o.e.n.Node               ] node name [oAC8eqy] derived from node ID [oAC8eqyqRfSqjKp3SBK5Mg]; set [node.name] to override
-[2018-01-03T18:33:18,066][INFO ][o.e.n.Node               ] version[6.1.1], pid[62617], build[bd92e7f/2017-12-17T20:23:25.338Z], OS[Mac OS X/10.12.5/x86_64], JVM[Oracle Corporation/Java HotSpot(TM) 64-Bit Server VM/9.0.1/9.0.1+11]
-[2018-01-03T18:33:18,066][INFO ][o.e.n.Node               ] JVM arguments [-Xms1g, -Xmx1g, -XX:+UseConcMarkSweepGC, -XX:CMSInitiatingOccupancyFraction=75, -XX:+UseCMSInitiatingOccupancyOnly, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -XX:-OmitStackTraceInFastThrow, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -XX:+HeapDumpOnOutOfMemoryError, -Des.path.home=/Users/vpereira1982/Downloads/elasticsearch-6.1.1, -Des.path.conf=/Users/vpereira1982/Downloads/elasticsearch-6.1.1/config]
-[2018-01-03T18:33:19,327][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [aggs-matrix-stats]
-[2018-01-03T18:33:19,329][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [analysis-common]
-[2018-01-03T18:33:19,329][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [ingest-common]
-[2018-01-03T18:33:19,329][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [lang-expression]
-[2018-01-03T18:33:19,329][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [lang-mustache]
-[2018-01-03T18:33:19,329][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [lang-painless]
-[2018-01-03T18:33:19,329][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [mapper-extras]
-[2018-01-03T18:33:19,330][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [parent-join]
-[2018-01-03T18:33:19,330][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [percolator]
-[2018-01-03T18:33:19,330][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [reindex]
-[2018-01-03T18:33:19,331][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [repository-url]
-[2018-01-03T18:33:19,331][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [transport-netty4]
-[2018-01-03T18:33:19,331][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [tribe]
-[2018-01-03T18:33:19,332][INFO ][o.e.p.PluginsService     ] [oAC8eqy] no plugins loaded
-[2018-01-03T18:33:20,973][INFO ][o.e.d.DiscoveryModule    ] [oAC8eqy] using discovery type [zen]
-[2018-01-03T18:33:21,483][INFO ][o.e.n.Node               ] initialized
-[2018-01-03T18:33:21,484][INFO ][o.e.n.Node               ] [oAC8eqy] starting ...
-[2018-01-03T18:33:21,661][INFO ][o.e.t.TransportService   ] [oAC8eqy] publish_address {127.0.0.1:9300}, bound_addresses {[fe80::1]:9300}, {[::1]:9300}, {127.0.0.1:9300}
-[2018-01-03T18:33:24,725][INFO ][o.e.c.s.MasterService    ] [oAC8eqy] zen-disco-elected-as-master ([0] nodes joined), reason: new_master {oAC8eqy}{oAC8eqyqRfSqjKp3SBK5Mg}{JZ1ytufuRc2b7-y56cAaaA}{127.0.0.1}{127.0.0.1:9300}
-[2018-01-03T18:33:24,730][INFO ][o.e.c.s.ClusterApplierService] [oAC8eqy] new_master {oAC8eqy}{oAC8eqyqRfSqjKp3SBK5Mg}{JZ1ytufuRc2b7-y56cAaaA}{127.0.0.1}{127.0.0.1:9300}, reason: apply cluster state (from master [master {oAC8eqy}{oAC8eqyqRfSqjKp3SBK5Mg}{JZ1ytufuRc2b7-y56cAaaA}{127.0.0.1}{127.0.0.1:9300} committed version [1] source [zen-disco-elected-as-master ([0] nodes joined)]])
-[2018-01-03T18:33:24,754][INFO ][o.e.h.n.Netty4HttpServerTransport] [oAC8eqy] publish_address {127.0.0.1:9200}, bound_addresses {[fe80::1]:9200}, {[::1]:9200}, {127.0.0.1:9200}
-[2018-01-03T18:33:24,754][INFO ][o.e.n.Node               ] [oAC8eqy] started
-[2018-01-03T18:33:25,116][INFO ][o.e.g.GatewayService     ] [oAC8eqy] recovered [5] indices into cluster_state
-[2018-01-03T18:33:26,917][INFO ][o.e.c.r.a.AllocationService] [oAC8eqy] Cluster health status changed from [RED] to [YELLOW] (reason: [shards started [[carros][0]] ...]).
-[2018-01-03T18:37:44,850][INFO ][o.e.n.Node               ] [] initializing ...
-[2018-01-03T18:37:44,956][INFO ][o.e.e.NodeEnvironment    ] [oAC8eqy] using [1] data paths, mounts [[/ (/dev/disk1)]], net usable_space [67.7gb], net total_space [232.5gb], types [hfs]
-[2018-01-03T18:37:44,956][INFO ][o.e.e.NodeEnvironment    ] [oAC8eqy] heap size [990.7mb], compressed ordinary object pointers [true]
-[2018-01-03T18:37:45,021][INFO ][o.e.n.Node               ] node name [oAC8eqy] derived from node ID [oAC8eqyqRfSqjKp3SBK5Mg]; set [node.name] to override
-[2018-01-03T18:37:45,022][INFO ][o.e.n.Node               ] version[6.1.1], pid[62654], build[bd92e7f/2017-12-17T20:23:25.338Z], OS[Mac OS X/10.12.5/x86_64], JVM[Oracle Corporation/Java HotSpot(TM) 64-Bit Server VM/9.0.1/9.0.1+11]
-[2018-01-03T18:37:45,023][INFO ][o.e.n.Node               ] JVM arguments [-Xms1g, -Xmx1g, -XX:+UseConcMarkSweepGC, -XX:CMSInitiatingOccupancyFraction=75, -XX:+UseCMSInitiatingOccupancyOnly, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -XX:-OmitStackTraceInFastThrow, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -XX:+HeapDumpOnOutOfMemoryError, -Des.path.home=/Users/vpereira1982/HackReactor/Portazon/server/search/elasticsearch, -Des.path.conf=/Users/vpereira1982/HackReactor/Portazon/server/search/elasticsearch/config]
-[2018-01-03T18:37:46,035][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [aggs-matrix-stats]
-[2018-01-03T18:37:46,035][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [analysis-common]
-[2018-01-03T18:37:46,035][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [ingest-common]
-[2018-01-03T18:37:46,036][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [lang-expression]
-[2018-01-03T18:37:46,036][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [lang-mustache]
-[2018-01-03T18:37:46,036][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [lang-painless]
-[2018-01-03T18:37:46,036][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [mapper-extras]
-[2018-01-03T18:37:46,037][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [parent-join]
-[2018-01-03T18:37:46,037][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [percolator]
-[2018-01-03T18:37:46,037][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [reindex]
-[2018-01-03T18:37:46,038][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [repository-url]
-[2018-01-03T18:37:46,038][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [transport-netty4]
-[2018-01-03T18:37:46,038][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [tribe]
-[2018-01-03T18:37:46,038][INFO ][o.e.p.PluginsService     ] [oAC8eqy] no plugins loaded
-[2018-01-03T18:37:47,759][INFO ][o.e.d.DiscoveryModule    ] [oAC8eqy] using discovery type [zen]
-[2018-01-03T18:37:48,260][INFO ][o.e.n.Node               ] initialized
-[2018-01-03T18:37:48,261][INFO ][o.e.n.Node               ] [oAC8eqy] starting ...
-[2018-01-03T18:37:48,413][INFO ][o.e.t.TransportService   ] [oAC8eqy] publish_address {127.0.0.1:9300}, bound_addresses {[fe80::1]:9300}, {[::1]:9300}, {127.0.0.1:9300}
-[2018-01-03T18:37:48,445][INFO ][o.e.n.Node               ] [oAC8eqy] stopping ...
-[2018-01-03T18:37:48,529][INFO ][o.e.n.Node               ] [oAC8eqy] stopped
-[2018-01-03T18:37:48,530][INFO ][o.e.n.Node               ] [oAC8eqy] closing ...
-[2018-01-03T18:37:48,535][INFO ][o.e.h.n.Netty4HttpServerTransport] [oAC8eqy] publish_address {127.0.0.1:9200}, bound_addresses {[fe80::1]:9200}, {[::1]:9200}, {127.0.0.1:9200}
-[2018-01-03T18:37:48,535][INFO ][o.e.n.Node               ] [oAC8eqy] started
-[2018-01-03T18:37:48,548][INFO ][o.e.n.Node               ] [oAC8eqy] closed
-[2018-01-03T18:43:06,669][INFO ][o.e.n.Node               ] [] initializing ...
-[2018-01-03T18:43:06,787][INFO ][o.e.e.NodeEnvironment    ] [oAC8eqy] using [1] data paths, mounts [[/ (/dev/disk1)]], net usable_space [67.7gb], net total_space [232.5gb], types [hfs]
-[2018-01-03T18:43:06,788][INFO ][o.e.e.NodeEnvironment    ] [oAC8eqy] heap size [990.7mb], compressed ordinary object pointers [true]
-[2018-01-03T18:43:06,871][INFO ][o.e.n.Node               ] node name [oAC8eqy] derived from node ID [oAC8eqyqRfSqjKp3SBK5Mg]; set [node.name] to override
-[2018-01-03T18:43:06,873][INFO ][o.e.n.Node               ] version[6.1.1], pid[62724], build[bd92e7f/2017-12-17T20:23:25.338Z], OS[Mac OS X/10.12.5/x86_64], JVM[Oracle Corporation/Java HotSpot(TM) 64-Bit Server VM/9.0.1/9.0.1+11]
-[2018-01-03T18:43:06,874][INFO ][o.e.n.Node               ] JVM arguments [-Xms1g, -Xmx1g, -XX:+UseConcMarkSweepGC, -XX:CMSInitiatingOccupancyFraction=75, -XX:+UseCMSInitiatingOccupancyOnly, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -XX:-OmitStackTraceInFastThrow, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -XX:+HeapDumpOnOutOfMemoryError, -Des.path.home=/Users/vpereira1982/HackReactor/Portazon/server/search/elasticsearch, -Des.path.conf=/Users/vpereira1982/HackReactor/Portazon/server/search/elasticsearch/config]
-[2018-01-03T18:43:33,383][INFO ][o.e.n.Node               ] [] initializing ...
-[2018-01-03T18:43:33,505][INFO ][o.e.e.NodeEnvironment    ] [oAC8eqy] using [1] data paths, mounts [[/ (/dev/disk1)]], net usable_space [67.7gb], net total_space [232.5gb], types [hfs]
-[2018-01-03T18:43:33,505][INFO ][o.e.e.NodeEnvironment    ] [oAC8eqy] heap size [990.7mb], compressed ordinary object pointers [true]
-[2018-01-03T18:43:33,565][INFO ][o.e.n.Node               ] node name [oAC8eqy] derived from node ID [oAC8eqyqRfSqjKp3SBK5Mg]; set [node.name] to override
-[2018-01-03T18:43:33,565][INFO ][o.e.n.Node               ] version[6.1.1], pid[62751], build[bd92e7f/2017-12-17T20:23:25.338Z], OS[Mac OS X/10.12.5/x86_64], JVM[Oracle Corporation/Java HotSpot(TM) 64-Bit Server VM/9.0.1/9.0.1+11]
-[2018-01-03T18:43:33,566][INFO ][o.e.n.Node               ] JVM arguments [-Xms1g, -Xmx1g, -XX:+UseConcMarkSweepGC, -XX:CMSInitiatingOccupancyFraction=75, -XX:+UseCMSInitiatingOccupancyOnly, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -XX:-OmitStackTraceInFastThrow, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -XX:+HeapDumpOnOutOfMemoryError, -Des.path.home=/Users/vpereira1982/HackReactor/Portazon/server/search/elasticsearch, -Des.path.conf=/Users/vpereira1982/HackReactor/Portazon/server/search/elasticsearch/config]
-[2018-01-03T18:43:34,591][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [aggs-matrix-stats]
-[2018-01-03T18:43:34,591][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [analysis-common]
-[2018-01-03T18:43:34,591][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [ingest-common]
-[2018-01-03T18:43:34,591][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [lang-expression]
-[2018-01-03T18:43:34,592][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [lang-mustache]
-[2018-01-03T18:43:34,592][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [lang-painless]
-[2018-01-03T18:43:34,592][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [mapper-extras]
-[2018-01-03T18:43:34,592][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [parent-join]
-[2018-01-03T18:43:34,592][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [percolator]
-[2018-01-03T18:43:34,592][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [reindex]
-[2018-01-03T18:43:34,593][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [repository-url]
-[2018-01-03T18:43:34,593][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [transport-netty4]
-[2018-01-03T18:43:34,593][INFO ][o.e.p.PluginsService     ] [oAC8eqy] loaded module [tribe]
-[2018-01-03T18:43:34,594][INFO ][o.e.p.PluginsService     ] [oAC8eqy] no plugins loaded
-[2018-01-03T18:43:36,367][INFO ][o.e.d.DiscoveryModule    ] [oAC8eqy] using discovery type [zen]
-[2018-01-03T18:43:36,847][INFO ][o.e.n.Node               ] initialized
-[2018-01-03T18:43:36,847][INFO ][o.e.n.Node               ] [oAC8eqy] starting ...
-[2018-01-03T18:43:36,998][INFO ][o.e.t.TransportService   ] [oAC8eqy] publish_address {127.0.0.1:9300}, bound_addresses {[fe80::1]:9300}, {[::1]:9300}, {127.0.0.1:9300}
-[2018-01-03T18:43:40,064][INFO ][o.e.c.s.MasterService    ] [oAC8eqy] zen-disco-elected-as-master ([0] nodes joined), reason: new_master {oAC8eqy}{oAC8eqyqRfSqjKp3SBK5Mg}{mRVYuN1xS8it4milFwCJvw}{127.0.0.1}{127.0.0.1:9300}
-[2018-01-03T18:43:40,069][INFO ][o.e.c.s.ClusterApplierService] [oAC8eqy] new_master {oAC8eqy}{oAC8eqyqRfSqjKp3SBK5Mg}{mRVYuN1xS8it4milFwCJvw}{127.0.0.1}{127.0.0.1:9300}, reason: apply cluster state (from master [master {oAC8eqy}{oAC8eqyqRfSqjKp3SBK5Mg}{mRVYuN1xS8it4milFwCJvw}{127.0.0.1}{127.0.0.1:9300} committed version [1] source [zen-disco-elected-as-master ([0] nodes joined)]])
-[2018-01-03T18:43:40,090][INFO ][o.e.h.n.Netty4HttpServerTransport] [oAC8eqy] publish_address {127.0.0.1:9200}, bound_addresses {[fe80::1]:9200}, {[::1]:9200}, {127.0.0.1:9200}
-[2018-01-03T18:43:40,090][INFO ][o.e.n.Node               ] [oAC8eqy] started
-[2018-01-03T18:43:40,421][INFO ][o.e.g.GatewayService     ] [oAC8eqy] recovered [5] indices into cluster_state
-[2018-01-03T18:43:42,188][INFO ][o.e.c.r.a.AllocationService] [oAC8eqy] Cluster health status changed from [RED] to [YELLOW] (reason: [shards started [[carros][4], [carros][1], [carros][2], [carros][0]] ...]).
+[2018-01-13T13:47:19,920][INFO ][o.e.c.m.MetaDataDeleteIndexService] [oAC8eqy] [products/4t4CZMpPTlKfCFnNc8npdg] deleting index
+[2018-01-13T13:49:08,278][INFO ][o.e.c.m.MetaDataCreateIndexService] [oAC8eqy] [products] creating index, cause [auto(bulk api)], templates [], shards [5]/[1], mappings []
+[2018-01-13T13:49:08,546][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/SQt_JttTSnaRgSwCl40xYw] create_mapping [inventory]
+[2018-01-13T13:49:08,552][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/SQt_JttTSnaRgSwCl40xYw] update_mapping [inventory]
+[2018-01-13T13:49:08,612][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/SQt_JttTSnaRgSwCl40xYw] update_mapping [inventory]
+[2018-01-13T13:49:08,632][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/SQt_JttTSnaRgSwCl40xYw] update_mapping [inventory]
+[2018-01-13T13:49:08,645][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/SQt_JttTSnaRgSwCl40xYw] update_mapping [inventory]
+[2018-01-13T13:49:09,174][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/SQt_JttTSnaRgSwCl40xYw] update_mapping [inventory]
+[2018-01-13T13:49:13,655][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/SQt_JttTSnaRgSwCl40xYw] update_mapping [inventory]
+[2018-01-13T13:49:17,994][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/SQt_JttTSnaRgSwCl40xYw] update_mapping [inventory]
+[2018-01-13T14:51:02,830][INFO ][o.e.c.m.MetaDataDeleteIndexService] [oAC8eqy] [products/SQt_JttTSnaRgSwCl40xYw] deleting index
+[2018-01-13T14:51:51,532][INFO ][o.e.c.m.MetaDataCreateIndexService] [oAC8eqy] [products] creating index, cause [auto(bulk api)], templates [], shards [5]/[1], mappings []
+[2018-01-13T14:51:51,670][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/0L-jJJ65R3OySEoUMt4zpg] create_mapping [inventory]
+[2018-01-13T14:51:52,669][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/0L-jJJ65R3OySEoUMt4zpg] update_mapping [inventory]
+[2018-01-13T15:05:36,285][INFO ][o.e.c.m.MetaDataDeleteIndexService] [oAC8eqy] [products/0L-jJJ65R3OySEoUMt4zpg] deleting index
+[2018-01-13T15:06:59,362][INFO ][o.e.c.m.MetaDataCreateIndexService] [oAC8eqy] [products] creating index, cause [auto(bulk api)], templates [], shards [5]/[1], mappings []
+[2018-01-13T15:06:59,534][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/0U9YI4yISjKZPfwokDdnPQ] create_mapping [inventory]
+[2018-01-13T15:06:59,538][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/0U9YI4yISjKZPfwokDdnPQ] update_mapping [inventory]
+[2018-01-13T15:06:59,544][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/0U9YI4yISjKZPfwokDdnPQ] update_mapping [inventory]
+[2018-01-13T15:10:16,775][INFO ][o.e.c.m.MetaDataDeleteIndexService] [oAC8eqy] [products/0U9YI4yISjKZPfwokDdnPQ] deleting index
+[2018-01-13T15:12:01,540][INFO ][o.e.c.m.MetaDataCreateIndexService] [oAC8eqy] [products] creating index, cause [auto(bulk api)], templates [], shards [5]/[1], mappings []
+[2018-01-13T15:12:01,625][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/brtzABV8RxmQKQrptc3XLQ] create_mapping [inventory]
+[2018-01-13T15:12:01,691][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/brtzABV8RxmQKQrptc3XLQ] update_mapping [inventory]
+[2018-01-13T15:12:37,366][INFO ][o.e.c.m.MetaDataDeleteIndexService] [oAC8eqy] [products/brtzABV8RxmQKQrptc3XLQ] deleting index
+[2018-01-13T15:16:18,127][INFO ][o.e.c.m.MetaDataCreateIndexService] [oAC8eqy] [products] creating index, cause [auto(bulk api)], templates [], shards [5]/[1], mappings []
+[2018-01-13T15:16:18,196][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/MSjHo6eGRPCX2PuwEe8Wjg] create_mapping [inventory]
+[2018-01-13T15:16:18,248][INFO ][o.e.c.m.MetaDataMappingService] [oAC8eqy] [products/MSjHo6eGRPCX2PuwEe8Wjg] update_mapping [inventory]
