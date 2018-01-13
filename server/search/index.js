@@ -19,7 +19,7 @@ router.use(bodyParser.urlencoded({extended: false}));
 // DEPLOYMENT: download elasticsearch, kibana, and logstash to individual folders inside /search/
 // DEPLOYMENT: npm run elasticsearch
 // DEPLOYMENT: npm run kibana
-// DEPLOYMENT: npm run -logstash will add all the JCPenney products to the ElasticSearch db
+// DEPLOYMENT: npm run -logstash will add all the FlipKart products to the ElasticSearch db
 //*************
 
 
