@@ -5,7 +5,8 @@ const routes = require('./search/index.js');
 
 
 // Middleware
-server.use(express.static(path.join(__dirname, '../client')));
+server.use(express.static(path.join(__dirname, '../client/dist')));
+
 
 // Routing
 server.use('/search', routes);
