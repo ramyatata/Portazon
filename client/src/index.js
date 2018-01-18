@@ -19,6 +19,15 @@ class Hello extends React.Component {
     }
   }
 
+  changeView(view){
+    //this function's input should be a string
+    //the string should represent the users desired page
+    //example: if the input is 'shoppingCart'
+    //the function should set the state of 'view' to 'shoppingCart'
+    //so the page will re-render
+    this.setState({view: view});
+  }
+
   getProductsByQuery(query) {
     $.ajax({
       method: 'get',
