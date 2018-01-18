@@ -1,6 +1,7 @@
+
+server/search/kibana
 server/search/logstash
 server/search/elasticsearch
-server/search/kibana
 
 node_modules/
 .DS_Store
