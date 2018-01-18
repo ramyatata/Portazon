@@ -38,7 +38,7 @@ class Hello extends React.Component {
   }
 
   render() {
-    console.log('rendering page', this.state.view)
+    console.log('rendering page why isn\'t this working!!!', this.state.view)
     return (
       <div>
         <div>Hello rendering using react!!!</div>
