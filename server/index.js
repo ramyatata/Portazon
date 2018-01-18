@@ -14,3 +14,5 @@ server.use('/search', routes);
 server.listen(process.env.PORT || 3000, () => {
   console.log('Server is awaiting request');
 });
+
+//http:localhost3000
