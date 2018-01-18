@@ -1,12 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import ShoppingCart from './components/Shoppingcart.js';
 
 
 class Hello extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: ''
+      view: 'shoppingCart'
     }
   }
 
@@ -24,6 +26,7 @@ class Hello extends React.Component {
   }
 
   renderView() {
+    console.log('in render view', this.state.view)
     let view = this.state.view;
     if (view === 'homepage') {
       return <HomePage/>
@@ -35,8 +38,14 @@ class Hello extends React.Component {
   }
 
   render() {
+    console.log('rendering page', this.state.view)
     return (
-        <div>Hello rendering using react</div>
+      <div>
+        <div>Hello rendering using react!!!</div>
+        <div>
+          {this.renderView()}
+        </div>
+      </div>
       );
   }
 }
