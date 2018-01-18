@@ -49,6 +49,9 @@ class Hello extends React.Component {
     //we should update the users shopping cart by setting the state
     //upon error:
     //console log the error and see whats happening!
+
+    //for now:
+    this.state.cart.push(item);
   }
 
   removeItemFromCart(item) {
@@ -59,6 +62,16 @@ class Hello extends React.Component {
     //we should update the users cart to reflect the removed item
     //upon error:
     //console log the error and see whats happening!!
+
+    //for now:
+    let cart = this.state.cart;
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i] === item) {
+        cart.splice(i, 1);
+        return;
+      }
+    }
+    return;
   }
 
   renderView() {
