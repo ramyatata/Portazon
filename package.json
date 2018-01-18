@@ -10,6 +10,7 @@
     "elasticsearch": "server/search/elasticsearch/bin/elasticsearch",
     "kibana": "server/search/kibana/bin/kibana",
     "logstash": "server/search/logstash/bin/logstash -f /Users/lichinshao/desktop/hr-remote/Portazon/server/data/logstash.conf"
+
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "nodemon": "^1.13.3",
     "path": "^0.12.7",
     "react": "^16.2.0",
+    "react-bootstrap": "^0.32.0",
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
