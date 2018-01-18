@@ -4,7 +4,7 @@
  *
  * This is programatically created and updated, do not modify
  *
- * context: {"env":"production","kbnVersion":"6.1.1","buildNum":16350}
+ * context: {"env":"production","kbnVersion":"6.1.2","buildNum":16363}
  * includes code from:
  *  - console@kibana
  *  - elasticsearch@kibana

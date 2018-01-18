@@ -1753,7 +1753,7 @@ visualize-spy pre {
 }
 .visualize-fixed-position {
   position: absolute;
-  z-index: 999;
+  z-index: 9999;
 }
 .visualize-spy-content {
   position: relative;
@@ -8387,6 +8387,8 @@ box-sizing: border-box;
 .leaflet-container {
   background: #ffffff !important;
   outline: 0 !important;
+  min-width: 1px !important;
+  min-height: 1px !important;
 }
 .leaflet-popup-content-wrapper {
   margin: 0;

@@ -62,7 +62,7 @@ function createColorFormat(FieldFormat) {
   ColorFormat.prototype._convert = {
     html(val) {
       const color = this.findColorRuleForVal(val);
-      if (!color) return (0, _as_pretty_string.asPrettyString)(val);
+      if (!color) return _lodash2.default.escape((0, _as_pretty_string.asPrettyString)(val));
 
       let style = '';
       if (color.text) style += `color: ${color.text};`;

@@ -1,3 +1,10 @@
-server/database/config.js
+server/search/kibana
+server/search/logstash
+server/search/elasticsearch
+server/search/elasticsearch/logs/elasticsearch.log
+
 node_modules/
 .DS_Store
+
+
+

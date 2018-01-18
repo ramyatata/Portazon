@@ -38,9 +38,53 @@ From within the root directory:
 npm install
 ```
 
+### Running ElasticSearch and populating its Database
+
+Install JDK (Java Development Kit) but there is one caveat. DO NOT install v9, you need to install v8 otherwise Logstash will not work
+Download ElasticSearch: https://www.elastic.co/downloads/elasticsearch
+Download Kibana (optional for now): https://www.elastic.co/downloads/kibana
+Download LogStash: https://www.elastic.co/products/logstash
+
+After you download them, add them as separate folders inside the server/search folder(e.g. /server/search/elasticsearch)
+
+Go to package.json and change the file path from my local folder (/Users/vpereira1982/HackReactor/) to yours for Logstash.
+Inside the /server/data folder, you will find a file called 'logstash.conf', make sure you do the same there on line 3 (path) so Logstash can find this file
+Lastly, make sure there is a product_list.csv file inside of this 'data' folder;
+
+Now just run all these commands to initiate everything:
+
+npm start
+npm run elasticsearch
+npm run kibana (if you installed it)
+npm run logstash
+
+And there you have it! If you make a 'GET' request passing a key value of 'q=value', you should get results back: http://127.0.0.1:3000/search/?q=games
+
 ### Roadmap
 
 View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+
+### Running ElasticSearch and populating its Database
+
+Install JDK (Java Development Kit) but there is one caveat. DO NOT install v9, you need to install v8 otherwise Logstash will not work
+Download ElasticSearch: https://www.elastic.co/downloads/elasticsearch
+Download Kibana (optional for now): https://www.elastic.co/downloads/kibana
+Download LogStash: https://www.elastic.co/products/logstash
+
+After you download them, add them as separate folders inside the server/search folder(e.g. /server/search/elasticsearch)
+
+Go to package.json and change the file path from my local folder (/Users/vpereira1982/HackReactor/) to yours for Logstash.
+Inside the /server/data folder, you will find a file called 'logstash.conf', make sure you do the same there on line 3 (path) so Logstash can find this file
+Lastly, make sure there is a product_list.csv file inside of this 'data' folder;
+
+Now just run all these commands to initiate everything:
+
+npm start
+npm run elasticsearch
+npm run kibana (if you installed it)
+npm run logstash
+
+And there you have it! If you make a 'GET' request passing a key value of 'q=value', you should get results back: http://127.0.0.1:3000/search/?q=games
 
 
 ## Contributing

@@ -6,9 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/index.js",
-    "react-dev": "webpack -d --watch",
+    "webpack": "webpack -d --watch",
     "elasticsearch": "server/search/elasticsearch/bin/elasticsearch",
-    "kibana": "server/search/kibana/bin/kibana"
+    "kibana": "server/search/kibana/bin/kibana",
+    "logstash": "server/search/logstash/bin/logstash -f /Users/lichinshao/desktop/hr-remote/Portazon/server/data/logstash.conf"
+
   },
   "repository": {
     "type": "git",
@@ -21,10 +23,6 @@
   },
   "homepage": "https://github.com/Portazon/Portazon#readme",
   "dependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
     "body-parser": "^1.18.2",
     "elasticsearch": "^14.0.0",
     "express": "^4.16.2",
@@ -33,7 +31,15 @@
     "nodemon": "^1.13.3",
     "path": "^0.12.7",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react-bootstrap": "^0.32.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "webpack": "^3.10.0"
   }
 }
