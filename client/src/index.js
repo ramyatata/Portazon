@@ -29,6 +29,7 @@ class Hello extends React.Component {
   }
 
   getProductsByQuery(query) {
+    //lets use axios instead of ajax
     $.ajax({
       method: 'get',
       url: '/search/:query',
