@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 
 
 import ShoppingCart from './components/Shoppingcart.jsx';
+import HomePage from './components/homePage.jsx'
+
 
 
 class Hello extends React.Component {
@@ -88,16 +90,11 @@ class Hello extends React.Component {
   }
 
   render() {
-    console.log('rendering page why isn\'t this working!!! test', this.state.view)
-    alert('rendering page!!!!')
     return (
       <div>
-        <div>Hello rendering using react!!!</div>
-
         <div>
           {this.renderView()}
         </div>
-
       </div>
       );
   }
