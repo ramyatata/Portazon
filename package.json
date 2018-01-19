@@ -10,7 +10,6 @@
     "elasticsearch": "server/search/elasticsearch/bin/elasticsearch",
     "kibana": "server/search/kibana/bin/kibana",
     "logstash": "server/search/logstash/bin/logstash -f /Users/lichinshao/desktop/hr-remote/Portazon/server/data/logstash.conf"
-
   },
   "repository": {
     "type": "git",
