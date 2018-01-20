@@ -118,36 +118,81 @@ let addDocument = (doc) => {
 
 
 // Search query
-let search = (query) => {
-  console.log('this is the input inside searchResults', query)
+let searchQuery = (query) => {
+  if (query.category) {
+    return client.search({
+      index: 'products',
+      type: 'inventory',
+      body: {
+        query: {
+          bool: {
+            must: [
+              {
+                match: {
+                  "product_category_tree": query.category
+                }
+              }
+            ],
+            should: [
+              {
+                multi_match: {
+                  query: query.q
+                }
+              }
+            ]
+          }
+        }
+      }
+    })
+  }
+
   return client.search({
     index: 'products',
     type: 'inventory',
     body: {
       query: {
         multi_match: {
-          query: query,
-          fields: ["name_title^4", "brand^3", "category_tree^2", "description"]
-          /*
-          "message" : {
-                "query" : "to be or not to be",
-                "operator" : "and",
-                "zero_terms_query": "all"
-        }*/
+          query: query.q || query,
+          fields: ["product_name^1", "brand^3", "product_category_tree^2", "description^5"]
         }
       }
     }
   });
 }
 
+// Search Category Products
+let showCategory = (category) => {
+  return client.search({
+    index: 'products',
+    type: 'inventory',
+    body: {
+      query: {
+        match: {"product_category_tree": category}
+        }
+      }
+  });
+}
+
+
 
 //*************
 // Search API Routing
 //*************
 
+
+// Search Query && Categories Route
 router.get('/', (req, res) => {
-  search(req.query.q).then((response) => {
-    console.log('success!', response.hits.hits)
+  searchQuery(req.query).then((response) => {
+
+    let hits = response.hits.hits;
+    res.status(200).send(hits);
+  })
+});
+
+
+// Show Category Specific Products Route
+router.get('/category', (req, res) => {
+  showCategory(req.query.category).then((response) => {
 
     let hits = response.hits.hits;
     res.status(200).send(hits);
