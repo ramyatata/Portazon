@@ -44,7 +44,7 @@
 
             {/* navbar right */}
             <ul className="nav navbar-nav navbar-right">
-              <li><a href="#"><span className="glyphicon glyphicon-shopping-cart" style={{'fontSize': '1.5em'}}></span></a></li>
+              <li><button onClick={this.props.changeView('shoppingCart')}><span className="glyphicon glyphicon-shopping-cart"  style={{'fontSize': '1.5em'}}></span></button></li>
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={{'fontSize': '1.5em'}}></span></a>
                 <div className="dropdown-menu">

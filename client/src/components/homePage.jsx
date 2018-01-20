@@ -9,9 +9,10 @@ class HomePage extends React.Component {
     super(props)
   }
   render(){
+    let changeView = this.props.changeView;
     return(
       <div>
-        <Header></Header>
+        <Header changeView={changeView}></Header>
         <div>HomePage main Content</div>
         <Footer></Footer>
       </div>

@@ -5,6 +5,7 @@ server/search/elasticsearch/logs/elasticsearch.log
 
 node_modules/
 .DS_Store
+client/dist/bundle.js
 
 
 
