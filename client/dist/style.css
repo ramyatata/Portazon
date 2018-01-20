@@ -1,0 +1,17 @@
+.body {
+  font-family: "HelveticaNeueW01-55Roma",sans-serif;
+}
+
+.headerAccountDropdown {
+  padding: 10px 20px;
+  background-color: #333;
+  width:320px;
+}
+
+.header-account-dropdown input {
+  display: block;
+  margin-bottom: 20px;
+  width: 100%;
+  background: #666;
+  border: solid 1px #666;
+}
