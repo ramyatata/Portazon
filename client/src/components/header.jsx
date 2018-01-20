@@ -1,15 +1,22 @@
   import React from 'react';
   import ReactDOM from 'react-dom';
 
+  import CategoryList from './categoryList.jsx';
+
   class Header extends React.Component {
     constructor(props){
       super(props);
+
       this.changeViewToCart = this.changeViewToCart.bind(this);
     }
 
     changeViewToCart(){
       let changeView = this.props.changeView;
       changeView('shoppingCart');
+    }
+
+    populateCategoriesMenu(){
+
     }
 
 
@@ -27,14 +34,7 @@
             <ul className="nav navbar-nav">
               <li className='dropdown'>
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop By <span className="caret"></span></a>
-                <ul className='dropdown-menu header-category-dropdown'>
-                  <li><a href='#'>Cat1</a></li>
-                  <li><a href='#'>Cat2</a></li>
-                  <li><a href='#'>Cat3</a></li>
-                  <li><a href='#'>Cat4</a></li>
-                  <li><a href='#'>Cat5</a></li>
-                  <li><a href='#'>Cat6</a></li>
-                </ul>
+                  <CategoryList></CategoryList>
               </li>
             </ul>
 
