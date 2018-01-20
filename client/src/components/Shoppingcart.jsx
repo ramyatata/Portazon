@@ -4,8 +4,45 @@ class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cart: products
+      cart: products,
+      totalAmt: 0,
+      totalItems: 0
     }
+
+  }
+  componentDidMount() {
+    this.getTotals();
+  }
+
+  getTotals(){
+    let items = this.state.cart;
+    let totalPrice = 0;
+    let totalItems = 0;
+    for (let i = 0; i < items.length; i++) {
+      let retail = items[i]._source.retail_price;
+      let sale = items[i]._source.discounted_price;
+      let quantity = items[i].quantity;
+      let itemTotal = 0;
+      let imageUrls = JSON.parse(items[i]._source.image);
+      items[i]._source.image = imageUrls;
+      if (!sale) {
+        itemTotal = quantity * retail;
+      } else {
+        itemTotal = quantity * sale;
+      }
+      totalPrice += itemTotal;
+      totalItems += quantity;
+    }
+    this.setState({totalAmt: totalPrice.toFixed(2), totalItems: totalItems, cart: items});
+  }
+
+  createItemList() {
+    let items = this.state.cart;
+    items.map(item => (
+      <div>
+        <div>{item._source.image}</div>
+      </div>
+    ))
   }
 
   render() {
@@ -14,6 +51,19 @@ class ShoppingCart extends React.Component {
       <div className='container-fluid'>
         <div>
           <h2>shopping cart</h2>
+        </div>
+        <div>
+          <h3>Your current total amount is: $ {this.state.totalAmt}</h3>
+        </div>
+        <div className='cart-item-list'>
+          <div>picture</div>
+          <div>details</div>
+          <div>price</div>
+          <div>quantity</div>
+          <div>total</div>
+        </div>
+        <div className='cart-item-list'>
+
         </div>
       </div>
     )
@@ -45,7 +95,8 @@ var products = [
             "product_name": "Smiledrive Snuggle Arm Shaped Stuffed Pillow Toy  - 25 inch",
             "rating": 5,
             "description": "Buy Smiledrive Snuggle Arm Shaped Stuffed Pillow Toy  - 25 inch Snuggle Arm Shaped Stuffed Pillow Toy from Flipkart.com. Only Genuine Products. 30 Day Replacement Guarantee. Free Shipping. Cash On Delivery! Buy Cushions & Pillows toys online in India Toys for Boys. Toys for Girls."
-        }
+        },
+        "quantity": 2
     },
      {
         "_index": "products",
@@ -68,6 +119,7 @@ var products = [
             "@version": "1",
             "product_url": "http://www.flipkart.com/gungun-toys-beautiful-teddy-bear-152-cm/p/itme9eq8jxxvxgbg?pid=STFE9EQ8MZRNQMJF",
             "path": "/Users/lichinshao/desktop/hr-remote/Portazon/server/data/product_list.csv"
-        }
+        },
+        "quantity": 1
     }
 ]

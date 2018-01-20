@@ -3,8 +3,15 @@
 
   class Header extends React.Component {
     constructor(props){
-      super(props)
+      super(props);
+      this.changeViewToCart = this.changeViewToCart.bind(this);
     }
+
+    changeViewToCart(){
+      let changeView = this.props.changeView;
+      changeView('shoppingCart');
+    }
+
 
     render() {
       return (
@@ -44,7 +51,7 @@
 
            {/* user account */}
           <ul className="nav navbar-nav navbar-right">
-          <li><a href="#"><span className="glyphicon glyphicon-shopping-cart" style={{'fontSize': '1.5em'}}></span></a></li>
+          <li><button onClick={this.changeViewToCart}><span className="glyphicon glyphicon-shopping-cart" style={{'fontSize': '1.5em'}}></span></button></li>
                <li className="dropdown">
                  <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={{'fontSize': '1.5em'}}></span></a>
                  <div className="dropdown-menu">
