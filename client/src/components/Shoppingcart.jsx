@@ -42,7 +42,7 @@ class ShoppingCart extends React.Component {
     let items = this.state.cart;
     return items.map((item, ind) => (
       <div className="cart-item-list col-sm-12" key={ind}>
-        <img src={item._source.image[0]} alt="" className="col-sm-3"></img>
+        <img src={item._source.image[0]} alt="" className="cart-item-img col-sm-3"></img>
         <div className="col-sm-3">{item._source.description}</div>
         <div className="col-sm-2">{item._source.discounted_price}</div>
         <div className="col-sm-2">{item.quantity}</div>
@@ -69,8 +69,34 @@ class ShoppingCart extends React.Component {
           <div className="col-sm-2">quantity</div>
           <div className="col-sm-2">total</div>
         </div>
-        <div className='cart-items col-sm-12'>
+        <div className="cart-items col-sm-12">
           {this.createItemList()}
+        </div>
+        <div className="cart-summary col-sm-12">
+          <div className="col-sm-7">
+          </div>
+          <div className="col-sm-5">
+            <div>
+              <input placeholder="enter promo code here"/>
+              <button>Apply</button>
+            </div>
+            <div>
+              Subtotal({this.state.totalItems} items): ${this.state.totalAmt}
+            </div>
+            <div>
+              Shipping & Handling: $0.00
+            </div>
+            <div>
+              Estimated Taxes: $0.00 **
+            </div>
+            <div>
+              Estimated Order Total: ${this.state.totalAmt}
+            </div>
+            <div>
+              ** Actual sales tax will be calculated at time of shipment
+            </div>
+            <button>Checkout</button>
+          </div>
         </div>
       </div>
     )
