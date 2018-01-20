@@ -76,3 +76,10 @@
   text-align: center;
 }
 
+.cart-item-list {
+  height: 200px;
+}
+
+.cart-item-img {
+  height: 180px;
+}
