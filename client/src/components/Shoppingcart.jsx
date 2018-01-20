@@ -41,12 +41,12 @@ class ShoppingCart extends React.Component {
   createItemList() {
     let items = this.state.cart;
     return items.map((item, ind) => (
-      <div className='cart-item-list' key={ind}>
-        <img src={item._source.image[0]} alt=""></img>
-        <div>{item._source.description}</div>
-        <div>{item._source.sale_price}</div>
-        <div>{item.quantity}</div>
-        <div>{item.indTotal}</div>
+      <div className="cart-item-list col-sm-12" key={ind}>
+        <img src={item._source.image[0]} alt="" className="col-sm-3"></img>
+        <div className="col-sm-3">{item._source.description}</div>
+        <div className="col-sm-2">{item._source.discounted_price}</div>
+        <div className="col-sm-2">{item.quantity}</div>
+        <div className="col-sm-2">{item.indTotal}</div>
       </div>
     ))
 
@@ -55,21 +55,21 @@ class ShoppingCart extends React.Component {
   render() {
     console.log('current products', this.state.cart)
     return(
-      <div className='container-fluid'>
+      <div className="container-fluid">
         <div>
           <h2>shopping cart</h2>
         </div>
         <div>
           <h3>Your current total amount is: $ {this.state.totalAmt}</h3>
         </div>
-        <div className='cart-item-list'>
-          <div>picture</div>
-          <div>details</div>
-          <div>price</div>
-          <div>quantity</div>
-          <div>total</div>
+        <div className="cart-item-banner col-sm-12">
+          <div className="col-sm-3">picture</div>
+          <div className="col-sm-3">details</div>
+          <div className="col-sm-2">price</div>
+          <div className="col-sm-2">quantity</div>
+          <div className="col-sm-2">total</div>
         </div>
-        <div>
+        <div className='cart-items col-sm-12'>
           {this.createItemList()}
         </div>
       </div>
