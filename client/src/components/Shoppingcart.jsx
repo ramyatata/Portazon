@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from './Footer.jsx';
 
 class ShoppingCart extends React.Component {
   constructor(props) {
@@ -26,7 +27,6 @@ class ShoppingCart extends React.Component {
   }
 
   changeQuantity(e, item) {
-    console.log('in changequantity', e.target.value, item)
     let cart = this.state.cart;
     for (let i = 0; i < cart.length; i++) {
       if (cart[i]._id === item._id) {
@@ -74,9 +74,15 @@ class ShoppingCart extends React.Component {
   }
 
   render() {
-    console.log('current products', this.state.cart)
     return(
       <div className="container-fluid">
+        <nav className="navbar navbar-inverse">
+          <div className="container-fluid">
+            <div className="navbar-header" id="logo">
+              <a className="navbar-brand" href="#">PORTAZON</a>
+            </div>
+          </div>
+        </nav>
         <div>
           <h2>shopping cart</h2>
         </div>

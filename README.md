@@ -5,7 +5,7 @@ Portents + Amazon!
 
 ## Team
 
-  - __Product Owner__:
+  - __Product Owner__: Li
   - __Scrum Master__: Manjunath
   - __Development Team__: Ramya, Vitor
 
