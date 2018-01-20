@@ -8,9 +8,32 @@ class ShoppingCart extends React.Component {
       totalAmt: 0,
       totalItems: 0
     }
-
+    this.changeQuantity = this.changeQuantity.bind(this);
   }
-  componentDidMount() {
+
+  componentWillMount() {
+    this.parseImages();
+  }
+
+  componentDidMount(){
+    this.getTotals();
+  }
+
+  parseImages() {
+    let cart = this.state.cart;
+    let newCart = parseImageUrls(cart);
+    this.setState({cart: newCart});
+  }
+
+  changeQuantity(e, item) {
+    console.log('in changequantity', e.target.value, item)
+    let cart = this.state.cart;
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i]._id === item._id) {
+        cart[i].quantity = Number(e.target.value);
+      }
+    }
+    this.setState({cart: cart});
     this.getTotals();
   }
 
@@ -23,9 +46,7 @@ class ShoppingCart extends React.Component {
       let sale = items[i]._source.discounted_price;
       let quantity = items[i].quantity;
       let itemTotal = 0;
-      let imageUrls = JSON.parse(items[i]._source.image);
       let indTotal = 0;
-      items[i]._source.image = imageUrls;
       if (!sale) {
         itemTotal = quantity * retail;
       } else {
@@ -33,9 +54,9 @@ class ShoppingCart extends React.Component {
       }
       items[i].indTotal = itemTotal;
       totalPrice += itemTotal;
-      totalItems += quantity;
+      totalItems = totalItems + quantity;
     }
-    this.setState({totalAmt: totalPrice.toFixed(2), totalItems: totalItems, cart: items});
+    this.setState({totalAmt: totalPrice.toFixed(2), totalItems: totalItems});
   }
 
   createItemList() {
@@ -45,7 +66,7 @@ class ShoppingCart extends React.Component {
         <img src={item._source.image[0]} alt="" className="cart-item-img col-sm-3"></img>
         <div className="col-sm-3">{item._source.description}</div>
         <div className="col-sm-2">{item._source.discounted_price}</div>
-        <div className="col-sm-2">{item.quantity}</div>
+        <input onChange={e => this.changeQuantity(e, item)} className="col-sm-2" placeholder={item.quantity}/>
         <div className="col-sm-2">{item.indTotal}</div>
       </div>
     ))
@@ -81,7 +102,7 @@ class ShoppingCart extends React.Component {
               <button>Apply</button>
             </div>
             <div>
-              Subtotal({this.state.totalItems} items): ${this.state.totalAmt}
+              Subtotal ({this.state.totalItems} items): ${this.state.totalAmt}
             </div>
             <div>
               Shipping & Handling: $0.00
@@ -105,6 +126,13 @@ class ShoppingCart extends React.Component {
 
 export default ShoppingCart;
 
+function parseImageUrls(items) {
+  for (let i = 0; i < items.length; i++) {
+    let images = JSON.parse(items[i]._source.image);
+    items[i]._source.image = images;
+  }
+  return items;
+}
 
 var products = [
       {
