@@ -64,7 +64,7 @@ class ShoppingCart extends React.Component {
     return items.map((item, ind) => (
       <div className="cart-item-list col-sm-12" key={ind}>
         <img src={item._source.image[0]} alt="" className="cart-item-img col-sm-3"></img>
-        <div className="col-sm-3">{item._source.description}</div>
+        <div className="col-sm-3">{item._source.product_name}</div>
         <div className="col-sm-2">{item._source.discounted_price}</div>
         <input onChange={e => this.changeQuantity(e, item)} className="col-sm-2" placeholder={item.quantity}/>
         <div className="col-sm-2">{item.indTotal}</div>
@@ -91,7 +91,7 @@ class ShoppingCart extends React.Component {
         </div>
         <div className="cart-item-banner col-sm-12">
           <div className="col-sm-3">picture</div>
-          <div className="col-sm-3">details</div>
+          <div className="col-sm-3">name</div>
           <div className="col-sm-2">price</div>
           <div className="col-sm-2">quantity</div>
           <div className="col-sm-2">total</div>
