@@ -24,12 +24,14 @@ class ShoppingCart extends React.Component {
       let quantity = items[i].quantity;
       let itemTotal = 0;
       let imageUrls = JSON.parse(items[i]._source.image);
+      let indTotal = 0;
       items[i]._source.image = imageUrls;
       if (!sale) {
         itemTotal = quantity * retail;
       } else {
         itemTotal = quantity * sale;
       }
+      items[i].indTotal = itemTotal;
       totalPrice += itemTotal;
       totalItems += quantity;
     }
@@ -38,11 +40,16 @@ class ShoppingCart extends React.Component {
 
   createItemList() {
     let items = this.state.cart;
-    items.map(item => (
-      <div>
-        <div>{item._source.image}</div>
+    return items.map((item, ind) => (
+      <div className='cart-item-list' key={ind}>
+        <img src={item._source.image[0]} alt=""></img>
+        <div>{item._source.description}</div>
+        <div>{item._source.sale_price}</div>
+        <div>{item.quantity}</div>
+        <div>{item.indTotal}</div>
       </div>
     ))
+
   }
 
   render() {
@@ -62,8 +69,8 @@ class ShoppingCart extends React.Component {
           <div>quantity</div>
           <div>total</div>
         </div>
-        <div className='cart-item-list'>
-
+        <div>
+          {this.createItemList()}
         </div>
       </div>
     )
