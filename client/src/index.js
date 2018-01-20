@@ -19,6 +19,7 @@ class Hello extends React.Component {
       view: 'homepage',
       cart: []
     }
+    this.changeView = this.changeView.bind(this);
   }
 
   changeView(view){
@@ -81,7 +82,7 @@ class Hello extends React.Component {
 
     let view = this.state.view;
     if (view === 'homepage') {
-      return <HomePage/>
+      return <HomePage changeView={this.changeView}/>
     } else if (view === 'shoppingCart') {
       return <ShoppingCart cart={this.state.cart}/>
     } else {
@@ -92,6 +93,7 @@ class Hello extends React.Component {
   render() {
     return (
       <div>
+
         <div>
           {this.renderView()}
         </div>
