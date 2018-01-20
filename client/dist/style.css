@@ -1,11 +1,16 @@
 .body {
   font-family: "HelveticaNeueW01-55Roma",sans-serif;
 }
-
-.headerAccountDropdown {
+.header-account-dropdown {
   padding: 10px 20px;
   background-color: #333;
   width:320px;
+}
+
+.header-category-dropdown li a{
+  background-color: #333;
+  color: '#fff';
+  padding: 5px;
 }
 
 .header-account-dropdown input {
@@ -15,3 +20,59 @@
   background: #666;
   border: solid 1px #666;
 }
+.white {
+  color: '#fff'
+}
+
+.header-account-dropdown a {
+  color: #999 !important;
+  margin: auto;
+  width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.footer {
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  position: fixed;
+}
+.main-footer{
+  background-color: rgba(0,0,0,.6) ;
+  color: #fff;
+}
+.sub-footer {
+  background-color: black;
+  color: #fff;
+  padding: 10px 50px;
+}
+.footer-section {
+  padding: 20px 20px;
+  vertical-align: middle;
+  float: left;
+  text-align: center;
+}
+.footer-section span>a {
+  padding: 40px 20px;
+  color: white;
+}
+.bg {
+  height: 100%;
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGkRcDCuTrExq6HcYtWD-FRAxTH6n71xWDJuAGNI-BxT1MoGtNOA);
+  background-position: center center;
+  background-size: cover;
+}
+.text-right{
+  text-align: right;
+}
+
+.text-left{
+  text-align: left;
+}
+
+.text-center{
+  text-align: center;
+}
+
