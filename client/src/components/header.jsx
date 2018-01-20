@@ -22,12 +22,12 @@
 
     render() {
       return (
-        <nav className='navbar navbar-inverse'>
-          <div className='container-fluid'>
+        <nav className="navbar navbar-inverse">
+          <div className="container-fluid">
 
             {/* Logo */}
-            <div className='navbar-header' id='logo'>
-              <a className='navbar-brand' href='#'>PORTAZON</a>
+            <div className="navbar-header" id="logo">
+              <a className="navbar-brand" href="#">PORTAZON</a>
             </div>
 
             {/* category menu */}
