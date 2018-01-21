@@ -18,8 +18,19 @@ class Hello extends React.Component {
     this.changeView = this.changeView.bind(this);
   }
 
+  componentDidMount(){
+    this.parseImages();
+
+  }
+
   changeView(view){
     this.setState({view: view});
+  }
+
+  parseImages() {
+    let cart = this.state.cart;
+    let newCart = parseImageUrls(cart);
+    this.setState({cart: newCart});
   }
 
   getProductsByQuery(query) {
@@ -92,6 +103,14 @@ class Hello extends React.Component {
       </div>
       );
   }
+}
+
+function parseImageUrls(items) {
+  for (let i = 0; i < items.length; i++) {
+    let images = JSON.parse(items[i]._source.image);
+    items[i]._source.image = images;
+  }
+  return items;
 }
 
 var products = [

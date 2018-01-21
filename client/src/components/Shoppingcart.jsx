@@ -12,19 +12,19 @@ class ShoppingCart extends React.Component {
     this.changeQuantity = this.changeQuantity.bind(this);
   }
 
-  componentWillMount() {
-    this.parseImages();
-  }
+  // componentWillMount() {
+  //   this.parseImages();
+  // }
 
   componentDidMount(){
     this.getTotals();
   }
 
-  parseImages() {
-    let cart = this.state.cart;
-    let newCart = parseImageUrls(cart);
-    this.setState({cart: newCart});
-  }
+  // parseImages() {
+  //   let cart = this.state.cart;
+  //   let newCart = parseImageUrls(cart);
+  //   this.setState({cart: newCart});
+  // }
 
   changeQuantity(e, item) {
     let cart = this.state.cart;
@@ -132,13 +132,13 @@ class ShoppingCart extends React.Component {
 
 export default ShoppingCart;
 
-function parseImageUrls(items) {
-  for (let i = 0; i < items.length; i++) {
-    let images = JSON.parse(items[i]._source.image);
-    items[i]._source.image = images;
-  }
-  return items;
-}
+// function parseImageUrls(items) {
+//   for (let i = 0; i < items.length; i++) {
+//     let images = JSON.parse(items[i]._source.image);
+//     items[i]._source.image = images;
+//   }
+//   return items;
+// }
 
 // var products = [
 //       {
