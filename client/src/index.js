@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import ShoppingCart from './components/Shoppingcart.jsx';
 import HomePage from './components/homePage.jsx';
 import ProductsList from './components/productsListPage.jsx';
+import ProductCard from './components/productCard.jsx';
 
 var axios = require('axios');
 
@@ -75,7 +76,7 @@ class Hello extends React.Component {
     } else if (view === 'shoppingCart') {
       return <ShoppingCart cart={this.state.cart}/>
     }  else if (view === 'productsList') {
-      return <ProductsList products={this.state.searchedItems}/>
+      return <ProductsList products={this.state.searchedItems} query={this.state.query}/>
     }else {
       return null;
     }
@@ -98,12 +99,12 @@ function addDecimalInPrice(number) {
   let s = number.toString().split('');
   let last = s[s.length - 1];
   let sec = s[s.length - 2];
-  if (last && sec === '9') {
+  if (last === '9' && sec === '9') {
     s.splice(2, 0, '.');
     let n = s.join('');
     return parseFloat(n);
   }
-  return number.toFixed(2);
+  return number;
 }
 
 function parseImageUrls(items) {
