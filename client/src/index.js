@@ -8,11 +8,6 @@ import ProductsList from './components/productsListPage.jsx';
 class Hello extends React.Component {
   constructor(props) {
     super(props);
-    //we need to make tabs on the homepage that will change the view in state
-    //right now, the default page should be the homepage
-    //the user should be able to click on a "shopping cart" tab somewhere and it should rerender
-    //to be the shopping cart component
-    //we also need to implement the homepage and what it displays.
     this.state = {
       view: 'homepage',
       cart: []
@@ -21,16 +16,10 @@ class Hello extends React.Component {
   }
 
   changeView(view){
-    //this function's input should be a string
-    //the string should represent the users desired page
-    //example: if the input is 'shoppingCart'
-    //the function should set the state of 'view' to 'shoppingCart'
-    //so the page will re-render
     this.setState({view: view});
   }
 
   getProductsByQuery(query) {
-    //lets use axios instead of ajax
     $.ajax({
       method: 'get',
       url: '/search/:query',

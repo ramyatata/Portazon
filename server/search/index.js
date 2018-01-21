@@ -33,6 +33,7 @@ router.get('/user', (req, res) => {
 
 
 router.get('/', (req, res) => {
+  // console.log('in search', req.query)
   searchQuery(req.query).then((response) => {
     let hits = response.hits.hits;
 
