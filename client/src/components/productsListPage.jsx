@@ -15,18 +15,16 @@ class ProductsListPage extends React.Component {
   }
 
   createProductCards() {
-    console.log('in create product card')
     let products = this.state.products;
-    console.log('products', products)
+    let addItemToCart = this.props.addItemToCart;
     return products.map((item, ind) => (
-        <ProductCard item={item} key={ind}/>
+        <ProductCard item={item} key={ind} addItemToCart={addItemToCart}/>
       )
     )
   }
 
 
   render(){
-    // console.log('products in product page', this.state.products)
     return(
         <div>
           <Header></Header>

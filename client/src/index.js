@@ -13,12 +13,13 @@ class Hello extends React.Component {
     super(props);
     this.state = {
       view: 'homepage',
-      cart: [],
+      cart: null,
       searchedItems: '',
       query: ''
     }
     this.changeView = this.changeView.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   changeView(view){
@@ -36,16 +37,14 @@ class Hello extends React.Component {
     }
 
   addItemToCart(item) {
-    //this function should have an input of an object that represents a single item
-    //we then need to do an ajax POST request to the server to addItemToCart
-    //the data we need to send with this request is the item object
-    //upon success:
-    //we should update the users shopping cart by setting the state
-    //upon error:
-    //console log the error and see whats happening!
-
-    //for now:
-    this.state.cart.push(item);
+    console.log('in add item to cart', item)
+    let cart = this.state.cart;
+    if (!cart) {
+      this.setState({cart: [item]})
+    } else {
+      let update = cart.push(item);
+      this.setState({cart: update});
+    }
   }
 
   removeItemFromCart(item) {
@@ -76,16 +75,16 @@ class Hello extends React.Component {
     } else if (view === 'shoppingCart') {
       return <ShoppingCart cart={this.state.cart}/>
     }  else if (view === 'productsList') {
-      return <ProductsList products={this.state.searchedItems} query={this.state.query}/>
+      return <ProductsList products={this.state.searchedItems} query={this.state.query} addItemToCart={this.addItemToCart}/>
     }else {
       return null;
     }
   }
 
   render() {
+    console.log('cart in index', this.state.cart)
     return (
       <div>
-
         <div>
           {this.renderView()}
         </div>
