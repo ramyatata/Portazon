@@ -5,12 +5,15 @@ import Header from './header.jsx';
 import Footer from './footer.jsx';
 import ProductCard from './productCard.jsx';
 
-class ProductListPage extends React.Component {
+class ProductsListPage extends React.Component {
   constructor(props){
-    super(props)
+    super(props);
+    this.state = {
+      products: this.props.products
+    }
   }
   render(){
-
+    console.log('products in product page', this.state.products)
     return(
         <div>
           <Header></Header>
@@ -34,4 +37,4 @@ class ProductListPage extends React.Component {
   }
 }
 
-export default ProductListPage
+export default ProductsListPage;

@@ -12,9 +12,10 @@ class HomePage extends React.Component {
   }
   render(){
     let changeView = this.props.changeView;
+    let submitQuery = this.props.submitQuery;
     return(
       <div>
-        <Header changeView={changeView}></Header>
+        <Header changeView={changeView} submitQuery={submitQuery}></Header>
         <Banner/>
         <Footer></Footer>
       </div>

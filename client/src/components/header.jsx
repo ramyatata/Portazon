@@ -13,9 +13,10 @@
         query: '',
         searchedItems: ''
       }
-      this.submitQuery = this.submitQuery.bind(this);
+
       this.handleChange = this.handleChange.bind(this);
       this.changeViewToCart = this.changeViewToCart.bind(this);
+      this.handleSearchClick = this.handleSearchClick.bind(this);
     }
 
     changeViewToCart(){
@@ -32,15 +33,19 @@
 
     }
 
-    submitQuery() {
-      let q = this.state.query;
-      axios.get('search/?q=' + q)
-        .then(res => {
-          let items = res.data;
-          let parseImages = parseImageUrls(items);
-          this.setState({searchedItems: parseImages});
-          //this.changeViewToProductList ?? change the view to list of products by productsListPage?
-        })
+    // submitQuery() {
+    //   let q = this.state.query;
+    //   axios.get('search/?q=' + q)
+    //     .then(res => {
+    //       let items = res.data;
+    //       let parseImages = parseImageUrls(items);
+    //       this.setState({searchedItems: parseImages});
+    //       //this.changeViewToProductList ?? change the view to list of products by productsListPage?
+    //     })
+    // }
+    handleSearchClick() {
+      let submitQuery = this.props.submitQuery;
+      submitQuery(this.state.query);
     }
 
     handleChange(e) {
@@ -49,7 +54,7 @@
 
 
     render() {
-      console.log('access searchedItems by: this.state.searchedItems', this.state.searchedItems)
+      // console.log('access searchedItems by: this.state.searchedItems', this.state.searchedItems)
       return (
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
@@ -72,7 +77,7 @@
              <ul className="nav navbar-nav" style={{width: '50%'}}>
                <div className="input-group" style={{paddingTop: '10px'}}>
                  <input onChange={e => this.handleChange(e)} type = "text" className ="form-control" placeholder="Search for something fun ..." />
-                 <div onClick={this.submitQuery} className="input-group-addon">
+                 <div onClick={this.handleSearchClick} className="input-group-addon">
                    <span className="glyphicon glyphicon-search"></span>
                  </div>
                 </div>
@@ -112,10 +117,10 @@
 export default Header;
 
 
-function parseImageUrls(items) {
-  for (let i = 0; i < items.length; i++) {
-    let images = JSON.parse(items[i]._source.image);
-    items[i]._source.image = images;
-  }
-  return items;
-}
+// function parseImageUrls(items) {
+//   for (let i = 0; i < items.length; i++) {
+//     let images = JSON.parse(items[i]._source.image);
+//     items[i]._source.image = images;
+//   }
+//   return items;
+// }

@@ -5,32 +5,34 @@ import ShoppingCart from './components/Shoppingcart.jsx';
 import HomePage from './components/homePage.jsx';
 import ProductsList from './components/productsListPage.jsx';
 
+var axios = require('axios');
+
 class Hello extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: 'homepage',
-      cart: []
+      cart: [],
+      searchedItems: '',
+      query: ''
     }
     this.changeView = this.changeView.bind(this);
+    this.submitQuery = this.submitQuery.bind(this);
   }
 
   changeView(view){
     this.setState({view: view});
   }
 
-  getProductsByQuery(query) {
-    $.ajax({
-      method: 'get',
-      url: '/search/:query',
-      success: (response) => {
-        console.log('success in get request by query string!', response)
-      },
-      error: (err) => {
-        console.log('err getting data', err);
-      }
-    })
-  }
+  submitQuery(query) {
+    axios.get('search/?q=' + query)
+      .then(res => {
+        let items = res.data;
+        let modItems = parseImageUrls(items);
+        this.setState({searchedItems: modItems, query: query, view: 'productsList'});
+        //this.changeViewToProductList ?? change the view to list of products by productsListPage?
+      })
+    }
 
   addItemToCart(item) {
     //this function should have an input of an object that represents a single item
@@ -69,11 +71,11 @@ class Hello extends React.Component {
 
     let view = this.state.view;
     if (view === 'homepage') {
-      return <HomePage changeView={this.changeView}/>
+      return <HomePage changeView={this.changeView} submitQuery={this.submitQuery}/>
     } else if (view === 'shoppingCart') {
       return <ShoppingCart cart={this.state.cart}/>
     }  else if (view === 'productsList') {
-      return <ProductsList/>
+      return <ProductsList products={this.state.searchedItems}/>
     }else {
       return null;
     }
@@ -89,6 +91,31 @@ class Hello extends React.Component {
       </div>
       );
   }
+}
+
+function addDecimalInPrice(number) {
+
+  let s = number.toString().split('');
+  let last = s[s.length - 1];
+  let sec = s[s.length - 2];
+  if (last && sec === '9') {
+    s.splice(2, 0, '.');
+    let n = s.join('');
+    return parseFloat(n);
+  }
+  return number.toFixed(2);
+}
+
+function parseImageUrls(items) {
+  for (let i = 0; i < items.length; i++) {
+    let images = JSON.parse(items[i]._source.image);
+    items[i]._source.image = images;
+    let retail = items[i]._source.retail_price;
+    items[i]._source.retail_price = addDecimalInPrice(retail);
+    let discount = items[i]._source.discounted_price;
+    items[i]._source.discounted_price = addDecimalInPrice(discount);
+  }
+  return items;
 }
 
 ReactDOM.render(<Hello/>, document.getElementById('root'));
