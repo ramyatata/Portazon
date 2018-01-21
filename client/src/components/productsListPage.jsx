@@ -25,9 +25,10 @@ class ProductsListPage extends React.Component {
 
 
   render(){
+    console.log('itemsin product list', this.state.products)
     return(
         <div>
-          <Header></Header>
+          {/*<Header submitQuery={this.props.submitQuery}></Header>*/}
           <h3>You searched for: {this.props.query}</h3>
           <div className="col-xs-12">
             {this.createProductCards()}

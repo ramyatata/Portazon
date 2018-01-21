@@ -5,6 +5,7 @@ import ShoppingCart from './components/Shoppingcart.jsx';
 import HomePage from './components/homePage.jsx';
 import ProductsList from './components/productsListPage.jsx';
 import ProductCard from './components/productCard.jsx';
+import Header from './components/header.jsx';
 
 var axios = require('axios');
 
@@ -14,7 +15,7 @@ class Hello extends React.Component {
     this.state = {
       view: 'homepage',
       cart: null,
-      searchedItems: '',
+      searchedItems: null,
       query: ''
     }
     this.changeView = this.changeView.bind(this);
@@ -29,10 +30,17 @@ class Hello extends React.Component {
   submitQuery(query) {
     axios.get('search/?q=' + query)
       .then(res => {
+        // console.log('response', res.data)
         let items = res.data;
         let modItems = parseImageUrls(items);
-        this.setState({searchedItems: modItems, query: query, view: 'productsList'});
-        //this.changeViewToProductList ?? change the view to list of products by productsListPage?
+        this.state.searchedItems = null;
+        console.log('modItems', modItems)
+        if (this.state.view !== 'productsList') {
+          this.setState({searchedItems: modItems, query: query, view: 'productsList'})
+        } else {
+          this.setState({searchedItems: modItems, query: query});
+          //even though I set the state, it isn't updating the product list component?! what the heck!?
+        }
       })
     }
 
@@ -68,23 +76,28 @@ class Hello extends React.Component {
   }
 
   renderView() {
-
     let view = this.state.view;
     if (view === 'homepage') {
       return <HomePage changeView={this.changeView} submitQuery={this.submitQuery}/>
     } else if (view === 'shoppingCart') {
       return <ShoppingCart cart={this.state.cart}/>
     }  else if (view === 'productsList') {
-      return <ProductsList products={this.state.searchedItems} query={this.state.query} addItemToCart={this.addItemToCart}/>
+      return <ProductsList
+        products={this.state.searchedItems}
+        query={this.state.query}
+        addItemToCart={this.addItemToCart}
+        submitQuery={this.submitQuery}
+        />
     }else {
       return null;
     }
   }
 
   render() {
-    console.log('cart in index', this.state.cart)
+    // console.log('cart in index', this.state.cart)
     return (
       <div>
+        <Header changeView={this.changeView} submitQuery={this.submitQuery}/>
         <div>
           {this.renderView()}
         </div>
