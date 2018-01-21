@@ -195,8 +195,8 @@ module.exports = {
       body: {
         query: {
           match: {"product_category_tree": category}
-          }
         }
+      }
     });
   },
 }
