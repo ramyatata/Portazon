@@ -14,7 +14,7 @@ class Hello extends React.Component {
     //to be the shopping cart component
     //we also need to implement the homepage and what it displays.
     this.state = {
-      view: 'productsList',
+      view: 'homepage',
       cart: []
     }
     this.changeView = this.changeView.bind(this);

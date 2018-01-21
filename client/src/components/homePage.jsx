@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 
+import Banner from './banner.jsx';
+
 class HomePage extends React.Component {
   constructor(props){
     super(props)
@@ -13,7 +15,7 @@ class HomePage extends React.Component {
     return(
       <div>
         <Header changeView={changeView}></Header>
-        <div>HomePage main Content</div>
+        <Banner/>
         <Footer></Footer>
       </div>
     );
