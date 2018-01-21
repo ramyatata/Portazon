@@ -1,12 +1,20 @@
   import React from 'react';
   import ReactDOM from 'react-dom';
 
+
   import CategoryList from './categoryList.jsx';
+
+  var axios = require('axios');
 
   class Header extends React.Component {
     constructor(props){
       super(props);
-
+      this.state = {
+        query: '',
+        searchedItems: ''
+      }
+      this.submitQuery = this.submitQuery.bind(this);
+      this.handleChange = this.handleChange.bind(this);
       this.changeViewToCart = this.changeViewToCart.bind(this);
     }
 
@@ -19,8 +27,22 @@
 
     }
 
+    submitQuery() {
+      let q = this.state.query;
+      axios.get('search/?q=' + q)
+        .then(res => {
+          console.log('in then for submit query', res)
+          this.setState({searchItems: res.data});
+        })
+    }
+
+    handleChange(e) {
+      this.setState({query: e.target.value});
+    }
+
 
     render() {
+      // console.log('query in header', this.state.query)
       return (
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
@@ -42,8 +64,8 @@
           {/* search bar */}
              <ul className="nav navbar-nav" style={{width: '50%'}}>
                <div className="input-group" style={{paddingTop: '10px'}}>
-                 <input type = "text" className ="form-control" placeholder="Search for something fun ..." />
-                 <div className="input-group-addon">
+                 <input onChange={e => this.handleChange(e)} type = "text" className ="form-control" placeholder="Search for something fun ..." />
+                 <div onClick={this.submitQuery} className="input-group-addon">
                    <span className="glyphicon glyphicon-search"></span>
                  </div>
                 </div>
