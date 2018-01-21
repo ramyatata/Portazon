@@ -1,11 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-
 import ShoppingCart from './components/Shoppingcart.jsx';
-import HomePage from './components/homePage.jsx'
-
-
+import HomePage from './components/homePage.jsx';
+import ProductsList from './components/productsListPage.jsx';
 
 class Hello extends React.Component {
   constructor(props) {
@@ -16,7 +14,7 @@ class Hello extends React.Component {
     //to be the shopping cart component
     //we also need to implement the homepage and what it displays.
     this.state = {
-      view: 'homepage',
+      view: 'productsList',
       cart: []
     }
     this.changeView = this.changeView.bind(this);
@@ -85,7 +83,9 @@ class Hello extends React.Component {
       return <HomePage changeView={this.changeView}/>
     } else if (view === 'shoppingCart') {
       return <ShoppingCart cart={this.state.cart}/>
-    } else {
+    }  else if (view === 'productsList') {
+      return <ProductsList/>
+    }else {
       return null;
     }
   }

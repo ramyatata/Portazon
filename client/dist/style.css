@@ -83,3 +83,16 @@
 .cart-item-img {
   height: 180px;
 }
+
+.card{
+  margin: 10px;
+  width: '30rem';
+  border: 'solid 1px grey';
+  padding:'20px 20px';
+}
+
+.card-img-top{
+  width: 100%;
+  overflow: hidden;
+}
+
