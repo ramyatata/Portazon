@@ -15,7 +15,7 @@ class HomePage extends React.Component {
     let submitQuery = this.props.submitQuery;
     return(
       <div>
-        <Header changeView={changeView} submitQuery={submitQuery}></Header>
+        {/*<Header changeView={changeView} submitQuery={submitQuery}></Header>*/}
         <Banner/>
         <Footer></Footer>
       </div>
