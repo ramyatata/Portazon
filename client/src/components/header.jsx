@@ -31,7 +31,6 @@
       let q = this.state.query;
       axios.get('search/?q=' + q)
         .then(res => {
-          console.log('in then for submit query', res.data)
           this.setState({searchedItems: res.data});
         })
     }
@@ -42,7 +41,7 @@
 
 
     render() {
-      console.log('qitems found in header', this.state.searchedItems)
+      // console.log('access searchedItems by: this.state.searchedItems', this.state.searchedItems)
       return (
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
