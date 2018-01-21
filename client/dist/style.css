@@ -96,3 +96,14 @@
   overflow: hidden;
 }
 
+.homepage-banner{
+  height: 380px;
+}
+
+.homepage-thumb {
+  height: 180px;
+}
+ .homepage-thumb2{
+  height: 180px;
+  margin-top: 20px;
+ }
