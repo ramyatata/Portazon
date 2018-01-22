@@ -33,7 +33,6 @@ class Hello extends React.Component {
         // console.log('response', res.data)
         let items = res.data;
         let modItems = parseImageUrls(items);
-        this.state.searchedItems = null;
         console.log('modItems', modItems)
         if (this.state.view !== 'productsList') {
           this.setState({searchedItems: modItems, query: query, view: 'productsList'})
