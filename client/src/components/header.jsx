@@ -33,16 +33,6 @@
 
     }
 
-    // submitQuery() {
-    //   let q = this.state.query;
-    //   axios.get('search/?q=' + q)
-    //     .then(res => {
-    //       let items = res.data;
-    //       let parseImages = parseImageUrls(items);
-    //       this.setState({searchedItems: parseImages});
-    //       //this.changeViewToProductList ?? change the view to list of products by productsListPage?
-    //     })
-    // }
     handleSearchClick() {
       let submitQuery = this.props.submitQuery;
       submitQuery(this.state.query);
@@ -54,7 +44,6 @@
 
 
     render() {
-      // console.log('access searchedItems by: this.state.searchedItems', this.state.searchedItems)
       return (
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
@@ -115,12 +104,3 @@
   }
 
 export default Header;
-
-
-// function parseImageUrls(items) {
-//   for (let i = 0; i < items.length; i++) {
-//     let images = JSON.parse(items[i]._source.image);
-//     items[i]._source.image = images;
-//   }
-//   return items;
-// }
