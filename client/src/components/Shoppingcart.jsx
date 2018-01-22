@@ -76,13 +76,6 @@ class ShoppingCart extends React.Component {
   render() {
     return(
       <div className="container-fluid">
-        <nav className="navbar navbar-inverse">
-          <div className="container-fluid">
-            <div className="navbar-header" id="logo">
-              <a className="navbar-brand" href="#">PORTAZON</a>
-            </div>
-          </div>
-        </nav>
         <div>
           <h2>shopping cart</h2>
         </div>

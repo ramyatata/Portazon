@@ -46,6 +46,7 @@ class Hello extends React.Component {
   addItemToCart(item) {
     console.log('in add item to cart', item)
     let cart = this.state.cart;
+    item.quantity = 1;
     if (!cart) {
       this.setState({cart: [item]})
     } else {
