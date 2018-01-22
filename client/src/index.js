@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import ShoppingCart from './components/Shoppingcart.jsx';
+import ShoppingCart from './components/shoppingCart.jsx';
 import HomePage from './components/homePage.jsx';
 import ProductsList from './components/productsListPage.jsx';
 import ProductCard from './components/productCard.jsx';
