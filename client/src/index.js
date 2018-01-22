@@ -96,7 +96,6 @@ class Hello extends React.Component {
   }
 
   render() {
-    // console.log('cart in index', this.state.cart)
     return (
       <div>
         <Header changeView={this.changeView} submitQuery={this.submitQuery}/>
@@ -109,7 +108,6 @@ class Hello extends React.Component {
 }
 
 function addDecimalInPrice(number) {
-
   let s = number.toString().split('');
   let last = s[s.length - 1];
   let sec = s[s.length - 2];
