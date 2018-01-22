@@ -50,8 +50,10 @@ class Hello extends React.Component {
     if (!cart) {
       this.setState({cart: [item]})
     } else {
+      console.log('cart to be pushed', cart)
       let update = cart.push(item);
-      this.setState({cart: update});
+      // console.log('updated', update)
+      this.setState({cart: cart});
     }
   }
 
