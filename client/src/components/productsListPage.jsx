@@ -19,12 +19,4 @@ const ProductsListPage = ({products, query, addItemToCart}) => (
 
 );
 
-function createProductCards(products) {
-
-  return products.map((item, ind) => (
-      <ProductCard item={item} key={ind} addItemToCart={addItemToCart}/>
-    )
-  )
-}
-
 export default ProductsListPage;
