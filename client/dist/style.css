@@ -96,3 +96,17 @@
   overflow: hidden;
 }
 
+<<<<<<< HEAD
+=======
+.homepage-banner{
+  height: 380px;
+}
+
+.homepage-thumb {
+  height: 180px;
+}
+ .homepage-thumb2{
+  height: 180px;
+  margin-top: 20px;
+ }
+>>>>>>> 6d93f95915e5c0dc974667cc85bc4a8d109794b5

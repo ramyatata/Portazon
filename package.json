@@ -9,7 +9,7 @@
     "webpack": "webpack -d --watch",
     "elasticsearch": "server/search/elasticsearch/bin/elasticsearch",
     "kibana": "server/search/kibana/bin/kibana",
-    "logstash": "server/search/logstash/bin/logstash -f /Users/vpereira1982/HackReactor/Portazon/server/data/logstash.conf"
+    "logstash": "server/search/logstash/bin/logstash -f /Users/vitor.pereira/Desktop/Portazon/server/data/logstash.conf"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/Portazon/Portazon#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "elasticsearch": "^14.0.0",
     "express": "^4.16.2",

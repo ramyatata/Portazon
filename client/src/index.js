@@ -1,59 +1,71 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+<<<<<<< HEAD
 import ShoppingCart from './components/Shoppingcart.jsx';
 import HomePage from './components/homePage.jsx';
 import ProductsList from './components/productsListPage.jsx';
+=======
+import ShoppingCart from './components/shoppingCart.jsx';
+import HomePage from './components/homePage.jsx';
+import ProductsList from './components/productsListPage.jsx';
+import ProductCard from './components/productCard.jsx';
+import Header from './components/header.jsx';
+
+var axios = require('axios');
+>>>>>>> 6d93f95915e5c0dc974667cc85bc4a8d109794b5
 
 class Hello extends React.Component {
   constructor(props) {
     super(props);
-    //we need to make tabs on the homepage that will change the view in state
-    //right now, the default page should be the homepage
-    //the user should be able to click on a "shopping cart" tab somewhere and it should rerender
-    //to be the shopping cart component
-    //we also need to implement the homepage and what it displays.
     this.state = {
+<<<<<<< HEAD
       view: 'productsList',
       cart: []
+=======
+      view: 'homepage',
+      cart: null,
+      searchedItems: null,
+      query: ''
+>>>>>>> 6d93f95915e5c0dc974667cc85bc4a8d109794b5
     }
     this.changeView = this.changeView.bind(this);
+    this.submitQuery = this.submitQuery.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   changeView(view){
-    //this function's input should be a string
-    //the string should represent the users desired page
-    //example: if the input is 'shoppingCart'
-    //the function should set the state of 'view' to 'shoppingCart'
-    //so the page will re-render
     this.setState({view: view});
   }
 
-  getProductsByQuery(query) {
-    //lets use axios instead of ajax
-    $.ajax({
-      method: 'get',
-      url: '/search/:query',
-      success: (response) => {
-        console.log('success in get request by query string!', response)
-      },
-      error: (err) => {
-        console.log('err getting data', err);
-      }
-    })
-  }
+  submitQuery(query) {
+    axios.get('search/?q=' + query)
+      .then(res => {
+        // console.log('response', res.data)
+        let items = res.data;
+        let modItems = parseImageUrls(items);
+        console.log('modItems', modItems)
+        if (this.state.view !== 'productsList') {
+          this.setState({searchedItems: modItems, query: query, view: 'productsList'})
+        } else {
+          this.setState({searchedItems: modItems, query: query});
+          //even though I set the state, it isn't updating the product list component?! what the heck!?
+        }
+      })
+    }
 
   addItemToCart(item) {
-    //this function should have an input of an object that represents a single item
-    //we then need to do an ajax POST request to the server to addItemToCart
-    //the data we need to send with this request is the item object
-    //upon success:
-    //we should update the users shopping cart by setting the state
-    //upon error:
-    //console log the error and see whats happening!
-
-    //for now:
-    this.state.cart.push(item);
+    console.log('in add item to cart', item)
+    let cart = this.state.cart;
+    item.quantity = 1;
+    if (!cart) {
+      this.setState({cart: [item]})
+    } else {
+      console.log('cart to be pushed', cart)
+      let update = cart.push(item);
+      // console.log('updated', update)
+      this.setState({cart: cart});
+    }
   }
 
   removeItemFromCart(item) {
@@ -77,14 +89,22 @@ class Hello extends React.Component {
   }
 
   renderView() {
-
     let view = this.state.view;
     if (view === 'homepage') {
-      return <HomePage changeView={this.changeView}/>
+      return <HomePage changeView={this.changeView} submitQuery={this.submitQuery}/>
     } else if (view === 'shoppingCart') {
       return <ShoppingCart cart={this.state.cart}/>
     }  else if (view === 'productsList') {
+<<<<<<< HEAD
       return <ProductsList/>
+=======
+      return <ProductsList
+        products={this.state.searchedItems}
+        query={this.state.query}
+        addItemToCart={this.addItemToCart}
+        submitQuery={this.submitQuery}
+        />
+>>>>>>> 6d93f95915e5c0dc974667cc85bc4a8d109794b5
     }else {
       return null;
     }
@@ -93,13 +113,37 @@ class Hello extends React.Component {
   render() {
     return (
       <div>
-
+        <Header changeView={this.changeView} submitQuery={this.submitQuery}/>
         <div>
           {this.renderView()}
         </div>
       </div>
       );
   }
+}
+
+function addDecimalInPrice(number) {
+  let s = number.toString().split('');
+  let last = s[s.length - 1];
+  let sec = s[s.length - 2];
+  if (last === '9' && sec === '9') {
+    s.splice(2, 0, '.');
+    let n = s.join('');
+    return parseFloat(n);
+  }
+  return number;
+}
+
+function parseImageUrls(items) {
+  for (let i = 0; i < items.length; i++) {
+    let images = JSON.parse(items[i]._source.image);
+    items[i]._source.image = images;
+    let retail = items[i]._source.retail_price;
+    items[i]._source.retail_price = addDecimalInPrice(retail);
+    let discount = items[i]._source.discounted_price;
+    items[i]._source.discounted_price = addDecimalInPrice(discount);
+  }
+  return items;
 }
 
 ReactDOM.render(<Hello/>, document.getElementById('root'));

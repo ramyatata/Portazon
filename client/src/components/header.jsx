@@ -1,13 +1,22 @@
   import React from 'react';
   import ReactDOM from 'react-dom';
 
+
   import CategoryList from './categoryList.jsx';
+
+  var axios = require('axios');
 
   class Header extends React.Component {
     constructor(props){
       super(props);
+      this.state = {
+        query: '',
+        searchedItems: ''
+      }
 
+      this.handleChange = this.handleChange.bind(this);
       this.changeViewToCart = this.changeViewToCart.bind(this);
+      this.handleSearchClick = this.handleSearchClick.bind(this);
     }
 
     changeViewToCart(){
@@ -15,8 +24,22 @@
       changeView('shoppingCart');
     }
 
+    changeViewToProductList() {
+      this.props.changeView('productslist');
+    }
+
+
     populateCategoriesMenu(){
 
+    }
+
+    handleSearchClick() {
+      let submitQuery = this.props.submitQuery;
+      submitQuery(this.state.query);
+    }
+
+    handleChange(e) {
+      this.setState({query: e.target.value});
     }
 
 
@@ -42,8 +65,8 @@
           {/* search bar */}
              <ul className="nav navbar-nav" style={{width: '50%'}}>
                <div className="input-group" style={{paddingTop: '10px'}}>
-                 <input type = "text" className ="form-control" placeholder="Search for something fun ..." />
-                 <div className="input-group-addon">
+                 <input onChange={e => this.handleChange(e)} type = "text" className ="form-control" placeholder="Search for something fun ..." />
+                 <div onClick={this.handleSearchClick} className="input-group-addon">
                    <span className="glyphicon glyphicon-search"></span>
                  </div>
                 </div>
@@ -80,4 +103,4 @@
     }
   }
 
-export default Header
+export default Header;
