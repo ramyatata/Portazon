@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import ShoppingCart from './components/shoppingCart.jsx';
+import Header from './components/header.jsx';
+import Footer from './components/footer.jsx';
 import HomePage from './components/homePage.jsx';
+import ShoppingCart from './components/shoppingCart.jsx';
 import ProductsList from './components/productsListPage.jsx';
 import ProductCard from './components/productCard.jsx';
-import Header from './components/header.jsx';
+import ProductDetail from './components/productDetailPage.jsx';
 
 var axios = require('axios');
 
@@ -90,7 +92,9 @@ class Hello extends React.Component {
         addItemToCart={this.addItemToCart}
         submitQuery={this.submitQuery}
         />
-    }else {
+    } else if(view === 'productDetail'){
+        return <ProductDetail/>
+    } else {
       return null;
     }
   }
@@ -102,6 +106,7 @@ class Hello extends React.Component {
         <div>
           {this.renderView()}
         </div>
+        <Footer/>
       </div>
       );
   }

@@ -1,9 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Header from './header.jsx';
-import Footer from './footer.jsx';
-
 import Banner from './banner.jsx';
 
 class HomePage extends React.Component {
@@ -15,9 +12,7 @@ class HomePage extends React.Component {
     let submitQuery = this.props.submitQuery;
     return(
       <div>
-        {/*<Header changeView={changeView} submitQuery={submitQuery}></Header>*/}
         <Banner/>
-        <Footer></Footer>
       </div>
     );
   }

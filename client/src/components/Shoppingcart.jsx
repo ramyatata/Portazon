@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from './Footer.jsx';
 
 class ShoppingCart extends React.Component {
   constructor(props) {
