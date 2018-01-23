@@ -15,7 +15,7 @@ class Hello extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'homepage',
+      view: 'productDetail',
       cart: null,
       searchedItems: null,
       query: ''
