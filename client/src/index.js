@@ -1,11 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-<<<<<<< HEAD
-import ShoppingCart from './components/Shoppingcart.jsx';
-import HomePage from './components/homePage.jsx';
-import ProductsList from './components/productsListPage.jsx';
-=======
 import ShoppingCart from './components/shoppingCart.jsx';
 import HomePage from './components/homePage.jsx';
 import ProductsList from './components/productsListPage.jsx';
@@ -13,21 +8,15 @@ import ProductCard from './components/productCard.jsx';
 import Header from './components/header.jsx';
 
 var axios = require('axios');
->>>>>>> 6d93f95915e5c0dc974667cc85bc4a8d109794b5
 
 class Hello extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< HEAD
-      view: 'productsList',
-      cart: []
-=======
       view: 'homepage',
       cart: null,
       searchedItems: null,
       query: ''
->>>>>>> 6d93f95915e5c0dc974667cc85bc4a8d109794b5
     }
     this.changeView = this.changeView.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
@@ -95,16 +84,12 @@ class Hello extends React.Component {
     } else if (view === 'shoppingCart') {
       return <ShoppingCart cart={this.state.cart}/>
     }  else if (view === 'productsList') {
-<<<<<<< HEAD
-      return <ProductsList/>
-=======
       return <ProductsList
         products={this.state.searchedItems}
         query={this.state.query}
         addItemToCart={this.addItemToCart}
         submitQuery={this.submitQuery}
         />
->>>>>>> 6d93f95915e5c0dc974667cc85bc4a8d109794b5
     }else {
       return null;
     }
