@@ -18,15 +18,16 @@ class Hello extends React.Component {
       view: 'homePage',
       cart: null,
       searchedItems: null,
-      query: ''
+      query: '',
+      productDetail: ''
     }
     this.changeView = this.changeView.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
   }
 
-  changeView(view){
-    this.setState({view: view});
+  changeView(view, item){
+    this.setState({view: view, productDetail: item});
   }
 
   submitQuery(query) {
@@ -91,6 +92,7 @@ class Hello extends React.Component {
         query={this.state.query}
         addItemToCart={this.addItemToCart}
         submitQuery={this.submitQuery}
+        changeView={this.changeView}
         />
     } else if(view === 'productDetail'){
         return <ProductDetail/>
