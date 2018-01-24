@@ -76,19 +76,19 @@ const ProductDetail = (props) => {
             <h6>Details</h6>
             <ul>{prodDetails}</ul>
           </div>
-          <div className="prod-quant">
-            <div className="col-xs-12">
-              <div className="col-xs-6 form-group">
-                <label className="col-xs-6">Quantity</label>
-                <select>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                </select>
-              </div>
-              <div className="col-xs-6">
-                <button className="btn">Add to Cart</button>
-              </div>
+          <div className="prod-quant col-xs-12">
+            <div className="col-xs-5 form-group">
+              <label className="col-xs-6" style={{fontWeight: 'bold', fontSize:'1.2em'}}>Quantity</label>
+              <select style={{padding: '10px', borderRadius: '10px', height:'30px', width: '60px'}}>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div className="col-xs-7">
+              <button type="button" className="btn btn-block" style={{backgroundColor:'#000', color:'White', fontWeight:'bold'}}>ADD TO BAG</button>
             </div>
           </div>
         </div>
