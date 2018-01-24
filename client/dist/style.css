@@ -203,10 +203,12 @@
   border-top: none;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  background-color: #ccc;
+  background-color: #f0f0f0;
   color: black;
   font-weight: bold;
   font-weight: 800;
+  text-align: center;
+  padding: 20px 20px;
 }
 /* need to check why this is not working when placed in style sheet */
 /*.prod-primaryPrice {
