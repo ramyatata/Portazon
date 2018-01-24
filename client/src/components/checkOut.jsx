@@ -27,7 +27,7 @@ class checkOut extends React.Component {
   render() {
     return (
       <div>
-        <div className="col-sm-7">
+        <div className="checkout-shipping col-sm-7">
           Shipping Address:
           <input placeholder="First Name"/>
           <input placeholder="Last Name"/>
@@ -37,7 +37,7 @@ class checkOut extends React.Component {
           <input placeholder="State"/>
           <input placeholder="Zip Code"/>
         </div>
-        <div>
+        <div className="checkout-payment col-sm-5">
           Payment Information:
         </div>
       </div>
