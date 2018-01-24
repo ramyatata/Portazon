@@ -15,7 +15,7 @@ class Hello extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'productDetail',
+      view: 'homePage',
       cart: null,
       searchedItems: null,
       query: ''
@@ -81,7 +81,7 @@ class Hello extends React.Component {
 
   renderView() {
     let view = this.state.view;
-    if (view === 'homepage') {
+    if (view === 'homePage') {
       return <HomePage changeView={this.changeView} submitQuery={this.submitQuery}/>
     } else if (view === 'shoppingCart') {
       return <ShoppingCart cart={this.state.cart}/>
@@ -112,17 +112,17 @@ class Hello extends React.Component {
   }
 }
 
-function addDecimalInPrice(number) {
-  let s = number.toString().split('');
-  let last = s[s.length - 1];
-  let sec = s[s.length - 2];
-  if (last === '9' && sec === '9') {
-    s.splice(2, 0, '.');
-    let n = s.join('');
-    return parseFloat(n);
-  }
-  return number;
-}
+// function addDecimalInPrice(number) {
+//   let s = number.toString().split('');
+//   let last = s[s.length - 1];
+//   let sec = s[s.length - 2];
+//   if (last === '9' && sec === '9') {
+//     s.splice(2, 0, '.');
+//     let n = s.join('');
+//     return parseFloat(n);
+//   }
+//   return number;
+// }
 
 function parseImageUrls(items) {
   for (let i = 0; i < items.length; i++) {
