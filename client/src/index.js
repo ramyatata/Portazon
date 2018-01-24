@@ -127,6 +127,13 @@ function parseImageUrls(items) {
   return items;
 }
 
+function cutDuplicates(items) {
+  let newList = [];
+  for (let i = 0; i < items.length; i++) {
+
+  }
+}
+
 ReactDOM.render(<Hello/>, document.getElementById('root'));
 
 
