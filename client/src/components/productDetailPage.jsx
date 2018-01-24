@@ -3,16 +3,6 @@ import ReactDOM from 'react-dom';
 
 const ProductDetail = ({item}) => {
   console.log('item in product detail', item)
-  // let prod = {
-  //   title: 'COPA 18+ TR Premium Navy',
-  //   rating: '4',
-  //   price: '$230.00',
-  //   salePrice: '$150.00',
-  //   save: '$80.00',
-  //   reviews: '100',
-  //   description: 'adidas brings a classic soccer silhouette to the streets with the release of the COPA 18+ TR Premium shoe. A Primeknit® collar wraps around the foot and offers responsive support, while the premium nubuck leather upper construction provides a refined look. BOOST™ spans the full length of the shoe at the midsole, and finishing details like an internal compression sock, a fold-over tongue, and metal lace aglets pull the silhouette together.',
-  //   details: ['Premium nubuck leather upper', 'Primeknit® sock collar at ankle','BOOST™ midsole throughout','Rubber outsole','Embossed 3-Stripe stamped branding','Fabric laces with metal aglets','AC7447']
-  // }
 
   //ratings
   let ratingStars = [];
@@ -32,6 +22,7 @@ const ProductDetail = ({item}) => {
       </li>
     );
   }
+
 
   //prod details
   // let prodDetails = prod.details.map((detail, ind) => <li key={ind}>{detail}</li>);
