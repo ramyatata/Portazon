@@ -223,6 +223,8 @@
   text-align: center;
   padding: 20px 20px;
 }
+
+
 /* need to check why this is not working when placed in style sheet */
 /*.prod-primaryPrice {
   display: inline;
@@ -237,4 +239,13 @@
 .prod-savePrice{
   display: 'inline'!important;
   color: 'red' !important;
-}*/
+}
+*/
+
+
+/*************************************************
+                  Shopping Cart
+**************************************************/
+.cart-summary {
+  marginBottom: 50px;
+}

@@ -32,7 +32,7 @@ class Hello extends React.Component {
   submitQuery(query) {
     axios.get('search/?q=' + query)
       .then(res => {
-        // console.log('response', res.data)
+        console.log('response', res.data)
         let items = res.data;
         let modItems = parseImageUrls(items);
         console.log('modItems', modItems)
@@ -112,26 +112,15 @@ class Hello extends React.Component {
   }
 }
 
-// function addDecimalInPrice(number) {
-//   let s = number.toString().split('');
-//   let last = s[s.length - 1];
-//   let sec = s[s.length - 2];
-//   if (last === '9' && sec === '9') {
-//     s.splice(2, 0, '.');
-//     let n = s.join('');
-//     return parseFloat(n);
-//   }
-//   return number;
-// }
+
 
 function parseImageUrls(items) {
   for (let i = 0; i < items.length; i++) {
     let images = JSON.parse(items[i]._source.image);
     items[i]._source.image = images;
-    let retail = items[i]._source.retail_price;
-    items[i]._source.retail_price = addDecimalInPrice(retail);
-    let discount = items[i]._source.discounted_price;
-    items[i]._source.discounted_price = addDecimalInPrice(discount);
+    if (items[i]._source.discounted_price === null || !items[i]._source.retail_price === null) {
+      items.splice(i, 1);
+    }
   }
   return items;
 }

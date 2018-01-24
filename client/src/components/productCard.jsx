@@ -12,6 +12,13 @@ class ProductCard extends React.Component {
 
   render(){
     let item = this.props.item;
+    let price = '';
+    if (!item._source.discounted_price) {
+      price= item._source.retail_price;
+    } else {
+      price = item._source.discounted_price;
+    }
+    console.log('item', item)
     return(
       <div className='card col-xs-3' style={{margin: '10px', width: '30rem', border: 'solid 1px grey', padding:'20px 20px'}}>
         <img className='card-img-top' src={item._source.image[0]} alt='Card image cap'/>
