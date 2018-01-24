@@ -95,7 +95,7 @@ class Hello extends React.Component {
         changeView={this.changeView}
         />
     } else if(view === 'productDetail'){
-        return <ProductDetail/>
+        return <ProductDetail item={this.state.productDetail}/>
     } else {
       return null;
     }
