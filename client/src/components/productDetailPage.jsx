@@ -35,6 +35,12 @@ const ProductDetail = (props) => {
   //prod details
   let prodDetails = prod.details.map((detail, ind)=><li key={ind}>{detail}</li>);
 
+  //quantity Options
+  let quantityOptions = [];
+  for(let i=1; i<6; i++ ){
+    quantityOptions.push(<option value={i}>{i}</option>);
+  }
+
   return(
     <div className="col-xs-12" style={{padding: '10px'}}>
       <div className="col-xs-7 prod-leftContainer" >
@@ -79,12 +85,7 @@ const ProductDetail = (props) => {
           <div className="prod-quant col-xs-12">
             <div className="col-xs-5 form-group">
               <label className="col-xs-6" style={{fontWeight: 'bold', fontSize:'1.2em'}}>Quantity</label>
-              <select style={{padding: '10px', borderRadius: '10px', height:'30px', width: '60px'}}>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+              <select style={{padding: '10px', borderRadius: '10px', height:'30px', width: '60px'}}>{quantityOptions}
               </select>
             </div>
             <div className="col-xs-7">

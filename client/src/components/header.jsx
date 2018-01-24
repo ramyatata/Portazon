@@ -49,7 +49,7 @@
           <div className="container-fluid">
 
             {/* Logo */}
-            <div className="navbar-header" id="logo">
+            <div className="navbar-header logo">
               <a className="navbar-brand" href="#">PORTAZON</a>
             </div>
 
@@ -74,7 +74,7 @@
 
            {/* user account */}
           <ul className="nav navbar-nav navbar-right">
-          <li><button onClick={this.changeViewToCart}><span className="glyphicon glyphicon-shopping-cart" style={{'fontSize': '1.5em'}}></span></button></li>
+          <li><button onClick={this.changeViewToCart} style={{marginTop: '15px', backgroundColor: '#222', color:'white', textAlign:'center', border:'none'}}><span className="glyphicon glyphicon-shopping-cart" style={{'fontSize': '1.5em'}}></span></button></li>
                <li className="dropdown">
                  <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={{'fontSize': '1.5em'}}></span></a>
                  <div className="dropdown-menu">

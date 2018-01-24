@@ -18,10 +18,10 @@ class CategoryList extends React.Component {
     }
   }
   render() {
-    const list = this.state.categories.map((item, ind)=>{return <li key={ind}>{item}</li>});
+    const list = this.state.categories.map((item, ind)=>{return <li key={ind} style={{backgroundColor: '#333', color: '#fff', padding: '1px 10px', cursor:'pointer'}}>{item}</li>});
 
     return (
-      <ul className='dropdown-menu header-category-dropdown'>
+      <ul className='dropdown-menu header-category-dropdown' style={{backgroundColor: '#333'}}>
       {list}
       </ul>
     );
