@@ -102,6 +102,9 @@
 .cart-item-img {
   height: 180px;
 }
+.cart-summary {
+  margin-bottom: 200px;
+}
 
 /*************************************************
                   Products List
@@ -242,13 +245,3 @@
 }
 */
 
-
-/*************************************************
-                  Shopping Cart
-**************************************************/
-.cart-summary {
-  margin-bottom: 200px;
-}
- .shopping-cart {
-
- }
