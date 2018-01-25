@@ -26,6 +26,7 @@ router.use(bodyParser.urlencoded({extended: false}));
 router.get('/user', (req, res) => {
   searchUser(req.query).then((response) => {
     let hits = response.hits.hits;
+    console.log(hits);
 
     res.status(200).send(hits);
   })
