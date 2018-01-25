@@ -78,37 +78,37 @@ class ShoppingCart extends React.Component {
           <h3>Your current total amount is: $ {this.state.totalAmt}</h3>
         </div>
         <div className="cart-item-banner col-sm-12">
-          <div className="col-sm-3">picture</div>
-          <div className="col-sm-3">name</div>
-          <div className="col-sm-2">price</div>
-          <div className="col-sm-2">quantity</div>
-          <div className="col-sm-2">total</div>
+          <h3 className="col-sm-3"></h3>
+          <h3 className="col-sm-3">name</h3>
+          <h3 className="col-sm-2">price</h3>
+          <h3 className="col-sm-2">quantity</h3>
+          <h3 className="col-sm-2">total</h3>
         </div>
         <div className="cart-items col-sm-12">
           {this.createItemList()}
         </div>
         <div className="cart-summary col-sm-12">
-          <div className="col-sm-7">
-          </div>
           <div className="col-sm-5">
+          </div>
+          <div className="col-sm-7">
             <div>
               <input placeholder="enter promo code here"/>
               <button>Apply</button>
             </div>
-            <div>
-              Subtotal ({this.state.totalItems} items): ${this.state.totalAmt}
+            <div className="cart-summary-row">
+              <h4> Subtotal ({this.state.totalItems} items):</h4> ${this.state.totalAmt}
             </div>
             <div>
-              Shipping & Handling: $0.00
+              <h4>Shipping & Handling:</h4> $0.00
             </div>
             <div>
-              Estimated Taxes: $0.00 **
+              <h4>Estimated Taxes:</h4> $0.00 **
             </div>
             <div>
-              Estimated Order Total: ${this.state.totalAmt}
+              <h4>Estimated Order Total:</h4> ${this.state.totalAmt}
             </div>
             <div>
-              ** Actual sales tax will be calculated at time of shipment
+              <h4>** Actual sales tax will be calculated at time of shipment</h4>
             </div>
             <button onClick={this.handleCheckoutClick}>Checkout</button>
           </div>
