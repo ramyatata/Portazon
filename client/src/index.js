@@ -8,6 +8,7 @@ import ShoppingCart from './components/shoppingCart.jsx';
 import ProductsList from './components/productsListPage.jsx';
 import ProductCard from './components/productCard.jsx';
 import ProductDetail from './components/productDetailPage.jsx';
+import CheckOut from './components/checkOut.jsx';
 
 var axios = require('axios');
 
@@ -17,17 +18,19 @@ class Hello extends React.Component {
     this.state = {
       view: 'homePage',
       cart: null,
+      totalAmt: '',
       searchedItems: null,
       query: '',
-      productDetail: ''
+      productDetail: '',
+      userInvoice:''
     }
     this.changeView = this.changeView.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
   }
 
-  changeView(view, item){
-    this.setState({view: view, productDetail: item});
+  changeView(view, item, invoice){
+    this.setState({view: view, productDetail: item, userInvoice: invoice});
   }
 
   submitQuery(query) {
@@ -47,13 +50,13 @@ class Hello extends React.Component {
     }
 
   addItemToCart(item) {
-    console.log('in add item to cart', item)
+    // console.log('in add item to cart', item)
     let cart = this.state.cart;
     item.quantity = 1;
     if (!cart) {
       this.setState({cart: [item]})
     } else {
-      console.log('cart to be pushed', cart)
+      // console.log('cart to be pushed', cart)
       let update = cart.push(item);
       // console.log('updated', update)
       this.setState({cart: cart});
@@ -85,7 +88,10 @@ class Hello extends React.Component {
     if (view === 'homePage') {
       return <HomePage changeView={this.changeView} submitQuery={this.submitQuery}/>
     } else if (view === 'shoppingCart') {
-      return <ShoppingCart cart={this.state.cart}/>
+      return <ShoppingCart
+        cart={this.state.cart}
+        changeView={this.changeView}
+        />
     }  else if (view === 'productsList') {
       return <ProductsList
         products={this.state.searchedItems}
@@ -96,6 +102,8 @@ class Hello extends React.Component {
         />
     } else if(view === 'productDetail'){
         return <ProductDetail item={this.state.productDetail}/>
+    } else if (view === 'checkOut'){
+        return <CheckOut />
     } else {
       return null;
     }

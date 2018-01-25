@@ -9,10 +9,16 @@ class ShoppingCart extends React.Component {
       totalItems: 0
     }
     this.changeQuantity = this.changeQuantity.bind(this);
+    this.handleCheckoutClick = this.handleCheckoutClick.bind(this);
   }
 
   componentDidMount(){
     this.getTotals();
+  }
+
+  handleCheckoutClick() {
+    console.log('in checkout click')
+    this.props.changeView('checkOut');
   }
 
   changeQuantity(e, item) {
@@ -64,7 +70,7 @@ class ShoppingCart extends React.Component {
 
   render() {
     return(
-      <div className="container-fluid">
+      <div className="shopping-cart container-fluid">
         <div>
           <h2>shopping cart</h2>
         </div>
@@ -104,7 +110,7 @@ class ShoppingCart extends React.Component {
             <div>
               ** Actual sales tax will be calculated at time of shipment
             </div>
-            <button>Checkout</button>
+            <button onClick={this.handleCheckoutClick}>Checkout</button>
           </div>
         </div>
       </div>
