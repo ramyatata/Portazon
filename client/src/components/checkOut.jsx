@@ -1,4 +1,6 @@
 import React from 'react';
+import {StripeProvider} from 'react-stripe-elements';
+import StoreCheckout from './StoreCheckout.jsx';
 
 class checkOut extends React.Component {
   constructor(props) {
@@ -89,6 +91,9 @@ class checkOut extends React.Component {
         </div>
         <div className="checkout-payment col-sm-5">
           Payment Information:
+          <StripeProvider apiKey='pk_test_EqbZWzt1btvcfcMIjAQ5s7ze'>
+                <StoreCheckout/>
+            </StripeProvider>
         </div>
       </div>
     )

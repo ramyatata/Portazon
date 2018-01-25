@@ -2,7 +2,8 @@ server/search/kibana
 server/search/logstash
 server/search/elasticsearch
 server/data/logstash.conf
-
+npm-debug.log
+config/
 
 node_modules/
 .DS_Store
