@@ -101,7 +101,10 @@ class Hello extends React.Component {
         changeView={this.changeView}
         />
     } else if(view === 'productDetail'){
-        return <ProductDetail item={this.state.productDetail}/>
+      return <ProductDetail
+        item={this.state.productDetail}
+        addItemToCart={this.addItemToCart}
+        />
     } else if (view === 'checkOut'){
         return <CheckOut />
     } else {
