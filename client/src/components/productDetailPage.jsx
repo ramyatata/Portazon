@@ -49,9 +49,9 @@ const ProductDetail = ({item, addItemToCart}) => {
           <h3>{item._source.product_name}</h3>
         </div>
         <div className="prod-secondaryInfo">
-          <div className="prod-rating">Customer Rating: {ratingStars}</div>
+          <div className="prod-rating">Customer Rating: {ratingStars} {rating}</div>
           <div className="prod-reviews">
-            <span>Reviews</span>
+
           </div>
         </div>
         <div className="prod-imageContainer">

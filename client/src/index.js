@@ -137,7 +137,6 @@ function parseImageUrls(items) {
 }
 
 function cutDuplicates(items) {
-  console.log('in cut dupes')
   let list = [];
   let newItemList = [];
 
