@@ -28,7 +28,7 @@ class ProductCard extends React.Component {
         <img onClick={() => this.handleCardClick(item)} className='card-img-top' src={item._source.image[0]} alt='Card image cap'/>
         <div className='card-block'>
           <h4 className='card-title'>{item._source.product_name}</h4>
-          <p className='card-text'>{item._source.description}}</p>
+          {/*<p className='card-text'>{item._source.description}}</p>*/}
           <h5 className='card-price'>{item._source.discounted_price.toFixed(2)}</h5>
           <a href='#' className='btn btn-primary' onClick={() => this.handleClick(item)}>add to cart</a>
         </div>

@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const ProductDetail = ({item}) => {
+const ProductDetail = ({item, addItemToCart}) => {
+
   console.log('item in product detail', item)
 
   //ratings
-  let ratingStars = [];
-  for(let i = 0; i < 5; i++) {
-    ratingStars.push(<span><i className="fa fa-star"></i></span>);
-  }
+
 
   //thumbnails
   let thumbnails = [];
@@ -47,7 +45,7 @@ const ProductDetail = ({item}) => {
           <h3>{item._source.product_name}</h3>
         </div>
         <div className="prod-secondaryInfo">
-          <div className="prod-rating">Customer Rating: {rating}</div>
+          <div className="prod-rating">Customer Rating: {createRatingStars(rating)} {rating}</div>
           <div className="prod-reviews">
             <span>Reviews</span>
           </div>
@@ -70,11 +68,11 @@ const ProductDetail = ({item}) => {
           <div className="prod-price">
             <h3 style={{display: 'inline', fontWeight:'600', lineHeight: '1', textTransform: 'uppercase'}}>${item._source.discounted_price}</h3>
             <p style={{margin: '0px 15px', display: 'inline'}}>Was ${item._source.retail_price}</p>
-            <p style={{display: 'inline', color: 'red'}}>$Save {save}</p>
+            <p style={{display: 'inline', color: 'red'}}>Save ${save}</p>
           </div>
           <div className="prod-description">
             <h6>Description</h6>
-            {item._source.description}
+            {limitDescription(item._source.description)}
           </div>
           <div className="prod-details">
             <h6>Details</h6>
@@ -87,7 +85,7 @@ const ProductDetail = ({item}) => {
               </select>
             </div>
             <div className="col-xs-7">
-              <button type="button" className="btn btn-block" style={{backgroundColor:'#000', color:'White', fontWeight:'bold'}}>ADD TO BAG</button>
+              <button onClick={() => addItemToCart(item)} type="button" className="btn btn-block" style={{backgroundColor:'#000', color:'White', fontWeight:'bold'}}>ADD TO CART</button>
             </div>
           </div>
         </div>
@@ -102,6 +100,16 @@ const ProductDetail = ({item}) => {
   );
 }
 
+function createRatingStars(rating) {
+  let ratingStars = [];
+  for(let i = 0; i < rating; i++) {
+    ratingStars.push(<span><i className="fa fa-star"></i></span>);
+  }
+}
+
+function limitDescription(description) {
+  return description.substring(0, 500)
+}
 export default ProductDetail;
 
 
