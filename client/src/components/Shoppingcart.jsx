@@ -96,16 +96,20 @@ class ShoppingCart extends React.Component {
               <button>Apply</button>
             </div>
             <div className="cart-summary-row">
-              <h4> Subtotal ({this.state.totalItems} items):</h4> ${this.state.totalAmt}
+              <h4> Subtotal ({this.state.totalItems} items):</h4>
+              <span> ${this.state.totalAmt}</span>
             </div>
-            <div>
-              <h4>Shipping & Handling:</h4> $0.00
+            <div className="cart-summary-row">
+              <h4>Shipping & Handling:</h4>
+              <span>$0.00</span>
             </div>
-            <div>
-              <h4>Estimated Taxes:</h4> $0.00 **
+            <div className="cart-summary-row">
+              <h4>Estimated Taxes:</h4>
+              <span>$0.00 **</span>
             </div>
-            <div>
-              <h4>Estimated Order Total:</h4> ${this.state.totalAmt}
+            <div className="cart-summary-row">
+              <h4>Estimated Order Total:</h4>
+              <span>${this.state.totalAmt}</span>
             </div>
             <div>
               <h4>** Actual sales tax will be calculated at time of shipment</h4>
