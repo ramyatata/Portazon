@@ -181,20 +181,6 @@ module.exports = {
       body: {
         from: 0,
         size: 50,
-        aggs: {
-          dedup: {
-            terms: {
-              field: "unique_id"
-             },
-          aggs:{
-            dedup_docs: {
-              top_hits: {
-                size: 1
-              }
-            }
-          }
-        }
-      },
         query: {
           multi_match: {
             query: query.q || query,
