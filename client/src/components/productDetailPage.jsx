@@ -6,7 +6,11 @@ const ProductDetail = ({item, addItemToCart}) => {
   console.log('item in product detail', item)
 
   //ratings
+  let ratingStars = [];
 
+  for(let i = 0; i < item._source.rating; i++) {
+    ratingStars.push(<span><i className="fa fa-star"></i></span>);
+  }
 
   //thumbnails
   let thumbnails = [];
@@ -45,7 +49,7 @@ const ProductDetail = ({item, addItemToCart}) => {
           <h3>{item._source.product_name}</h3>
         </div>
         <div className="prod-secondaryInfo">
-          <div className="prod-rating">Customer Rating: {createRatingStars(rating)} {rating}</div>
+          <div className="prod-rating">Customer Rating: {ratingStars}</div>
           <div className="prod-reviews">
             <span>Reviews</span>
           </div>
@@ -98,13 +102,6 @@ const ProductDetail = ({item, addItemToCart}) => {
       </div>
     </div>
   );
-}
-
-function createRatingStars(rating) {
-  let ratingStars = [];
-  for(let i = 0; i < rating; i++) {
-    ratingStars.push(<span><i className="fa fa-star"></i></span>);
-  }
 }
 
 function limitDescription(description) {
