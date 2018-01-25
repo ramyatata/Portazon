@@ -38,27 +38,25 @@ class Hello extends React.Component {
       .then(res => {
         console.log('response', res.data)
         let items = res.data;
-        let modItems = parseImageUrls(items);
-        console.log('modItems', modItems)
+        let noDupes = cutDuplicates(items);
+        let parseImages = parseImageUrls(noDupes);
+
+        console.log('modItems', parseImages)
         if (this.state.view !== 'productsList') {
-          this.setState({searchedItems: modItems, query: query, view: 'productsList'})
+          this.setState({searchedItems: parseImages, query: query, view: 'productsList'})
         } else {
-          this.setState({searchedItems: modItems, query: query});
-          //even though I set the state, it isn't updating the product list component?! what the heck!?
+          this.setState({searchedItems: parseImages, query: query});
         }
       })
     }
 
   addItemToCart(item) {
-    // console.log('in add item to cart', item)
     let cart = this.state.cart;
     item.quantity = 1;
     if (!cart) {
       this.setState({cart: [item]})
     } else {
-      // console.log('cart to be pushed', cart)
       let update = cart.push(item);
-      // console.log('updated', update)
       this.setState({cart: cart});
     }
   }
@@ -139,10 +137,17 @@ function parseImageUrls(items) {
 }
 
 function cutDuplicates(items) {
-  let newList = [];
-  for (let i = 0; i < items.length; i++) {
+  console.log('in cut dupes')
+  let list = [];
+  let newItemList = [];
 
+  for (let i = 0; i < items.length; i++) {
+    if (!list.includes(items[i]._source.product_name)) {
+      list.push(items[i]._source.product_name);
+      newItemList.push(items[i])
+    }
   }
+  return newItemList;
 }
 
 ReactDOM.render(<Hello/>, document.getElementById('root'));
