@@ -6,7 +6,7 @@ Portents + Amazon!
 ## Team
 
   - __Product Owner__: Li
-  - __Scrum Master__: Manjunath
+  - __Scrum Master__: Manjhunath
   - __Development Team__: Ramya, Vitor
 
 ## Table of Contents
@@ -61,6 +61,10 @@ npm run logstash
 
 And there you have it! If you make a 'GET' request passing a key value of 'q=value', you should get results back: http://127.0.0.1:3000/search/?q=games
 
+### Stripe Keys
+
+For Payments to work, you will have to sign up on Stripe.com and enter your Test Secret Key and Test Publishable Key inside config/stripe/keys.js file. 
+ 
 ### Querying the ES Endpoints:
 
 Search Query && Categories: /search?q=[QUERY]&category=[SELECTEDCATEGORY]
