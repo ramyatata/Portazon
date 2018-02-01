@@ -9,6 +9,7 @@
     "webpack": "webpack -d --watch",
     "elasticsearch": "server/search/elasticsearch/bin/elasticsearch",
     "kibana": "server/search/kibana/bin/kibana",
+    "user-schema": "mysql -u root < users/config/schema.sql",
     "logstash": "server/search/logstash/bin/logstash -f /Users/vitor.pereira/Desktop/Portazon/server/data/logstash.conf"
   },
   "repository": {
@@ -23,19 +24,20 @@
   "homepage": "https://github.com/Portazon/Portazon#readme",
   "dependencies": {
     "axios": "^0.17.1",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
     "body-parser": "^1.18.2",
     "elasticsearch": "^14.0.0",
     "express": "^4.16.2",
     "express-router": "0.0.1",
     "jquery": "^3.2.1",
+    "mysql": "^2.15.0",
     "nodemon": "^1.13.3",
     "path": "^0.12.7",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.0",
     "react-dom": "^16.2.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-2": "^6.24.1",
     "react-stripe-elements": "^1.4.0",
     "stripe": "^5.4.0"
   },
