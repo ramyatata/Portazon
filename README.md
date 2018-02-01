@@ -38,6 +38,12 @@ From within the root directory:
 npm install
 ```
 
+### Running MySQL and populating its User Database
+To run the user-schema the first time: npm run -user-schema
+For deployment purpuses: update the index.js inside of /users/config
+
+
+
 ### Running ElasticSearch and populating its Database
 
 Install JDK (Java Development Kit) but there is one caveat. DO NOT INSTALL v9, you need to install v8 otherwise Logstash will not work. You can check you JDK version typing 'java -version' in terminal (Mac).
@@ -63,8 +69,8 @@ And there you have it! If you make a 'GET' request passing a key value of 'q=val
 
 ### Stripe Keys
 
-For Payments to work, you will have to sign up on Stripe.com and enter your Test Secret Key and Test Publishable Key inside config/stripe/keys.js file. 
- 
+For Payments to work, you will have to sign up on Stripe.com and enter your Test Secret Key and Test Publishable Key inside config/stripe/keys.js file.
+
 ### Querying the ES Endpoints:
 
 Search Query && Categories: /search?q=[QUERY]&category=[SELECTEDCATEGORY]
