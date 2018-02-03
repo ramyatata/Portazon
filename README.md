@@ -39,8 +39,14 @@ npm install
 ```
 
 ### Running MySQL and populating its User Database
-To run the user-schema the first time: npm run -user-schema
+
+To run the user-schema the first time: npm run refresh-schema
 For deployment purpuses: update the index.js inside of /users/config
+
+## MySQL Users && Shopping_Cart Tables
+
+To Check a user (End)
+
 
 
 
@@ -71,9 +77,40 @@ And there you have it! If you make a 'GET' request passing a key value of 'q=val
 
 For Payments to work, you will have to sign up on Stripe.com and enter your Test Secret Key and Test Publishable Key inside config/stripe/keys.js file.
 
-### Querying the ES Endpoints:
+### DB Query Endpoints:
 
-Search Query && Categories: /search?q=[QUERY]&category=[SELECTEDCATEGORY]
+  GET REQUESTS:
+
+  1 - Search Query && Categories: /search?q=[QUERY]&category=[SELECTEDCATEGORY]
+  2 - Check User: /users?firstname=[FIRSTNAME]&lastname=[LASTNAME]&email=[EMAIL]
+  3 - Check Shopping_Cart: /users/cart?firstname=[FIRSTNAME]&lastname=[LASTNAME]&userID=[ID]
+
+  POST REQUEST:
+
+  1 - Register New User: /users/registerUser
+    Send a JSON with the following key/values:
+
+      {
+        firstname,
+        lastname,
+        pw,
+        email,
+        address,
+        state,
+        zip,
+        country
+      }
+
+  2 - Update Shopping Cart: /users/updateCart
+    Send an JSON with the following key/values:
+
+    {
+      userID,
+      productID,
+      amount,
+      email,
+      deleteItem (* this should be a boolean)
+    }
 
 ### Roadmap
 
