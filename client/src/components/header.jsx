@@ -15,13 +15,13 @@
       }
 
       this.handleChange = this.handleChange.bind(this);
-      this.changeViewToCart = this.changeViewToCart.bind(this);
+      this.changeView = this.changeView.bind(this);
       this.handleSearchClick = this.handleSearchClick.bind(this);
     }
 
-    changeViewToCart(){
+    changeView(view){
       let changeView = this.props.changeView;
-      changeView('shoppingCart');
+      changeView(view);
     }
 
     changeViewToProductList() {
@@ -74,7 +74,7 @@
 
            {/* user account */}
           <ul className="nav navbar-nav navbar-right">
-          <li><button onClick={this.changeViewToCart} style={{marginTop: '15px', backgroundColor: '#222', color:'white', textAlign:'center', border:'none'}}><span className="glyphicon glyphicon-shopping-cart" style={{'fontSize': '1.5em'}}></span></button></li>
+          <li><button onClick={() => this.changeView('shoppingCart')} style={{marginTop: '15px', backgroundColor: '#222', color:'white', textAlign:'center', border:'none'}}><span className="glyphicon glyphicon-shopping-cart" style={{'fontSize': '1.5em'}}></span></button></li>
                <li className="dropdown">
                  <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={{'fontSize': '1.5em'}}></span></a>
                  <div className="dropdown-menu">
@@ -91,7 +91,7 @@
                      <button type="submit" className="btn btn-block">SIGN IN</button>
                    </form>
                    <div className="header-account-dropdown">
-                     <a href="#">Create Account</a>
+                     <a onClick={() =>this.changeView('registerUserForm')}>Create Account</a>
                      <a href="#">Forgot Password?</a>
                    </div>
                  </div>
