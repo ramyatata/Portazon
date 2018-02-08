@@ -27,6 +27,7 @@ class Hello extends React.Component {
     this.changeView = this.changeView.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
+
   }
 
   changeView(view, item, invoice){
@@ -111,6 +112,7 @@ class Hello extends React.Component {
   }
 
   render() {
+    console.log('rendering...')
     return (
       <div>
         <Header changeView={this.changeView} submitQuery={this.submitQuery}/>
