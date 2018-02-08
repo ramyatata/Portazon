@@ -30,28 +30,8 @@ class checkOut extends React.Component {
     this.handleZipChange = this.handleZipChange.bind(this);
   }
 
-  handleFNameChange(e) {
-    this.setState({firstName: e.target.value});
-  }
-
-  handleLNameChange(e) {
-    this.setState({lastName: e.target.value});
-  }
-
-  handleStreetChange(e) {
-    this.setState({street: e.target.value});
-  }
-
-  handleAptNoChange(e) {
-    this.setState({aptNo: e.target.value});
-  }
-
-  handleCityChange(e) {
-    this.setState({city: e.target.value});
-  }
-
-  handleStateChange(e) {
-    this.setState({state: e.target.value})
+  handleChange(field, e) {
+    this.setState({field: e.target.value});
   }
 
   handleZipChange(e){
@@ -70,27 +50,27 @@ class checkOut extends React.Component {
           Shipping Address:
           <div>
             <label htmlFor="firstName">First Name</label>
-              <input type="text" id="firstName" onChange={e => {this.handleFNameChange(e)}}/>
+              <input type="text" id="firstName" onChange={e => {this.handleChange('firstName',e)}}/>
             <label htmlFor="lastName">Last Name</label>
-             <input type="text" id="lastName" onChange={e => {this.handleLNameChange(e)}}/>
+             <input type="text" id="lastName" onChange={e => {this.handleChange('lastName', e)}}/>
           </div>
           <div>
             <label htmlFor="street">Street </label>
-              <input type="text" id="street" onChange={e => {this.handleStreetChange(e)}}/>
+              <input type="text" id="street" onChange={e => {this.handleChange('street', e)}}/>
             <label htmlFor="aptNo">Apt. No. </label>
-              <input type="text" id="aptNo" onChange={e => {this.handleAptNoChange(e)}}/>
+              <input type="text" id="aptNo" onChange={e => {this.handleChange('aptNo', e)}}/>
           </div>
           <div>
             <label htmlFor="city">City </label>
-              <input type="text" id="city" onChange={e => {this.handleCityChange(e)}}/>
+              <input type="text" id="city" onChange={e => {this.handleChange('city', e)}}/>
             <label htmlFor="state">State</label>
-              <input type="text" id="state" onChange={e => {this.handleStateChange(e)}}/>
+              <input type="text" id="state" onChange={e => {this.handleChange('state', e)}}/>
             <label htmlFor="zip">Zip Code </label>
               <input type="text" id="zip" onChange={e => {this.handleZipChange(e)}}/>
           </div>
         </div>
         <div className="checkout-payment col-sm-5">
-          
+
           <StripeProvider apiKey='pk_test_EqbZWzt1btvcfcMIjAQ5s7ze'>
                 <StoreCheckout/>
             </StripeProvider>

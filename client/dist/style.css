@@ -230,6 +230,13 @@
   padding: 20px 20px;
 }
 
+/*************************************************
+              Reigster User Form
+**************************************************/
+
+.registerUserForm {
+
+}
 
 /* need to check why this is not working when placed in style sheet */
 /*.prod-primaryPrice {
