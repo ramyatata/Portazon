@@ -13,6 +13,7 @@ class ShoppingCart extends React.Component {
   }
 
   componentDidMount(){
+    console.log('in shopping cart!')
     this.getTotals();
   }
 
