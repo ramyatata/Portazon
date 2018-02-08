@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-let bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const config = require('./config');
-
-let db = mysql.createConnection(config);
+const db = mysql.createConnection(config);
 
 db.connect();
 
@@ -14,9 +13,10 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 
 //*************
-// GET Routing: Users & Shopping Card
+// GET Routing: Users Login
 //*************
 
+// Check User (i.e. manual login)
 router.get('/', (req, res) => {
   let { firstname, lastname, email } = req.query;
 
@@ -24,10 +24,25 @@ router.get('/', (req, res) => {
     if (err) throw 'User email is not in the DB';
     res.status(200).send(data);
   })
-
 })
 
-// User Shopping Cart
+
+router.get('/google', (req, res) => {
+  // handle with Passport
+});
+
+router.get('/facebook', (req, res) => {
+  // handle with Passport
+});
+
+router.get('/logout', (req, res) => {
+  // handle with Passport
+})
+
+
+//*************
+// GET Routing: User Shopping Card
+//*************
 router.get('/cart', (req, res) => {
   let { firstname, lastname, userID } = req.query;
 
@@ -39,9 +54,8 @@ router.get('/cart', (req, res) => {
 
 
 //*************
-// POST Routing: Create Users
+// POST Routing: Registering Users
 //*************
-
 router.post('/registerUser', (req, res) => {
   const columns = `(
     firstname,
@@ -104,6 +118,5 @@ router.post('/updateCart', (req, res) => {
       });
   });
 });
-
 
 module.exports = router;
