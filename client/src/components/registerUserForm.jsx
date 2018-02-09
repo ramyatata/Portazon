@@ -19,18 +19,17 @@ const RegisterUserForm = () => {
       pwd: document.getElementById('pwd').value,
     };
     console.log('user to register', user)
-    let keys = Object.keys(user);
-    for (let i = 0; i < keys.length; i++) {
-      if (user.keys[i] === '') {
-        alert('Please complete all fields!');
+    let required = ['firstName', 'lastName', 'email', 'pwd'];
+    for (let i = 0; i < required.length; i++) {
+      if (user[required[i]] === '') {
+        alert('First Name, Last Name, Email, and password are required!');
         return;
       }
     }
-
-    // axios.post('/users/registerUser', user)
-    //   .then(res => {
-    //     console.log('submitted user to table!', res)
-    //   })
+    axios.post('/users/registerUser', user)
+      .then(res => {
+        console.log('submitted user to table!', res)
+      })
   }
 
   return (
