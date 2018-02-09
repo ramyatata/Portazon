@@ -7,7 +7,6 @@ var axios = require('axios');
 const RegisterUserForm = () => {
 
   const validate = () => {
-
     let user = {
       firstName: document.getElementById('firstName').value,
       lastName: document.getElementById('lastName').value,
@@ -20,7 +19,18 @@ const RegisterUserForm = () => {
       pwd: document.getElementById('pwd').value,
     };
     console.log('user to register', user)
+    let keys = Object.keys(user);
+    for (let i = 0; i < keys.length; i++) {
+      if (user.keys[i] === '') {
+        alert('Please complete all fields!');
+        return;
+      }
+    }
 
+    // axios.post('/users/registerUser', user)
+    //   .then(res => {
+    //     console.log('submitted user to table!', res)
+    //   })
   }
 
   return (
