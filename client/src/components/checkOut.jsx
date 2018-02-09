@@ -21,13 +21,7 @@ class checkOut extends React.Component {
       bState: '',
       bZip:''
     }
-    this.handleFNameChange = this.handleFNameChange.bind(this);
-    this.handleLNameChange = this.handleLNameChange.bind(this);
-    this.handleStreetChange = this.handleStreetChange.bind(this);
-    this.handleAptNoChange = this.handleAptNoChange.bind(this);
-    this.handleCityChange = this.handleCityChange.bind(this);
-    this.handleStateChange = this.handleStateChange.bind(this);
-    this.handleZipChange = this.handleZipChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(field, e) {
