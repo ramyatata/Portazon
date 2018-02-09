@@ -10,7 +10,9 @@ CREATE TABLE users (
   lastname VARCHAR(30),
   pw VARCHAR (30),
   email VARCHAR (250),
-  address VARCHAR (300),
+  street VARCHAR (300),
+  num VARCHAR (20),
+  city VARCHAR (300),
   state VARCHAR (50),
   zip INT,
   country VARCHAR (50)
@@ -26,7 +28,9 @@ INSERT INTO users (
   lastname,
   pw,
   email,
-  address,
+  street,
+  num,
+  city,
   state,
   zip,
   country
@@ -35,7 +39,9 @@ INSERT INTO users (
   'Doe',
   'abcd1234',
   'johndoe@gmail.com',
-  '704 wicked rd, san francisco',
+  'wicked rd',
+  '734',
+  'San Francisco',
   'CA',
   '94063',
   'USA'

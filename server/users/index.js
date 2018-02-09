@@ -62,7 +62,9 @@ router.post('/registerUser', (req, res) => {
     lastname,
     pw,
     email,
-    address,
+    street,
+    num,
+    city,
     state,
     zip,
     country
@@ -72,7 +74,9 @@ router.post('/registerUser', (req, res) => {
     '${req.body.lastname}',
     '${req.body.pw}',
     '${req.body.email}',
-    '${req.body.address}',
+    '${req.body.street}',
+    '${req.body.num}',
+    '${req.body.city}',
     '${req.body.state}',
     '${req.body.zip}',
     '${req.body.country}'
