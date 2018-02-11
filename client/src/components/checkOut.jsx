@@ -65,9 +65,9 @@ class checkOut extends React.Component {
         </div>
         <div className="checkout-payment col-sm-5">
 
-          <StripeProvider apiKey='pk_test_EqbZWzt1btvcfcMIjAQ5s7ze'>
-                <StoreCheckout/>
-            </StripeProvider>
+          //<StripeProvider apiKey='pk_test_EqbZWzt1btvcfcMIjAQ5s7ze'>
+          //      <StoreCheckout/>
+           // </StripeProvider>
         </div>
       </div>
     )
