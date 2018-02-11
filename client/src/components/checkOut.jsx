@@ -1,6 +1,6 @@
 import React from 'react';
 //import {StripeProvider} from 'react-stripe-elements';
-import StoreCheckout from './StoreCheckout.jsx';
+// import StoreCheckout from './StoreCheckout.jsx';
 
 class checkOut extends React.Component {
   constructor(props) {
