@@ -1,5 +1,5 @@
 import React from 'react';
-import {injectStripe, CardCVCElement} from 'react-stripe-elements';
+//import {injectStripe, CardCVCElement} from 'react-stripe-elements';
 
 // import AddressSection from './AddressSection.jsx';
 import CardSection from './CardSection.jsx';
@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 class CheckoutForm extends React.Component {
-    
+
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,13 +19,13 @@ class CheckoutForm extends React.Component {
         var paymentAmount = 100;
 
         this.props.stripe.createToken({name: customerName}).then(({token}) => {
-            console.log('Received Stripe token', token); 
- 
-            var paymentButton =  document.getElementById("paymentButton");  
+            console.log('Received Stripe token', token);
+
+            var paymentButton =  document.getElementById("paymentButton");
             paymentButton.innerHTML = "Processing Payment ...";
             paymentButton.style.backgroundColor = 'orange';
 
-            axios.post('/payment', 
+            axios.post('/payment',
                 {
                     stripeToken: token,
                     paymentAmount: paymentAmount
@@ -50,9 +50,9 @@ class CheckoutForm extends React.Component {
         return(
             <form onSubmit={this.handleSubmit}>
                 {/* <AddressSection/> */}
-                
+
                 <CardSection/>
-                
+
                 <button id="paymentButton"> Confirm and Pay  </button>
             </form>
         );
