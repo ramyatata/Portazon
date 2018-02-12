@@ -46,8 +46,9 @@ router.post('/login', (req, res) => {
         id: user.id
       };
       res.status(200).send(JSON.stringify(req.session));
+    } else {
+      res.status(403).send(false);
     }
-    res.status(403).send(false);
   });
 })
 
