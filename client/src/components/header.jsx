@@ -1,7 +1,6 @@
   import React from 'react';
   import ReactDOM from 'react-dom';
 
-
   import CategoryList from './categoryList.jsx';
 
   var axios = require('axios');
@@ -61,7 +60,6 @@
               </li>
             </ul>
 
-
           {/* search bar */}
              <ul className="nav navbar-nav" style={{width: '50%'}}>
                <div className="input-group" style={{paddingTop: '10px'}}>
@@ -71,6 +69,8 @@
                  </div>
                 </div>
              </ul>
+
+
 
            {/* user account */}
           <ul className="nav navbar-nav navbar-right">
@@ -104,3 +104,16 @@
   }
 
 export default Header;
+
+
+//
+
+
+
+//              <div className="input-group">
+//   <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)"/>
+//   <div className="input-group-append">
+//     <span className="input-group-text">$</span>
+//     <span className="glyphicon glyphicon-search">0.00</span>
+//   </div>
+// </div>

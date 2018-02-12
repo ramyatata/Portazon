@@ -14,7 +14,8 @@ class CategoryList extends React.Component {
                       'Home Decor & Festive Need','Furniture','Kitchen & Dining',
                       'Toys & School Supplies','Eyewear','Automotive',
                       'Home Entertainment','Tools & Hardware','Pet Supplies',
-                      'eBooks','Gaming','Watches','Sunglasses','Home & Kitchen']
+                      'eBooks','Gaming','Watches','Sunglasses','Home & Kitchen'
+                      ]
     }
   }
   render() {
@@ -29,3 +30,5 @@ class CategoryList extends React.Component {
 }
 
 export default CategoryList;
+
+

@@ -92,35 +92,6 @@ const RegisterUserForm = () => {
 }
 
 
-
 export default RegisterUserForm;
 
-/*
 
-<div className="registerUserForm container-fluid">
-        <h3>Registration Form</h3>
-        <label htmlFor="firstName">First Name</label>
-          <input type="text" id="firstName" onChange={e => {this.handleChange('firstName', e)}}/>
-        <label htmlFor="lastName">Last Name</label>
-          <input type="text" id="lastfirstName" onChange={e => {this.handleChange('lastName', e)}}/>
-        <label htmlFor="email">Email</label>
-          <input type="text" id="email" onChange={e => {this.handleChange('email', e)}}/>
-        <label htmlFor="password">Password</label>
-          <input type="text" id="pwd" onChange={e => {this.handleChange('pwd', e)}}/>
-        <label htmlFor="street">Street</label>
-          <input type="text" id="street" onChange={e => {this.handleChange('street', e)}}/>
-        <label htmlFor="aptNo">Apt. No.</label>
-          <input type="text" id="aptNo" onChange={e => {this.handleChange('aptNo', e)}}/>
-        <label htmlFor="city">City</label>
-          <input type="text" id="city" onChange={e => {this.handleChange('city', e)}}/>
-        <label htmlFor="state">State</label>
-          <input type="text" id="state" onChange={e => {this.handleChange('state', e)}}/>
-        <label htmlFor="zip">Postal Code</label>
-          <input type="text" id="zip" onChange={e => {this.handleChange('zip', e)}}/>
-        <label htmlFor="country">Country (if NOT the US)</label>
-          <input type="text" id="country" onChange={e => {this.handleChange('country', e)}}/>
-        <button type="submit" onClick={this.handleSubmit}>Sign Up!</button>
-      </div>
-
-
-*/
