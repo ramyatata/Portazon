@@ -3,12 +3,13 @@ const path = require('path');
 const server = express();
 const search_route = require('./search/index.js');
 const users_route = require('./users/index.js');
+const passport = require('passport');
 //const payment_route = require('./payment/index.js');
 
 
 // Middleware
 server.use(express.static(path.join(__dirname, '../client/dist')));
-
+server.use(passport.initialize());
 
 // Routing
 server.use('/users', users_route);

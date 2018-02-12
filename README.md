@@ -48,7 +48,20 @@ For deployment purpuses: update the index.js inside of /users/config
 To Check a user (End)
 
 
+### Populating the Passport Keys for OAUTH 2.0
 
+Get the following items for the Google API for Portazon below:
+https://console.developers.google.com/apis/credentials/oauthclient/247829672634-aqpg8brn659b37ppmcae7g7roa6sjen8.apps.googleusercontent.com?project=portazon-194822
+
+    client_id,
+    client_secret,
+    redirect_uris[0]
+
+Put this in a 'index.js' file inside of the '/keys' folder in users/config/keys. For Example:
+
+module.exports = {
+  google: {"client_id":"247sdf672634-aqpg8brn659b37ppmcae7g7roa6sjen8.apps.googleusercontent.com","client_secret":"7pFGhsLPtDQG30GuUML00Ax9","redirect_uris":["http://localhost:3000/home"],"javascript_origins":["http://localhost:3000"]}
+};
 
 ### Running ElasticSearch and populating its Database
 
@@ -82,8 +95,7 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
   GET REQUESTS:
 
   1 - Search Query && Categories: /search?q=[QUERY]&category=[SELECTEDCATEGORY]
-  2 - Check User: /users?firstname=[FIRSTNAME]&lastname=[LASTNAME]&email=[EMAIL]
-  3 - Check Shopping_Cart: /users/cart?firstname=[FIRSTNAME]&lastname=[LASTNAME]&userID=[ID]
+  2 - Check Shopping_Cart: /users/cart?firstname=[FIRSTNAME]&lastname=[LASTNAME]&userID=[ID]
 
   POST REQUEST:
 
@@ -111,6 +123,28 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
       email,
       deleteItem (* this should be a boolean)
     }
+
+  3 - Check if UN/PW match
+    {
+      firstname,
+      lastname,
+      email,
+      pw
+    }
+
+
+## Config files with http://localhost:3000 || local folder settings by default
+package.json
+server/index.js
+server/search/elasticsearch/config/elasticsearch.yml
+server/search/kibana/config/kibana.yml
+server/data/logstash.config
+server/search/index.js
+server/users/config/index.js
+server/users/config/passport-config.js
+
+
+
 
 ### Roadmap
 

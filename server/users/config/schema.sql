@@ -8,14 +8,15 @@ CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   firstname VARCHAR(30),
   lastname VARCHAR(30),
-  pw VARCHAR (30),
+  pw VARCHAR (300),
+  salt VARCHAR (300),
   email VARCHAR (250),
   street VARCHAR (300),
-  num VARCHAR (20),
-  city VARCHAR (300),
+  num VARCHAR (10),
+  city VARCHAR (30),
   state VARCHAR (50),
-  zip INT,
-  country VARCHAR (50)
+  zip VARCHAR (10),
+  country VARCHAR (30)
 );
 
 CREATE TABLE shopping_cart (
@@ -27,6 +28,7 @@ INSERT INTO users (
   firstname,
   lastname,
   pw,
+  salt,
   email,
   street,
   num,
@@ -38,6 +40,7 @@ INSERT INTO users (
   'John',
   'Doe',
   'abcd1234',
+  'salty',
   'johndoe@gmail.com',
   'wicked rd',
   '734',
@@ -49,7 +52,7 @@ INSERT INTO users (
 
 ALTER TABLE shopping_cart ADD FOREIGN KEY (userID) REFERENCES users(id);
 
-INSERT INTO shopping_cart (cart, userID) VALUES ('{"666ABCD": "4"}', 1);
+INSERT INTO shopping_cart (cart, userID) VALUES ('{"666ABCD": 4}', 1);
 
 /* Example of Table Altering
 ALTER TABLE tracks ADD FOREIGN KEY (userID) REFERENCES users(id);

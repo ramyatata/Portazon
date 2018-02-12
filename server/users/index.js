@@ -2,53 +2,85 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const bodyParser = require('body-parser');
-const mysql = require('mysql');
-const config = require('./config');
-const db = mysql.createConnection(config);
+const passport = require('./config/passport-config.js');
+const model = require('./model');
+const encryptor = require('./encryptor');
+const cookieSession = require('cookie-session');
+const keys = require('./config/keys');
 
-db.connect();
-
-// BodyParser
+// Cookie-Session & Body-Parser middlewares
+router.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000,
+  keys: [keys.cookieSession]
+}));
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 
-//*************
-// GET Routing: Users Login
-//*************
 
-// Check User (i.e. manual login)
+//*************
+// Cookie Session Check
+//*************
 router.get('/', (req, res) => {
-  let { firstname, lastname, email } = req.query;
+  res.status(200).send(JSON.stringify(req.session));
+});
 
-  db.query(`SELECT * FROM users WHERE users.email = '${email}'`, (err, data) => {
-    if (err) throw 'User email is not in the DB';
-    res.status(200).send(data);
-  })
+
+//*************
+// User Login Routing
+//*************
+
+// Manual Login
+router.post('/login', (req, res) => {
+  model.doesUserExist(req.body, (response) => {
+    if (!response) {
+      res.status(200).send(false);
+    }
+
+    let hashPW = encryptor.hashPW(req.body.pw, response.salt);
+    let user = (hashPW === response.pw) ? response : false;
+
+    if (hashPW === response.pw) {
+      req.session = {
+        name: `${user.firstname} ${user.lastname}`,
+        email: user.email,
+        id: user.id
+      };
+      res.status(200).send(JSON.stringify(req.session));
+    }
+    res.status(403).send(false);
+  });
 })
 
 
-router.get('/google', (req, res) => {
-  // handle with Passport
+// Google Login (OAuth)
+router.get('/google', passport.authenticate('google', {
+  scope: ['profile', 'email']
+}));
+
+router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
+  res.status(200).send(JSON.stringify(req.session.passport.user));
 });
 
+
+// Facebook Login (OAuth)
 router.get('/facebook', (req, res) => {
-  // handle with Passport
+  // TBD
 });
 
+
+// Logoff
 router.get('/logout', (req, res) => {
-  // handle with Passport
+  req.session = null;
+  res.status(200).send('Session has been destroyed');
 })
 
 
 //*************
-// GET Routing: User Shopping Card
+// Shopping Card Routing
 //*************
 router.get('/cart', (req, res) => {
-  let { firstname, lastname, userID } = req.query;
-
-  db.query(`SELECT cart FROM shopping_cart INNER JOIN users WHERE users.id = shopping_cart.userID AND users.firstname = '${firstname}' AND users.lastname = '${lastname}' and users.id = ${userID}`, (err, data) => {
-    if (err) throw 'Error in the GET cart query';
-    res.status(200).send(data);
+  model.getUserCart(req.query, (response) => {
+    res.status(200).send(response);
   });
 });
 
@@ -57,70 +89,27 @@ router.get('/cart', (req, res) => {
 // POST Routing: Registering Users
 //*************
 router.post('/registerUser', (req, res) => {
-  const columns = `(
-    firstname,
-    lastname,
-    pw,
-    email,
-    street,
-    num,
-    city,
-    state,
-    zip,
-    country
-  )`;
-  const values = `(
-    '${req.body.firstname}',
-    '${req.body.lastname}',
-    '${req.body.pw}',
-    '${req.body.email}',
-    '${req.body.street}',
-    '${req.body.num}',
-    '${req.body.city}',
-    '${req.body.state}',
-    '${req.body.zip}',
-    '${req.body.country}'
-    )`;
+  model.doesUserExist(req.body, (response) => {
+    if (response) {
+      res.status(201).send('User already exists');
+    }
 
-  db.query(`INSERT INTO users ${columns} VALUES ${values}`, (err, data) => {
-    if (err) throw 'User registration Error';
-    console.log(`${req.body.firstname} ${req.body.lastname} is a new user`);
-  });
+    // Generate a SALT to encrypt the PW
+    req.body.salt = encryptor.generateSalt;
 
-  db.query(`INSERT INTO shopping_cart (cart) VALUES ('{}')`, (err, data) => {
-    if (err) throw 'Cart creation Error';
-    res.status(201).send(`${req.body.firstname} ${req.body.lastname} cart has been created`);
-  });
+    // Hash the PW before storing in the db
+    req.body.pw = encryptor.hashPW(req.body.pw, req.body.salt);
+
+    model.registerUser(req.body, (response) => {
+      res.status(201).send(response);
+    });
+  })
 });
 
 router.post('/updateCart', (req, res) => {
-  let { userID, productID, amount, email, deleteItem } = req.body;
-
-  db.query(`
-    SELECT cart FROM shopping_cart
-    INNER JOIN users
-    WHERE users.id = shopping_cart.userID
-    AND users.email = '${email}'
-    AND users.id = ${userID}`
-    , (err, data) => {
-      if (err) throw 'Error in the GET cart query';
-
-      let cart = JSON.parse(data[0].cart);
-
-      if (deleteItem) {
-        delete cart[productID]
-      } else {
-        cart[productID] = amount;
-      }
-
-      cart = JSON.stringify(cart);
-
-      db.query(`UPDATE shopping_cart SET cart = '${cart}' WHERE userID = '${userID}'`, (err, data) => {
-        if (err) throw 'Could not update product in Shopping Cart';
-        res.status(201)
-        .send(`Product Id ${productID} has been modified in ${email}'s Shopping Cart`);
-      });
-  });
+  model.updateCart(req.body, (response) => {
+    res.status(201).send(response);
+  })
 });
 
 module.exports = router;
