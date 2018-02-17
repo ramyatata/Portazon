@@ -21,7 +21,7 @@ CREATE TABLE users (
 
 CREATE TABLE shopping_cart (
   userID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  cart JSON
+  cart VARCHAR (600)
 );
 
 INSERT INTO users (

@@ -68,6 +68,7 @@ module.exports = {
 Install JDK (Java Development Kit) but there is one caveat. DO NOT INSTALL v9, you need to install v8 otherwise Logstash will not work. You can check you JDK version typing 'java -version' in terminal (Mac).
 
 Download ElasticSearch: https://www.elastic.co/downloads/elasticsearch
+* Installing from the command line (for AWS instance, user TAR workflow): https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html
 Download Kibana (optional for now): https://www.elastic.co/downloads/kibana
 Download LogStash: https://www.elastic.co/products/logstash
 
