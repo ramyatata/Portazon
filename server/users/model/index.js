@@ -63,12 +63,6 @@ module.exports = {
 
     db.query(`INSERT INTO users ${columns} VALUES ${values}`, (err, data) => {
       if (err) throw 'User registration Error';
-      cb({
-        firstname: details.firstname,
-        lastname: details.lastname,
-        email: details.email,
-        id: data.insertId
-      });
     });
 
     db.query(`
@@ -76,7 +70,7 @@ module.exports = {
       VALUES ('{}', (SELECT COUNT(ID) FROM users))`,
       (err, data) => {
         if (err) throw 'Cart creation Error';
-        cb(`${details.firstname} ${details.lastname} cart has been created`);
+        cb(`${details.firstname} ${details.lastname} user and cart have been created`);
       });
   },
 

@@ -7,6 +7,7 @@ const {
   searchQuery,
   showCategory,
   addDocument,
+  editReview,
   createUser,
   searchUser,
   createIndexMapping,
@@ -24,16 +25,6 @@ router.use(bodyParser.urlencoded({extended: false}));
 //*************
 
 // Search Query && Categories Route
-router.get('/user', (req, res) => {
-  searchUser(req.query).then((response) => {
-    let hits = response.hits.hits;
-    console.log(hits);
-
-    res.status(200).send(hits);
-  })
-});
-
-
 router.get('/', (req, res) => {
   searchQuery(req.query).then((response) => {
     let hits = response.hits.hits;
@@ -55,7 +46,6 @@ router.get('/category', (req, res) => {
 //*************
 // GET Routing: Delete Index
 //*************
-
 router.get('/delete', (req, res) => {
   deleteIndex('products')
   .then(() => {
@@ -66,20 +56,19 @@ router.get('/delete', (req, res) => {
 
 
 //*************
-// POST Routing: User and New Index Creation
+// POST Routing: Add/Edit Product Review
 //*************
+router.post('/review', (req, res) => {
 
-// Create User
-router.post('/createuser', (req, res) => {
-  createUser(req.body)
-  .then(() => {
-    res.status(201)
-    .send(`${req.body.firstname} ${req.body.firstname} has been added to the User database`);
+  editReview(req.body).then((response) => {
+    res.status(201).send(response);
   })
-  .catch((err) => console.error(err));
 });
 
 
+//*************
+// POST Routing: New Index Creation
+//*************
 router.post('/createindex', (req, res) => {
   createIndexMapping(req.body)
   .then(() => {

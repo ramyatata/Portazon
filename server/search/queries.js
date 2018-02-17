@@ -22,7 +22,7 @@ client.ping({
 });
 
 module.exports = {
-  createUser: (input) => {
+/*  createUser: (input) => {
     let doesIndexExist = client.indices.exists({
       index: 'users'
     });
@@ -67,7 +67,7 @@ module.exports = {
         }
       }
     });
-  },
+  },*/
 
 
   createNewIndex: (indexName) => {
@@ -139,6 +139,21 @@ module.exports = {
           description: doc.description,
           price: doc.price
         }
+      }
+    });
+  },
+
+
+  // Add Document (ie. equivalent to a 'row' in RDMS)
+  editReview: (product) => {
+    return client.index({
+      index: 'products',
+      type: 'inventory',
+      id: product.id,
+      body: {
+
+          reviews: product.reviews,
+          porra:'hahahaha'
       }
     });
   },

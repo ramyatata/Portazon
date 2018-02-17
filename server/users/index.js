@@ -52,7 +52,6 @@ router.post('/login', (req, res) => {
   });
 })
 
-
 // Google Login (OAuth)
 router.get('/google', passport.authenticate('google', {
   scope: ['profile', 'email']
@@ -62,12 +61,10 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
   res.status(200).send(JSON.stringify(req.session.passport.user));
 });
 
-
 // Facebook Login (OAuth)
 router.get('/facebook', (req, res) => {
   // TBD
 });
-
 
 // Logoff
 router.get('/logout', (req, res) => {
@@ -92,7 +89,8 @@ router.get('/cart', (req, res) => {
 router.post('/registerUser', (req, res) => {
   model.doesUserExist(req.body, (response) => {
     if (response) {
-      res.status(201).send('User already exists');
+      res.send('User already exists');
+      return;
     }
 
     // Generate a SALT to encrypt the PW
