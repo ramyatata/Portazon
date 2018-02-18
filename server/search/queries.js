@@ -146,14 +146,14 @@ module.exports = {
 
   // Add Document (ie. equivalent to a 'row' in RDMS)
   editReview: (product) => {
-    return client.index({
+    return client.update({
       index: 'products',
       type: 'inventory',
       id: product.id,
       body: {
-
-          reviews: product.reviews,
-          porra:'hahahaha'
+        doc: {
+          reviews: `${JSON.stringify(product.reviews)}`
+        }
       }
     });
   },
