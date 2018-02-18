@@ -159,7 +159,7 @@ function cutDuplicates(items) {
   }
   return newItemList;
 }
+export default App;
 
-ReactDOM.render(<App />, document.getElementById('root'));
 
 
