@@ -134,8 +134,6 @@ class App extends React.Component {
   }
 }
 
-
-
 function parseImageUrls(items) {
   for (let i = 0; i < items.length; i++) {
     let images = JSON.parse(items[i]._source.image);
@@ -160,6 +158,8 @@ function cutDuplicates(items) {
   return newItemList;
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+export default App;
+
+
 
 
