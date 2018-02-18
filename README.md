@@ -133,6 +133,14 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
       pw
     }
 
+  4 - Add a new review: /search/review:
+    [{
+      id,
+      username,
+      date,
+      comment
+    }]
+
 
 ## Config files with http://localhost:3000 || local folder settings by default
 package.json
