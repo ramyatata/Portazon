@@ -120,8 +120,23 @@
   padding:'20px 20px';
 }
 .card-img-top{
-  width: 100%;
+  width: 200px;
+  height: 200px;
   overflow: hidden;
+}
+.card-title{
+  height: 40px;
+  line-height: 1.2;
+  font-family: 'BogleWeb';
+  display: block;
+  overflow: hidden;
+  line-height: 1.2;
+}
+.card-price{
+  height: 32px;
+  color: #002654;
+  font-weight: 600;
+  font-size: 1.75rem;
 }
 
 /*************************************************
