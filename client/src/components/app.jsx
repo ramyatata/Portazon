@@ -88,20 +88,22 @@ class App extends React.Component {
     }
 
   addItemToCart(item) {
-    // let cart = this.state.cart;
-    let obj = {
-      productID: item._id,
-      amount: item.quantity,
-      email: 'blah2@blah.com',
-      deleteItem: false
+    if (this.state.user) {
+      let obj = {
+        userID: this.state.user.id,
+        productID: item._id,
+        amount: item.quantity,
+        email: this.state.user.email,
+        deleteItem: false
+      }
     }
+    // let cart = this.state.cart;
     // if (!cart) {
     //   this.setState({cart: [item]})
     // } else {
     //   let update = cart.push(item);
     //   this.setState({cart: cart});
     // }
-
   }
 
   removeItemFromCart(item) {

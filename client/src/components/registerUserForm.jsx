@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import {Link} from 'react-router-dom';
 
 var axios = require('axios');
 
@@ -32,6 +33,7 @@ const RegisterUserForm = ({registerUser}) => {
   }
 
   return (
+    <div>
       <form className="register-user-form">
         <div className="col-sm-12">
           <h3>Registration Form</h3>
@@ -86,7 +88,11 @@ const RegisterUserForm = ({registerUser}) => {
         </div>
         <button onClick={validate} type="submit" id="sign-up-button" className="btn btn-primary">Sign Up!
         </button>
+        <button className="btn btn-info">
+          <Link to='/'>Back to Home</Link>
+        </button>
       </form>
+    </div>
     )
 }
 
