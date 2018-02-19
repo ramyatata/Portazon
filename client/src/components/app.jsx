@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Redirect, Route, Link, withRouter, Switch} from 'react-router-dom';
+import { Redirect, Route, withRouter, Switch} from 'react-router-dom';
 
 import Header from './header.jsx';
 import Footer from './footer.jsx';
