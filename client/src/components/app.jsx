@@ -24,12 +24,14 @@ class App extends React.Component {
       searchedItems: null,
       query: '',
       productDetail: '',
-      userInvoice:''
+      userInvoice:'',
+      user: ''
     }
     this.changeView = this.changeView.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
     this.registerUser = this.registerUser.bind(this);
+    this.login = this.login.bind(this);
 
   }
 
@@ -49,6 +51,26 @@ class App extends React.Component {
     }
   }
 
+  login(user) {
+    alert('in login in app.js', user)
+    console.log('user to login:', user)
+    axios.post('users/login', user)
+      .then(res => {
+        this.setState({user: res, view: 'homePage'});
+      })
+      .catch(err => console.log('error logging in user'))
+  }
+
+  registerUser(user) {
+    console.log('in app.js, user to add:', user)
+    axios.post('users/registerUser', user)
+      .then(response => {
+        alert('res', response)
+        console.log('res', response)
+      })
+      .catch(err => console.log('err', err))
+  }
+
   submitQuery(query) {
     axios.get('search/?q=' + query)
       .then(res => {
@@ -66,14 +88,20 @@ class App extends React.Component {
     }
 
   addItemToCart(item) {
-    let cart = this.state.cart;
-    item.quantity = 1;
-    if (!cart) {
-      this.setState({cart: [item]})
-    } else {
-      let update = cart.push(item);
-      this.setState({cart: cart});
+    // let cart = this.state.cart;
+    let obj = {
+      productID: item._id,
+      amount: item.quantity,
+      email: 'blah2@blah.com',
+      deleteItem: false
     }
+    // if (!cart) {
+    //   this.setState({cart: [item]})
+    // } else {
+    //   let update = cart.push(item);
+    //   this.setState({cart: cart});
+    // }
+
   }
 
   removeItemFromCart(item) {
@@ -96,14 +124,10 @@ class App extends React.Component {
     return;
   }
 
-  registerUser(user) {
-    console.log('in registerUser in index', user)
-  }
-
   render() {
     return (
       <div>
-        <Header changeView={this.changeView} submitQuery={this.submitQuery}/>
+        <Header changeView={this.changeView} submitQuery={this.submitQuery} login={this.login}/>
         <Switch>
           <Route exact path='/'
             render={()=><HomePage changeView={this.changeView} submitQuery={this.submitQuery}/>}>
