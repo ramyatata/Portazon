@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { withRouter } from 'react-router-dom';
 
 class ProductCard extends React.Component {
   constructor(props){
@@ -11,13 +12,13 @@ class ProductCard extends React.Component {
   }
 
   handleCardClick(item) {
-    let changeView = this.props.changeView;
-    changeView('productDetail', item)
+    this.props.changeView('productDetail', item);
   }
 
   render(){
     let item = this.props.item;
     let price = '';
+
     if (!item._source.discounted_price) {
       price= item._source.retail_price;
     } else {

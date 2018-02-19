@@ -1,5 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Redirect, Route, Link, withRouter, Switch} from 'react-router-dom';
 
 import Header from './header.jsx';
 import Footer from './footer.jsx';
@@ -11,7 +12,7 @@ import ProductDetail from './productDetailPage.jsx';
 import CheckOut from './checkOut.jsx';
 import RegisterUserForm from './registerUserForm.jsx';
 
-var axios = require('axios');
+const axios = require('axios');
 
 class App extends React.Component {
   constructor(props) {
@@ -34,22 +35,33 @@ class App extends React.Component {
 
   changeView(view, item, invoice){
     this.setState({view: view, productDetail: item, userInvoice: invoice});
+
+    let history = this.props.history;
+
+    if(view === 'productDetail'){
+      history.push('/product_detail');
+    } else if (view === 'shoppingCart') {
+      history.push('/shoppingcart');
+    } else if (view === 'checkOut') {
+      history.push('/checkout');
+    } else if (view === 'registerUserForm') {
+      history.push('/register_user');
+    }
   }
 
   submitQuery(query) {
     axios.get('search/?q=' + query)
       .then(res => {
-        console.log('response', res.data)
         let items = res.data;
         let noDupes = cutDuplicates(items);
         let parseImages = parseImageUrls(noDupes);
 
-        console.log('modItems', parseImages)
         if (this.state.view !== 'productsList') {
           this.setState({searchedItems: parseImages, query: query, view: 'productsList'})
         } else {
           this.setState({searchedItems: parseImages, query: query});
         }
+        this.props.history.push('/products');
       })
     }
 
@@ -88,49 +100,34 @@ class App extends React.Component {
     console.log('in registerUser in index', user)
   }
 
-  renderView() {
-    let view = this.state.view;
-    if (view === 'homePage') {
-      return <HomePage changeView={this.changeView} submitQuery={this.submitQuery}/>
-    } else if (view === 'shoppingCart') {
-      return <ShoppingCart
-        cart={this.state.cart}
-        changeView={this.changeView}
-        />
-    }  else if (view === 'productsList') {
-      return <ProductsList
-        products={this.state.searchedItems}
-        query={this.state.query}
-        addItemToCart={this.addItemToCart}
-        submitQuery={this.submitQuery}
-        changeView={this.changeView}
-        />
-    } else if(view === 'productDetail'){
-      return <ProductDetail
-        item={this.state.productDetail}
-        addItemToCart={this.addItemToCart}
-        />
-    } else if (view === 'checkOut'){
-      return <CheckOut />
-    } else if (view === 'registerUserForm'){
-      return <RegisterUserForm
-        registerUser={this.registerUser}
-        />
-    } else {
-      return null;
-    }
-  }
-
   render() {
     return (
       <div>
         <Header changeView={this.changeView} submitQuery={this.submitQuery}/>
-        <div>
-          {this.renderView()}
-        </div>
+        <Switch>
+          <Route exact path='/'
+            render={()=><HomePage changeView={this.changeView} submitQuery={this.submitQuery}/>}>
+          </Route>
+          <Route exact path='/products'
+            render={()=><ProductsList products={this.state.searchedItems} query={this.state.query} addItemToCart={this.addItemToCart} submitQuery={this.submitQuery} changeView={this.changeView}/>  }>
+          </Route>
+          <Route exact path='/product_detail'
+            render={()=><ProductDetail item={this.state.productDetail}
+            addItemToCart={this.addItemToCart}/>  }>
+          </Route>
+          <Route exact path='/shoppingcart'
+            render={()=><ShoppingCart cart={this.state.cart} changeView={this.changeView}/>  }>
+          </Route>
+          <Route exact path='/checkout'
+            render={()=><CheckOut/>  }>
+          </Route>
+          <Route exact path='/register_user'
+            render={()=><RegisterUserForm registerUser={this.registerUser}/>  }>
+          </Route>
+        </Switch>
         <Footer/>
       </div>
-      );
+    );
   }
 }
 
@@ -159,7 +156,8 @@ function cutDuplicates(items) {
   }
   return newItemList;
 }
-export default App;
+
+export default withRouter(App);
 
 
 
