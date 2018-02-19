@@ -6,7 +6,8 @@ module.exports = {
   entry: `${SRC_DIR}/index.js`,
   output: {
     filename: 'bundle.js',
-    path: DES_DIR
+    path: DES_DIR,
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -19,5 +20,8 @@ module.exports = {
         }
       }
     ]
+  },
+  devServer: {
+    historyApiFallback: true
   }
 };

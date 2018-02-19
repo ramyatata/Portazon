@@ -3,7 +3,6 @@ import ReactDom from 'react-dom';
 
 var axios = require('axios');
 
-
 const RegisterUserForm = () => {
 
   const validate = () => {

@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { withRouter} from 'react-router-dom';
 
 const ProductDetail = ({item, addItemToCart}) => {
-
-  console.log('item in product detail', item)
-
   //ratings
   let ratingStars = [];
 
@@ -24,7 +22,6 @@ const ProductDetail = ({item, addItemToCart}) => {
       </li>
     );
   }
-
 
   //prod details
   // let prodDetails = prod.details.map((detail, ind) => <li key={ind}>{detail}</li>);
