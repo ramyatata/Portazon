@@ -7,7 +7,9 @@ class ProductCard extends React.Component {
     super(props);
   }
 
-  handleClick(item) {
+  handleAddCartClick(item) {
+    let quantity = document.getElementById('quantity');
+    item.quantity = quantity;
     this.props.addItemToCart(item);
   }
 
@@ -30,7 +32,11 @@ class ProductCard extends React.Component {
         <div className='card-block'>
           <div className='card-price'><span>${item._source.discounted_price.toFixed(2)}</span></div>
           <div className='card-title'><span>{item._source.product_name}</span></div>
-          <a href='#' className='btn btn-primary' onClick={() => this.handleClick(item)}>add to cart</a>
+          <div>
+            <h5>Quantity</h5>
+            <input id='quantity' className='card-quantity'/>
+          </div>
+          <a href='#' className='btn btn-primary' onClick={() => this.handleAddCartClick(item)}>add to cart</a>
         </div>
       </div>
     );

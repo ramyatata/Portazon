@@ -17,6 +17,7 @@
       this.handleChange = this.handleChange.bind(this);
       this.changeView = this.changeView.bind(this);
       this.handleSearchClick = this.handleSearchClick.bind(this);
+      this.handleLoginClick - this.handleLoginClick.bind(this);
     }
 
     changeView(view){
@@ -31,6 +32,16 @@
 
     populateCategoriesMenu(){
 
+    }
+
+    handleLoginClick() {
+      console.log('in handle login click');
+      let user = {
+        email: document.getElementById('email').value,
+        pw: document.getElementById('pw').value
+      }
+      console.log(user)
+      this.props.login(user);
     }
 
     handleSearchClick() {
@@ -83,12 +94,12 @@
                    </div>
                    <form method="post" action="/account/login" className='header-account-dropdown'>
                      <div className="form-group ">
-                       <input type="email" className="form-control"placeholder="Email"/>
+                       <input type="email" id="email" className="form-control" placeholder="Email"/>
                      </div>
                      <div className="form-group">
-                       <input type="password" className="form-control" placeholder="Password"/>
+                       <input type="password" id="pw" className="form-control" placeholder="Password"/>
                      </div>
-                     <button type="submit" className="btn btn-block">SIGN IN</button>
+                     <button type="submit" className="btn btn-block" onClick={() => this.handleLoginClick()}>SIGN IN</button>
                    </form>
                    <div className="header-account-dropdown">
                      <a onClick={() =>this.changeView('registerUserForm')}>Create Account</a>
