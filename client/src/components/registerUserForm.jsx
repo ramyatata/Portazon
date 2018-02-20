@@ -4,46 +4,87 @@ import {Link} from 'react-router-dom';
 
 var axios = require('axios');
 
-const RegisterUserForm = ({registerUser}) => {
-
-  const validate = () => {
-    let user = {
-      firstname: document.getElementById('firstName').value,
-      lastname: document.getElementById('lastName').value,
-      street: document.getElementById('street').value,
-      aptNo: document.getElementById('aptNo').value,
-      city: document.getElementById('city').value,
-      state: document.getElementById('state').value,
-      zip: document.getElementById('zip').value,
-      email: document.getElementById('reg-email').value,
-      pw: document.getElementById('reg-pwd').value,
-      country: document.getElementById('country').value
+class RegisterUserForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstname: '',
+      lastname: '',
+      street: '',
+      aptNo: '',
+      city: '',
+      state: '',
+      zip: '',
+      email: '',
+      password: '',
+      country: '',
+      formErrors: {email: '', firstname: ''},
+      emailValid: false,
+      firstnameValid: false,
+      formValid: false
     };
-    if (user.country === '') {
-      user.country = 'USA';
-    }
-    let required = ['firstName', 'lastName', 'email', 'pwd'];
-    for (let i = 0; i < required.length; i++) {
-      if (user[required[i]] === '') {
-        alert('First Name, Last Name, Email, and password are required!');
-        return;
-      }
-    }
-    registerUser(user);
+
+    this.validateField = this.validateField.bind(this);
+    this.handleUserInput = this.handleUserInput.bind(this);
+    this.validateForm = this.validateForm.bind(this);
+    this.errorClass = this.errorClass.bind(this);
   }
 
-  return (
-    <form class="col-xs-12">
+  errorClass(error) {
+   return(error.length === 0 ? '' : 'has-error');
+  }
+
+  validateForm(){
+    this.setState({formValid: this.state.emailValid && this.state.firstnameValid})
+  }
+
+  validateField(fieldName, value){
+    let fieldValidationErrors = this.state.formErrors;
+    let emailValid = this.state.emailValid;
+    let firstnameValid = this.state.firstnameValid;
+
+    switch(fieldName){
+      case 'email':
+        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+        break;
+      case 'firstName':
+        firstnameValid = value.length > 2;
+        fieldValidationErrors.firstname = firstnameValid? '' : 'too short';
+        break;
+      default:
+        break;
+    }
+
+    this.setState({
+      formErrors: fieldValidationErrors,
+      emailValid: emailValid,
+      firstnameValid: firstnameValid
+    }, this.validateForm)
+
+  }
+
+  handleUserInput(e){
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({[name]: value}, ()=>{this.validateField(name, value)});
+  }
+
+
+  render() {
+    return (
+    <form className="col-xs-12">
       <div className="col-xs-6 col-xs-offset-5 signup-title"><h3>Create Your Account</h3></div>
       <div className="col-xs-6 col-xs-offset-3" style={{border: 'solid 1px lightgrey'}}>
 
       <div style={{paddingTop: '20px'}}>
-        <div className="form-group col-xs-12">
+        <div className={`form-group col-xs-12
+                 ${this.errorClass(this.state.formErrors.email)}`}>
           <label className="control-label col-xs-2">First Name</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
               <span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
-              <input id="firstName" placeholder="First Name" className="form-control"  type="text"/>
+              <input id="firstName" name="firstName" placeholder="First Name" className="form-control" type="text" value={this.state.firstName} onChange={(event) => this.handleUserInput(event)}/>
             </div>
           </div>
         </div>
@@ -175,7 +216,7 @@ const RegisterUserForm = ({registerUser}) => {
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
               <span className="input-group-addon"><i className="glyphicon glyphicon-envelope"></i></span>
-              <input id="reg-email" placeholder="E-Mail Address" className="form-control" type="text"/>
+              <input id="reg-email" name="email" placeholder="E-Mail Address" className="form-control" type="text" value={this.state.email} onChange={(event) => this.handleUserInput(event)}/>
             </div>
           </div>
         </div>
@@ -194,7 +235,7 @@ const RegisterUserForm = ({registerUser}) => {
           <label className="col-md-2 control-label"></label>
           <div className="col-md-10">
             <div className="col-xs-6">
-              <button type="button" id="sign-up-button" class="btn btn-block btn-default" onClick={validate}>SIGN UP</button>
+              <button type="button" id="sign-up-button" class="btn btn-block btn-default" onClick={this.validate} disabled={!this.state.formValid}>SIGN UP</button>
             </div>
             <div className="col-xs-6">
               <button type="button" class="btn btn-block btn-default" ><Link to='/'>HOME</Link></button>
@@ -205,70 +246,101 @@ const RegisterUserForm = ({registerUser}) => {
     </div>
     </form>
   );
-
-  // return (
-  //   <div>
-  //     <form className="register-user-form">
-  //       <div className="col-sm-12">
-  //         <h3>Registration Form</h3>
-  //       </div>
-  //       <div className="row">
-  //         <div className="col-sm-6">
-  //           <label htmlFor="firstName">First Name</label>
-  //           <input className="form-control" id="firstName" placeholder="First Name"/>
-  //         </div>
-  //         <div className="col-sm-6">
-  //           <label htmlFor="lastName">Last Name</label>
-  //           <input className="form-control" id="lastName" placeholder="Last Name"/>
-  //         </div>
-  //       </div>
-  //       <div className="row">
-  //         <div className="col-sm-8">
-  //           <label htmlFor="street">Street</label>
-  //           <input className="form-control" id="street" placeholder="street"/>
-  //         </div>
-  //         <div className="col-sm-4">
-  //           <label htmlFor="aptNo">Apt. No</label>
-  //           <input className="form-control" id="aptNo" placeholder="No."/>
-  //         </div>
-  //       </div>
-  //       <div className="row">
-  //         <div className="col-sm-4">
-  //           <label htmlFor="city">City</label>
-  //           <input className="form-control" id="city" placeholder="City"/>
-  //         </div>
-  //         <div className="col-sm-2">
-  //           <label htmlFor="state">State</label>
-  //           <input className="form-control" id="state" placeholder="State"/>
-  //         </div>
-  //         <div className="col-sm-3">
-  //           <label htmlFor="zip">Postal Code</label>
-  //           <input className="form-control" id="zip" placeholder="Postal Code"/>
-  //         </div>
-  //         <div className="col-sm-3">
-  //           <label htmlFor="country">Country (if NOT the US)</label>
-  //           <input className="form-control" id="country" placeholder="Country"/>
-  //         </div>
-  //       </div>
-  //       <div className="row">
-  //         <div className="col-sm-6">
-  //           <label htmlFor="email">Email</label>
-  //           <input className="form-control" id="reg-email" placeholder="Email"/>
-  //         </div>
-  //         <div className="col-sm-6">
-  //           <label htmlFor="pwd">Password</label>
-  //           <input className="form-control" id="reg-pwd" placeholder="Password"/>
-  //         </div>
-  //       </div>
-  //       <button onClick={validate} type="button" id="sign-up-button" className="btn btn-primary">Sign Up!
-  //       </button>
-  //       <button className="btn btn-info">
-  //         <Link to='/'>Back to Home</Link>
-  //       </button>
-  //     </form>
-  //   </div>
-  //   )
+ }
 }
+
+
+// const RegisterUserForm = ({registerUser}) => {
+
+//   const validate = () => {
+//     let user = {
+//       firstname: document.getElementById('firstName').value,
+//       lastname: document.getElementById('lastName').value,
+//       street: document.getElementById('street').value,
+//       aptNo: document.getElementById('aptNo').value,
+//       city: document.getElementById('city').value,
+//       state: document.getElementById('state').value,
+//       zip: document.getElementById('zip').value,
+//       email: document.getElementById('reg-email').value,
+//       pw: document.getElementById('reg-pwd').value,
+//       country: document.getElementById('country').value
+//     };
+//     if (user.country === '') {
+//       user.country = 'USA';
+//     }
+//     let required = ['firstName', 'lastName', 'email', 'pwd'];
+//     for (let i = 0; i < required.length; i++) {
+//       if (user[required[i]] === '') {
+//         alert('First Name, Last Name, Email, and password are required!');
+//         return;
+//       }
+//     }
+//     registerUser(user);
+//   }
+
+//   return (
+//     <div>
+//       <form className="register-user-form">
+//         <div className="col-sm-12">
+//           <h3>Registration Form</h3>
+//         </div>
+//         <div className="row">
+//           <div className="col-sm-6">
+//             <label htmlFor="firstName">First Name</label>
+//             <input className="form-control" id="firstName" placeholder="First Name"/>
+//           </div>
+//           <div className="col-sm-6">
+//             <label htmlFor="lastName">Last Name</label>
+//             <input className="form-control" id="lastName" placeholder="Last Name"/>
+//           </div>
+//         </div>
+//         <div className="row">
+//           <div className="col-sm-8">
+//             <label htmlFor="street">Street</label>
+//             <input className="form-control" id="street" placeholder="street"/>
+//           </div>
+//           <div className="col-sm-4">
+//             <label htmlFor="aptNo">Apt. No</label>
+//             <input className="form-control" id="aptNo" placeholder="No."/>
+//           </div>
+//         </div>
+//         <div className="row">
+//           <div className="col-sm-4">
+//             <label htmlFor="city">City</label>
+//             <input className="form-control" id="city" placeholder="City"/>
+//           </div>
+//           <div className="col-sm-2">
+//             <label htmlFor="state">State</label>
+//             <input className="form-control" id="state" placeholder="State"/>
+//           </div>
+//           <div className="col-sm-3">
+//             <label htmlFor="zip">Postal Code</label>
+//             <input className="form-control" id="zip" placeholder="Postal Code"/>
+//           </div>
+//           <div className="col-sm-3">
+//             <label htmlFor="country">Country (if NOT the US)</label>
+//             <input className="form-control" id="country" placeholder="Country"/>
+//           </div>
+//         </div>
+//         <div className="row">
+//           <div className="col-sm-6">
+//             <label htmlFor="email">Email</label>
+//             <input className="form-control" id="reg-email" placeholder="Email"/>
+//           </div>
+//           <div className="col-sm-6">
+//             <label htmlFor="pwd">Password</label>
+//             <input className="form-control" id="reg-pwd" placeholder="Password"/>
+//           </div>
+//         </div>
+//         <button onClick={validate} type="button" id="sign-up-button" className="btn btn-primary">Sign Up!
+//         </button>
+//         <button className="btn btn-info">
+//           <Link to='/'>Back to Home</Link>
+//         </button>
+//       </form>
+//     </div>
+//   )
+// }
 
 
 
