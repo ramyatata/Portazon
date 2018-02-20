@@ -41,8 +41,9 @@ describe('Search', () => {
   });
 });
 
+
 describe('Users', () => {
-  it('registers a new user', (done) => {
+  it('registers new user', (done) => {
     let requestParams = {
       uri: 'http://localhost:3000/users/registerUser',
       method: 'POST',
@@ -83,9 +84,7 @@ describe('Users', () => {
     });
   });
 
-
   it('should DELETE the user', (done) => {
-    // FOR TOMORROW, YOU'RE GETTING CART CREATION ERROR.. THIS MEANS the delete is NOT DELETING THE CART.. CHECK IF THE USER IS CREATED, THEN HOW IT LOOKS IN SHOOPING_CART, THEN DELETE THE USER, AND SEE IF IT REFLECTED IN SHOOPING CARD.. DEPENDING ON THE CASE, YOU WILL HAVE TO ADJUST YOUR DELETEUSER MODEL.
     let requestParams = {
       method: 'POST',
       uri: 'http://localhost:3000/users/deleteUser',
@@ -99,6 +98,22 @@ describe('Users', () => {
       done();
     });
   });
+
+  it('it rejects incorrect UN/PW credentials', (done) => {
+    let requestParams = {
+      method: 'POST',
+      uri: 'http://localhost:3000/users/login',
+      json: {
+        "email": "jaymz@met.com",
+        "pw": "666"
+      }
+    };
+    request(requestParams, (error, response, body) => {
+      expect(response.statusCode).to.equal(401);
+      expect(body).to.equal(false);
+      done();
+    })
+  })
 });
 
 

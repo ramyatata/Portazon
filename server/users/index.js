@@ -33,7 +33,8 @@ router.get('/', (req, res) => {
 router.post('/login', (req, res) => {
   model.doesUserExist(req.body, (response) => {
     if (!response) {
-      res.status(201).send(false);
+      res.status(401).send(response);
+      return;
     }
 
     let hashPW = encryptor.hashPW(req.body.pw, response.salt);
@@ -47,7 +48,7 @@ router.post('/login', (req, res) => {
       };
       res.status(201).send(JSON.stringify(req.session));
     } else {
-      res.status(403).send(false);
+      res.status(401).send(false);
     }
   });
 })
