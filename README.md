@@ -144,6 +144,10 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
     }]
   }
 
+  5 - Delete user: /search/deleteUser:
+  {
+    email
+  }
 
 ## Config files with http://localhost:3000 || local folder settings by default
 package.json

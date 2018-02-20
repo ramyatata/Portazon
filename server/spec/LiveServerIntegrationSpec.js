@@ -78,8 +78,8 @@ describe('Users', () => {
     };
 
     request(requestParams, (error, response, done) => {
+      console.log(response.statusCode);
       expect(response.statusCode).to.equal(201);
-      console.log(response);
       done();
     });
   });
