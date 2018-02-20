@@ -55,8 +55,10 @@ class App extends React.Component {
     alert('in login in app.js', user)
     console.log('user to login:', user)
     axios.post('users/login', user)
-      .then(res => {
-        this.setState({user: res, view: 'homePage'});
+      .then(user => {
+        this.setState({user: user, view: 'homePage'});
+        this.props.history.push('/');
+
       })
       .catch(err => console.log('error logging in user'))
   }
@@ -97,6 +99,7 @@ class App extends React.Component {
         deleteItem: false
       }
     }
+
     // let cart = this.state.cart;
     // if (!cart) {
     //   this.setState({cart: [item]})
@@ -107,23 +110,23 @@ class App extends React.Component {
   }
 
   removeItemFromCart(item) {
-    //this function should have an input of an item object
-    //we then need to do an ajax POST request to the server to removeItemFromCart
-    //the data we need to send with this post request is the item object
-    //upon success:
-    //we should update the users cart to reflect the removed item
-    //upon error:
-    //console log the error and see whats happening!!
-
-    //for now:
-    let cart = this.state.cart;
-    for (let i = 0; i < cart.length; i++) {
-      if (cart[i] === item) {
-        cart.splice(i, 1);
-        return;
+    if (this.state.user) {
+      let obj = {
+        userID: this.state.user.id,
+        productID: item._id,
+        amount: item.quantity,
+        email: this.state.user.email,
+        deleteItem: true
       }
     }
-    return;
+    // let cart = this.state.cart;
+    // for (let i = 0; i < cart.length; i++) {
+    //   if (cart[i] === item) {
+    //     cart.splice(i, 1);
+    //     return;
+    //   }
+    // }
+    // return;
   }
 
   render() {
@@ -150,6 +153,7 @@ class App extends React.Component {
           <Route exact path='/register_user'
             render={()=><RegisterUserForm registerUser={this.registerUser}/>  }>
           </Route>
+          <Route path='*' component={HomePage}></Route>
         </Switch>
         <Footer/>
       </div>
