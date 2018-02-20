@@ -22,54 +22,6 @@ client.ping({
 });
 
 module.exports = {
-/*  createUser: (input) => {
-    let doesIndexExist = client.indices.exists({
-      index: 'users'
-    });
-
-    if (!doesIndexExist) {
-      client.indices.create({
-        index: 'users',
-      }).then((err, response) => {
-        if (err) { console.log('client.indices.create failed') };
-        console.log('users DB has been created');
-       })
-    } else {
-      console.log('Users DB exists, moving on..');
-    }
-
-
-    return client.index({
-      index: 'users',
-      type: 'user',
-      id: 1,
-      body: {
-        properties: {
-          "firstName": input.firstname,
-          "lastName": input.lastname,
-          "address": input.address,
-          "cart": []
-        }
-      }
-    })
-  },
-
-
-  searchUser: (user) => {
-    return client.search({
-      index: 'users',
-      type: 'user',
-      body: {
-        query: {
-          multi_match: {
-            query: user.q || query
-          }
-        }
-      }
-    });
-  },*/
-
-
   createNewIndex: (indexName) => {
     return client.indices.create({
       index: indexName

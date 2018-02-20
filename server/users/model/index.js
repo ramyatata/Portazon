@@ -63,15 +63,15 @@ module.exports = {
 
     db.query(`INSERT INTO users ${columns} VALUES ${values}`, (err, data) => {
       if (err) throw 'User registration Error';
-    });
 
-    db.query(`
-      INSERT INTO shopping_cart (cart, userID)
-      VALUES ('{}', (SELECT COUNT(ID) FROM users))`,
-      (err, data) => {
-        if (err) throw 'Cart creation Error';
-        cb(`${details.firstname} ${details.lastname} user and cart have been created`);
-      });
+      db.query(`
+        INSERT INTO shopping_cart (cart, userID)
+        VALUES ('{}', ${data.insertId})`,
+        (err, data) => {
+          if (err) throw 'Cart creation Error';
+          cb(`${details.firstname} ${details.lastname} user and cart have been created`);
+        });
+    });
   },
 
   updateCart: (details, cb) => {
