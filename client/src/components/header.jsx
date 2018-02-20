@@ -97,7 +97,7 @@
                      <div className="form-group">
                        <input type="password" id="pw" className="form-control" placeholder="Password"/>
                      </div>
-                     <button type="submit" className="btn btn-block" onClick={() => this.handleLoginClick()}>SIGN IN</button>
+                     <button type="button" className="btn btn-block" onClick={() => this.handleLoginClick()}>SIGN IN</button>
                    </form>
                    <div className="header-account-dropdown">
                      <a onClick={() =>this.changeView('registerUserForm')}>Create Account</a>
