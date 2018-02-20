@@ -58,17 +58,18 @@ class App extends React.Component {
       .then(user => {
         this.setState({user: user, view: 'homePage'});
         this.props.history.push('/');
-
       })
       .catch(err => console.log('error logging in user'))
   }
 
   registerUser(user) {
-    console.log('in app.js, user to add:', user)
+    console.log('in app.js, user to add:', user);
+
     axios.post('users/registerUser', user)
       .then(response => {
         alert('res', response)
         console.log('res', response)
+        this.props.history.push('/');
       })
       .catch(err => console.log('err', err))
   }
