@@ -3,9 +3,6 @@ const config = require('../config');
 const db = mysql.createConnection(config);
 db.connect();
 
-let user = false;
-let cart = {};
-
 module.exports = {
   doesUserExist: (profile, cb) => {
     let { firstname, lastname, email } = profile;
@@ -29,6 +26,36 @@ module.exports = {
       (err, data) => {
         if (err) throw 'Error in the GET cart query';
         cb(data);
+      }
+    );
+  },
+
+  updateCart: (details, cb) => {
+    let { userID, productID, amount, email, deleteItem } = details;
+
+    db.query(`
+      SELECT cart FROM shopping_cart
+      INNER JOIN users
+      WHERE users.id = shopping_cart.userID
+      AND users.email = '${email}'
+      AND users.id = ${userID}`,
+      (err, data) => {
+        if (err) throw 'Error in the GET cart query';
+
+        let cart = JSON.parse(data[0].cart);
+
+        if (deleteItem) {
+          delete cart[productID]
+        } else {
+          cart[productID] = amount;
+        }
+
+        cart = JSON.stringify(cart);
+
+        db.query(`UPDATE shopping_cart SET cart = '${cart}' WHERE userID = '${userID}'`, (err, data) => {
+          if (err) throw 'Could not update product in Shopping Cart'
+          cb(`Product Id ${productID} has been modified in ${email}'s Shopping Cart`);
+        });
       }
     );
   },
@@ -74,35 +101,6 @@ module.exports = {
     });
   },
 
-  updateCart: (details, cb) => {
-    let { userID, productID, amount, email, deleteItem } = details;
-
-    db.query(`
-      SELECT cart FROM shopping_cart
-      INNER JOIN users
-      WHERE users.id = shopping_cart.userID
-      AND users.email = '${email}'
-      AND users.id = ${userID}`,
-      (err, data) => {
-        if (err) throw 'Error in the GET cart query';
-
-        let cart = JSON.parse(data[0].cart);
-
-        if (deleteItem) {
-          delete cart[productID]
-        } else {
-          cart[productID] = amount;
-        }
-
-        cart = JSON.stringify(cart);
-
-        db.query(`UPDATE shopping_cart SET cart = '${cart}' WHERE userID = '${userID}'`, (err, data) => {
-          if (err) throw 'Could not update product in Shopping Cart'
-          cb(`Product Id ${productID} has been modified in ${email}'s Shopping Cart`);
-        });
-      }
-    );
-  },
 
   deleteUser: (details, cb) => {
     db.query(`SELECT * FROM users WHERE users.email = '${details.email}'`, (err, data) => {

@@ -77,15 +77,25 @@ router.get('/logout', (req, res) => {
 //*************
 // Shopping Card Routing
 //*************
-router.get('/cart', (req, res) => {
-  model.getUserCart(req.query, (response) => {
-    res.status(200).send(response);
+router.post('/cart', (req, res) => {
+  model.doesUserExist(req.body, (response) => {
+    if (response) {
+      model.getUserCart(req.body, (response) => {
+        res.status(200).send(response);
+      });
+    }
   });
+});
+
+router.post('/updateCart', (req, res) => {
+  model.updateCart(req.body, (response) => {
+    res.status(201).send(response);
+  })
 });
 
 
 //*************
-// POST Routing: Registering Users
+// Registering Users
 //*************
 router.post('/registerUser', (req, res) => {
   model.doesUserExist(req.body, (response) => {
@@ -108,13 +118,6 @@ router.post('/registerUser', (req, res) => {
 
 router.post('/deleteUser', (req, res) => {
   model.deleteUser(req.body, (response) => {
-    res.status(201).send(response);
-  })
-});
-
-
-router.post('/updateCart', (req, res) => {
-  model.updateCart(req.body, (response) => {
     res.status(201).send(response);
   })
 });

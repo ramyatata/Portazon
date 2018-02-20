@@ -96,7 +96,8 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
   GET REQUESTS:
 
   1 - Search Query && Categories: /search?q=[QUERY]&category=[SELECTEDCATEGORY]
-  2 - Check Shopping_Cart: /users/cart?firstname=[FIRSTNAME]&lastname=[LASTNAME]&userID=[ID]
+  2 - Get all Category specific: /search/category?category=[SELECTEDCATEGORY]
+
 
   POST REQUEST:
 
@@ -114,7 +115,16 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
         country
       }
 
-  2 - Update Shopping Cart: /users/updateCart
+  2 - Get User's Shopping Cart: /users/cart
+    Send an JSON with the following key/values:
+
+    {
+      userID,
+      firstname,
+      lastname
+    }
+
+  3 - Update Shopping Cart: /users/updateCart
     Send an JSON with the following key/values:
 
     {
@@ -122,10 +132,12 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
       productID,
       amount,
       email,
-      deleteItem (* this should be a boolean)
+      deleteItem (i.e. this needs to be a boolean)
     }
 
-  3 - Check if UN/PW match
+
+
+  4 - Check if UN/PW match
     {
       firstname,
       lastname,
@@ -133,7 +145,7 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
       pw
     }
 
-  4 - Add a new review: /search/review:
+  5 - Add a new review: /search/review:
   {
     id,
     reviews: [{
@@ -144,7 +156,7 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
     }]
   }
 
-  5 - Delete user: /search/deleteUser:
+  6 - Delete user: /search/deleteUser:
   {
     email
   }
