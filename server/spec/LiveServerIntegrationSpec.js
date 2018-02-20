@@ -67,23 +67,40 @@ describe('Users', () => {
     });
   });
 
-  it('should login the user', (done) => {
+  it('should LOGIN the user', (done) => {
     let requestParams = {
-      uri: 'http://localhost:3000/users/login',
       method: 'POST',
+      uri: 'http://localhost:3000/users/login',
       json: {
         "email": "jaymz@met.com",
         "pw": "as"
       }
     };
 
-    request(requestParams, (error, response, done) => {
-      console.log(response.statusCode);
+    request(requestParams, (error, response, body) => {
+      expect(response.statusCode).to.equal(201);
+      done();
+    });
+  });
+
+
+  it('should DELETE the user', (done) => {
+    // FOR TOMORROW, YOU'RE GETTING CART CREATION ERROR.. THIS MEANS the delete is NOT DELETING THE CART.. CHECK IF THE USER IS CREATED, THEN HOW IT LOOKS IN SHOOPING_CART, THEN DELETE THE USER, AND SEE IF IT REFLECTED IN SHOOPING CARD.. DEPENDING ON THE CASE, YOU WILL HAVE TO ADJUST YOUR DELETEUSER MODEL.
+    let requestParams = {
+      method: 'POST',
+      uri: 'http://localhost:3000/users/deleteUser',
+      json: {
+        "email": "jaymz@met.com",
+      }
+    };
+
+    request(requestParams, (error, response, body) => {
       expect(response.statusCode).to.equal(201);
       done();
     });
   });
 });
+
 
 /*
   it('should accept POST requests to /classes/messages', function(done) {
