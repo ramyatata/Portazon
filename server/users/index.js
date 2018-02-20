@@ -42,7 +42,8 @@ router.post('/login', (req, res) => {
 
     if (hashPW === response.pw) {
       req.session = {
-        name: `${user.firstname} ${user.lastname}`,
+        firstname: user.firstname,
+        lastname: user.lastname,
         email: user.email,
         id: user.id
       };
