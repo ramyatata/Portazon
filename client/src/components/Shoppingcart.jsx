@@ -14,7 +14,9 @@ class ShoppingCart extends React.Component {
 
   componentDidMount(){
     console.log('in shopping cart!')
-    this.getTotals();
+    if (this.state.cart) {
+      this.getTotals();
+    }
   }
 
   handleCheckoutClick() {
@@ -70,11 +72,12 @@ class ShoppingCart extends React.Component {
   }
 
   render() {
-    return(
-      <div className="shopping-cart container-fluid">
-        <div>
-          <h2>shopping cart</h2>
-        </div>
+    var body;
+    if (!this.state.cart) {
+      body = <div>There are no items in your cart.</div>
+    } else {
+      body =
+      <div>
         <div>
           <h3>Your current total amount is: $ {this.state.totalAmt}</h3>
         </div>
@@ -118,6 +121,14 @@ class ShoppingCart extends React.Component {
             <button onClick={this.handleCheckoutClick}>Checkout</button>
           </div>
         </div>
+      </div>
+    }
+    return(
+      <div className="shopping-cart container-fluid">
+        <div>
+          <h2>shopping cart</h2>
+        </div>
+        {body}
       </div>
     )
   }
