@@ -249,8 +249,8 @@
               Reigster User Form
 **************************************************/
 
-.registerUserForm {
-
+.register-user-form {
+  margin-bottom: 200px;
 }
 .control-label {
   float: right;

@@ -73,7 +73,7 @@ class RegisterUserForm extends React.Component {
 
   render() {
     return (
-    <form className="col-xs-12">
+    <form className="register-user-form col-xs-12">
       <div className="col-xs-6 col-xs-offset-5 signup-title"><h3>Create Your Account</h3></div>
       <div className="col-xs-6 col-xs-offset-3" style={{border: 'solid 1px lightgrey'}}>
 
@@ -235,10 +235,10 @@ class RegisterUserForm extends React.Component {
           <label className="col-md-2 control-label"></label>
           <div className="col-md-10">
             <div className="col-xs-6">
-              <button type="button" id="sign-up-button" class="btn btn-block btn-default" onClick={this.validate} disabled={!this.state.formValid}>SIGN UP</button>
+              <button type="button" id="sign-up-button" className="btn btn-block btn-default" onClick={this.validateForm} disabled={!this.state.formValid}>SIGN UP</button>
             </div>
             <div className="col-xs-6">
-              <button type="button" class="btn btn-block btn-default" ><Link to='/'>HOME</Link></button>
+              <button type="button" className="btn btn-block btn-default" ><Link to='/'>HOME</Link></button>
             </div>
           </div>
         </div>
