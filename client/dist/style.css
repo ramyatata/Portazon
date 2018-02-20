@@ -252,7 +252,13 @@
 .registerUserForm {
 
 }
-
+.control-label {
+  float: right;
+}
+.signup-title {
+  font-family: 'myriad-pro,BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif';
+  font-size: '20px' !important;
+}
 /* need to check why this is not working when placed in style sheet */
 /*.prod-primaryPrice {
   display: inline;
