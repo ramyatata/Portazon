@@ -1,13 +1,107 @@
-var request = require('request');
-var expect = require('chai').expect;
+const request = require('request');
+const expect = require('chai').expect;
 
-describe('server', function() {
-  it('should respond to GET requests for /classes/messages with a 200 status code', function(done) {
-    request('http://127.0.0.1:3000/classes/messages', function(error, response, body) {
+describe('Search', () => {
+  it('should respond to GET requests for "/" with a 200 status code', (done) => {
+    request('http://localhost:3000/', (error, response, body) => {
       expect(response.statusCode).to.equal(200);
       done();
     });
   });
+
+  it('should return data from a search query', (done) => {
+    request('http://localhost:3000/search?q=games', (error, response, body) => {
+      expect(response.statusCode).to.equal(200);
+      expect(JSON.parse(body)).to.be.an('array');
+      done();
+    });
+  });
+
+  it('should return data from a specific category', (done) => {
+    request('http://localhost:3000/search/category?category=games', (error, response, body) => {
+      expect(response.statusCode).to.equal(200);
+      expect(JSON.parse(body)).to.be.an('array');
+      done();
+    });
+  });
+
+  it('should return data from a search query with a specific category', (done) => {
+    request('http://localhost:3000/search?q=nike&category=shoes', (error, response, body) => {
+      expect(response.statusCode).to.equal(200);
+      expect(JSON.parse(body)).to.be.an('array');
+      done();
+    })
+  });
+
+  it('Should 404 when asked for a nonexistent endpoint', function(done) {
+    request('http://127.0.0.1:3000/nonexistent', function(error, response, body) {
+      expect(response.statusCode).to.equal(404);
+      done();
+    });
+  });
+});
+
+describe('Users', () => {
+  it('registers a new user', (done) => {
+    let requestParams = {
+      uri: 'http://localhost:3000/users/registerUser',
+      method: 'POST',
+      json: {
+        "firstname": "James",
+        "lastname": "Hetfield",
+        "email": "jaymz@met.com",
+        "pw": "as",
+        "salt": "adf",
+        "street": "",
+        "num": "",
+        "city": "",
+        "state": "",
+        "zip": "",
+        "country": ""
+      }
+    };
+
+    request(requestParams, (error, response, body) => {
+      expect(response.statusCode).to.equal(201);
+      done();
+    });
+  });
+
+  it('should login the user', (done) => {
+    let requestParams = {
+      uri: 'http://localhost:3000/users/login',
+      method: 'POST',
+      json: {
+        "email": "jaymz@met.com",
+        "pw": "as"
+      }
+    };
+
+    request(requestParams, (error, response, done) => {
+      expect(response.statusCode).to.equal(201);
+      console.log(response);
+      done();
+    });
+  });
+});
+
+/*
+  it('should accept POST requests to /classes/messages', function(done) {
+    var requestParams = {method: 'POST',
+      uri: 'http://127.0.0.1:3000/classes/messages',
+      json: {
+        username: 'Jono',
+        message: 'Do my bidding!'}
+    };
+
+    request(requestParams, function(error, response, body) {
+      expect(response.statusCode).to.equal(201);
+      done();
+    });
+  });
+
+
+
 
   it('should send back parsable stringified JSON', function(done) {
     request('http://127.0.0.1:3000/classes/messages', function(error, response, body) {
@@ -65,13 +159,6 @@ describe('server', function() {
       });
     });
   });
-
-  it('Should 404 when asked for a nonexistent endpoint', function(done) {
-    request('http://127.0.0.1:3000/arglebargle', function(error, response, body) {
-      expect(response.statusCode).to.equal(404);
-      done();
-    });
-  });
-
-
 });
+
+*/

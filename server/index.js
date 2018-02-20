@@ -7,7 +7,6 @@ const passport = require('passport');
 const history = require('connect-history-api-fallback');
 //const payment_route = require('./payment/index.js');
 
-
 // Middleware
 server.use(express.static(path.join(__dirname, '../client/dist')));
 server.use(passport.initialize());

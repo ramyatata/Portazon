@@ -50,7 +50,7 @@ INSERT INTO users (
   'USA'
 );
 
-ALTER TABLE shopping_cart ADD FOREIGN KEY (userID) REFERENCES users(id);
+ALTER TABLE shopping_cart ADD FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE;
 
 INSERT INTO shopping_cart (cart, userID) VALUES ('{"666ABCD": 4}', 1);
 

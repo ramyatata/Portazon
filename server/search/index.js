@@ -36,8 +36,6 @@ router.get('/', (req, res) => {
 
 // Show Category Specific Products Route
 router.get('/category', (req, res) => {
-  //DELETE THE LINE BELOW:
-  console.log('this is the req.query', req.query)
   showCategory(req.query.category).then((response) => {
     let hits = response.hits.hits;
 

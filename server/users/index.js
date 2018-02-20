@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
 router.post('/login', (req, res) => {
   model.doesUserExist(req.body, (response) => {
     if (!response) {
-      res.status(200).send(false);
+      res.status(201).send(false);
     }
 
     let hashPW = encryptor.hashPW(req.body.pw, response.salt);
@@ -45,8 +45,7 @@ router.post('/login', (req, res) => {
         email: user.email,
         id: user.id
       };
-      console.log(req.session)
-      res.status(200).send(JSON.stringify(req.session));
+      res.status(201).send(JSON.stringify(req.session));
     } else {
       res.status(403).send(false);
     }
@@ -88,10 +87,8 @@ router.get('/cart', (req, res) => {
 // POST Routing: Registering Users
 //*************
 router.post('/registerUser', (req, res) => {
-  console.log('in server', req.body)
   model.doesUserExist(req.body, (response) => {
     if (response) {
-      console.log('user exists')
       res.send('User already exists');
       return;
     }
@@ -103,11 +100,17 @@ router.post('/registerUser', (req, res) => {
     req.body.pw = encryptor.hashPW(req.body.pw, req.body.salt);
 
     model.registerUser(req.body, (response) => {
-      console.log('added user')
       res.status(201).send(response);
     });
   })
 });
+
+router.post('/deleteUser', (req, res) => {
+  model.deleteUser(req.body, (response) => {
+    res.status(201).send(response);
+  })
+});
+
 
 router.post('/updateCart', (req, res) => {
   model.updateCart(req.body, (response) => {

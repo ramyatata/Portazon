@@ -102,6 +102,22 @@ module.exports = {
         });
       }
     );
+  },
+
+  deleteUser: (details, cb) => {
+    db.query(`SELECT * FROM users WHERE users.email = '${details.email}'`, (err, data) => {
+      if (err) throw 'User email is not in the DB';
+      let userId = data[0].id;
+
+      if (userId) {
+        db.query(`DELETE FROM users WHERE id = ${userId}`, (err, data) => {
+          if (err) throw err;
+          cb(`${details.email} has been deleted`);
+        });
+      } else {
+        cb('User does not exist to be deleted');
+      }
+    });
   }
 };
 
