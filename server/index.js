@@ -10,8 +10,6 @@ const history = require('connect-history-api-fallback');
 
 // Middleware
 server.use(express.static(path.join(__dirname, '../client/dist')));
-//server.use(history());
-//server.use(express.static(path.join(__dirname, '../client/dist')));
 server.use(passport.initialize());
 
 // Routing
