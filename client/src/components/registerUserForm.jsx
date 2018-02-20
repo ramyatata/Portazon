@@ -86,7 +86,7 @@ const RegisterUserForm = ({registerUser}) => {
             <input className="form-control" id="reg-pwd" placeholder="Password"/>
           </div>
         </div>
-        <button onClick={validate} type="submit" id="sign-up-button" className="btn btn-primary">Sign Up!
+        <button onClick={validate} type="button" id="sign-up-button" className="btn btn-primary">Sign Up!
         </button>
         <button className="btn btn-info">
           <Link to='/'>Back to Home</Link>
