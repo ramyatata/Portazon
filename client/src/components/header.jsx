@@ -35,12 +35,10 @@
     }
 
     handleLoginClick() {
-      console.log('in handle login click');
       let user = {
         email: document.getElementById('email').value,
         pw: document.getElementById('pw').value
       }
-      console.log(user)
       this.props.login(user);
     }
 
