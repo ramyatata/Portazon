@@ -84,6 +84,49 @@ describe('Users', () => {
     });
   });
 
+  it('adds products to the user\'s Shopping Cart', (done) => {
+    let requestParams = {
+      method: 'POST',
+      uri: 'http://localhost:3000/users/updateCart',
+      json: {
+        "userID": 1,
+        "productID": "XXXXX",
+        "amount": 15,
+        "firstname": "John",
+        "lastname": "Doe",
+        "email": "johndoe@gmail.com",
+        "deleteItem": false
+      }
+    }
+
+    request(requestParams, (error, response, body) => {
+      expect(response.statusCode).to.equal(201);
+      done();
+    });
+  });
+
+  it('modifies/deletes products from the user\'s Shopping Cart', (done) => {
+    let requestParams = {
+      method: 'POST',
+      uri: 'http://localhost:3000/users/updateCart',
+      json: {
+        "userID": 1,
+        "productID": "XXXXX",
+        "amount": 15,
+        "firstname": "John",
+        "lastname": "Doe",
+        "email": "johndoe@gmail.com",
+        "deleteItem": true
+      }
+    }
+
+    request(requestParams, (error, response, body) => {
+      expect(response.statusCode).to.equal(201);
+      done();
+    });
+  });
+
+
   it('should DELETE the user', (done) => {
     let requestParams = {
       method: 'POST',
