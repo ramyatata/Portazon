@@ -26,19 +26,28 @@ class App extends React.Component {
       productDetail: '',
       userInvoice:'',
       user: '',
-      featureProducts: null
+      featuredProducts: null
     }
     this.changeView = this.changeView.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
     this.registerUser = this.registerUser.bind(this);
     this.login = this.login.bind(this);
-    this.getFeatureProducts = this.getFeatureProducts.bind(this);
+    this.getFeaturedProducts = this.getFeaturedProducts.bind(this);
 
   }
 
-  getFeatureProducts(){
+  getFeaturedProducts() {
+    axios.get('search?q=rating%205')
+      .then(items => {
+        this.setState({featuredProducts: items.data, view: 'homePage'});
+        console.log(this.state.featuredProducts.length);
+      })
+      .catch(err => console.log('error fetching five rated products'));
+  }
 
+  componentWillMount(){
+    this.getFeaturedProducts();
   }
 
   changeView(view, item, invoice){
@@ -65,7 +74,7 @@ class App extends React.Component {
         this.setState({user: user, view: 'homePage'});
         this.props.history.push('/');
       })
-      .catch(err => console.log('error logging in user'))
+      .catch(err => console.log('error logging in user'));
   }
 
   registerUser(user) {
@@ -142,7 +151,7 @@ class App extends React.Component {
         <Header changeView={this.changeView} submitQuery={this.submitQuery} login={this.login}/>
         <Switch>
           <Route exact path='/'
-            render={()=><HomePage changeView={this.changeView} submitQuery={this.submitQuery}/>}>
+            render={()=><HomePage changeView={this.changeView} submitQuery={this.submitQuery}featuredProducts={this.state.featuredProducts}/>}>
           </Route>
           <Route exact path='/products'
             render={()=><ProductsList products={this.state.searchedItems} query={this.state.query} addItemToCart={this.addItemToCart} submitQuery={this.submitQuery} changeView={this.changeView}/>  }>
