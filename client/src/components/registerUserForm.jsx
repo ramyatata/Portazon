@@ -17,10 +17,30 @@ class RegisterUserForm extends React.Component {
       zip: '',
       email: '',
       password: '',
-      country: '',
-      formErrors: {email: '', firstname: ''},
-      emailValid: false,
+      country: 'USA',
+
+      formErrors: {
+        firstname: '',
+        lastname: '',
+        street: '',
+        aptNo: '',
+        city: '',
+        state: '',
+        zip: '',
+        email: '',
+        password: ''
+      },
+
       firstnameValid: false,
+      lastnameValid: false,
+      streetValid: false,
+      aptNoValid: false,
+      cityValid: false,
+      stateValid: false,
+      zipValid: false,
+      countryValid: false,
+      emailValid: false,
+      passwordValid: false,
       formValid: false
     };
 
@@ -28,6 +48,23 @@ class RegisterUserForm extends React.Component {
     this.handleUserInput = this.handleUserInput.bind(this);
     this.validateForm = this.validateForm.bind(this);
     this.errorClass = this.errorClass.bind(this);
+    this.registerUser = this.registerUser.bind(this);
+  }
+
+  registerUser() {
+    const user = {
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
+      street: this.state.street,
+      aptNo: this.state.aptNo,
+      city: this.state.city,
+      state: this.state.state,
+      zip: this.state.zip,
+      email: this.state.email,
+      pw: this.state.password,
+      country: this.state.country
+    }
+    this.props.registerUser(user);
   }
 
   errorClass(error) {
@@ -40,17 +77,49 @@ class RegisterUserForm extends React.Component {
 
   validateField(fieldName, value){
     let fieldValidationErrors = this.state.formErrors;
-    let emailValid = this.state.emailValid;
     let firstnameValid = this.state.firstnameValid;
+    let lastnameValid = this.state.lastnameValid;
+    let streetValid = this.state.streetValid;
+    let aptNoValid = this.state.aptNoValid;
+    let cityValid = this.state.cityValid;
+    let stateValid = this.state.stateValid;
+    let zipValid = this.state.zipValid;
+    let countryValid = this.state.countryValid;
+    let emailValid = this.state.emailValid;
+    let passwordValid = this.state.passwordValid;
 
-    switch(fieldName){
+    switch(fieldName) {
+      case 'firstname':
+        firstnameValid = value.match(/[a-zA-Z]+/) && value.length > 0;
+        fieldValidationErrors.firstname = firstnameValid? '' : 'no numeric values';
+        break;
+      case 'lastname':
+        lastnameValid = value.match(/[a-zA-Z]+/) && value.length > 0;
+        fieldValidationErrors.lastname = lastnameValid? '' : 'no numeric values';
+        break;
+      case 'street':
+        streetValid = value.match(/\d+[ ](?:[A-Za-z0-9.-]+[ ]?)+(?:Avenue|Lane|Road|Boulevard|Drive|Street|Ave|Dr|Rd|Blvd|Ln|St)\.?/) && value.length > 0;
+        fieldValidationErrors.street = streetValid ? '' : ' is invalid';
+        break;
+      case 'aptNo':
+        aptNoValid = value.match(/(\d)+/);
+        fieldValidationErrors.aptNo = aptNoValid? '' : 'apt no not valid , only numbers';
+        break;
+      case 'city':
+        cityValid = value.match(/(?:[A-Z][a-z.-]+[ ]?)+/) && value.length > 0;
+        fieldValidationErrors.city = cityValid? '' : 'not valid city';
+        break;
+      case 'zip':
+        zipValid = value.match(/(^\d{5}$)|(^\d{5}-\d{4}$)/);
+        fieldValidationErrors.zip = zipValid ? '' : 'zip is invalid';
+        break;
       case 'email':
         emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
         fieldValidationErrors.email = emailValid ? '' : ' is invalid';
         break;
-      case 'firstName':
-        firstnameValid = value.length > 2;
-        fieldValidationErrors.firstname = firstnameValid? '' : 'too short';
+      case 'password':
+        passwordValid = value.length > 6;
+        fieldValidationErrors.password = passwordValid? '' : 'password not valid min 6 chars';
         break;
       default:
         break;
@@ -59,7 +128,8 @@ class RegisterUserForm extends React.Component {
     this.setState({
       formErrors: fieldValidationErrors,
       emailValid: emailValid,
-      firstnameValid: firstnameValid
+      firstnameValid: firstnameValid,
+      lastnameValid: lastnameValid,
     }, this.validateForm)
 
   }
@@ -73,68 +143,78 @@ class RegisterUserForm extends React.Component {
 
   render() {
     return (
-    <form className="register-user-form col-xs-12">
+    <form className="col-xs-12">
       <div className="col-xs-6 col-xs-offset-5 signup-title"><h3>Create Your Account</h3></div>
       <div className="col-xs-6 col-xs-offset-3" style={{border: 'solid 1px lightgrey'}}>
 
       <div style={{paddingTop: '20px'}}>
         <div className={`form-group col-xs-12
-                 ${this.errorClass(this.state.formErrors.email)}`}>
+            ${this.errorClass(this.state.formErrors.firstname)}`}>
           <label className="control-label col-xs-2">First Name</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
               <span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
-              <input id="firstName" name="firstName" placeholder="First Name" className="form-control" type="text" value={this.state.firstName} onChange={(event) => this.handleUserInput(event)}/>
+              <input name="firstname" placeholder="First Name" className="form-control" type="text" value={this.state.firstname} onChange={(event) => this.handleUserInput(event)}/>
             </div>
           </div>
         </div>
 
-        <div className="form-group col-xs-12">
+        <div className={`form-group col-xs-12
+            ${this.errorClass(this.state.formErrors.lastname)}`}>
           <label className="col-md-2 control-label" >Last Name</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
               <span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
-              <input id="lastName" placeholder="Last Name" className="form-control"  type="text"/>
+              <input name="lastname" placeholder="Last Name" className="form-control" type="text"
+              value={this.state.lastname} onChange={(event) => this.handleUserInput(event)}/>
             </div>
           </div>
         </div>
 
-        <div className="form-group col-xs-12">
+        <div className={`form-group col-xs-12
+            ${this.errorClass(this.state.formErrors.street)}`}>
           <label className="col-md-2 control-label">Street</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
               <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
-              <input id="street" placeholder="Street" className="form-control" type="text"/>
+              <input name="street" placeholder="Street" className="form-control" type="text"
+              value={this.state.street} onChange={(event) => this.handleUserInput(event)}/>
             </div>
           </div>
         </div>
 
-        <div className="form-group col-xs-12">
+        <div className={`form-group col-xs-12
+            ${this.errorClass(this.state.formErrors.aptNo)}`}>
           <label className="col-md-2 control-label">Apt No</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
               <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
-              <input id="aptNo" placeholder="Apt No" className="form-control" type="text"/>
+              <input name="aptNo" placeholder="Apt No" className="form-control" type="text"
+              value={this.state.aptNo} onChange={(event) => this.handleUserInput(event)}/>
             </div>
           </div>
         </div>
 
-        <div className="form-group col-xs-12">
+        <div className={`form-group col-xs-12
+            ${this.errorClass(this.state.formErrors.city)}`}>
           <label className="col-md-2 control-label">City</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
               <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
-              <input id="city" placeholder="city" className="form-control"  type="text"/>
+              <input name="city" placeholder="city" className="form-control"  type="text"
+              value={this.state.city} onChange={(event) => this.handleUserInput(event)}/>
             </div>
           </div>
         </div>
 
-        <div className="form-group col-xs-12">
+        <div className={`form-group col-xs-12
+            ${this.errorClass(this.state.formErrors.state)}`}>
           <label className="col-md-2 control-label">State</label>
           <div className="col-md-10 selectContainer">
             <div className="input-group">
               <span className="input-group-addon"><i className="glyphicon glyphicon-list"></i></span>
-              <select id="state" className="form-control selectpicker" >
+              <select name="state" className="form-control selectpicker"
+                value={this.state.state} onChange={(event) => this.handleUserInput(event)}>
                 <option value=" " >Please select your state</option>
                 <option>Alabama</option>
                 <option>Alaska</option>
@@ -192,41 +272,48 @@ class RegisterUserForm extends React.Component {
           </div>
         </div>
 
-        <div className="form-group col-xs-12">
+        <div className={`form-group col-xs-12
+            ${this.errorClass(this.state.formErrors.zip)}`}>
           <label className="col-md-2 control-label">Zip Code</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
               <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
-              <input id="zip" placeholder="Zip Code" className="form-control"  type="text"/>
+              <input name="zip" placeholder="Zip Code" className="form-control" type="text"
+              value={this.state.zip} onChange={(event) => this.handleUserInput(event)}/>
             </div>
           </div>
         </div>
+
         <div className="form-group col-xs-12">
           <label className="col-md-2 control-label">Country</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
               <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
-              <input id="country" placeholder="Country" className="form-control"  type="text"/>
+              <input name="country" placeholder="Country" className="form-control" type="text"
+              value={this.state.country} onChange={(event) => this.handleUserInput(event)}/>
             </div>
           </div>
         </div>
 
-        <div className="form-group col-xs-12">
+        <div className={`form-group col-xs-12
+            ${this.errorClass(this.state.formErrors.email)}`}>
           <label className="col-md-2 control-label">Email</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
               <span className="input-group-addon"><i className="glyphicon glyphicon-envelope"></i></span>
-              <input id="reg-email" name="email" placeholder="E-Mail Address" className="form-control" type="text" value={this.state.email} onChange={(event) => this.handleUserInput(event)}/>
+              <input name="email" name="email" placeholder="E-Mail Address" className="form-control" type="text" value={this.state.email} onChange={(event) => this.handleUserInput(event)}/>
             </div>
           </div>
         </div>
 
-        <div className="form-group col-xs-12">
+        <div className={`form-group col-xs-12
+            ${this.errorClass(this.state.formErrors.password)}`}>
           <label className="col-md-2 control-label">Password</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
               <span className="input-group-addon"><i className="glyphicon glyphicon-pencil"></i></span>
-              <input id="reg-pwd" type="password" placeholder="Password" className="form-control"/>
+              <input name="password" type="password" placeholder="Password" className="form-control"
+              value={this.state.password} onChange={(event) => this.handleUserInput(event)}/>
             </div>
           </div>
         </div>
@@ -235,7 +322,7 @@ class RegisterUserForm extends React.Component {
           <label className="col-md-2 control-label"></label>
           <div className="col-md-10">
             <div className="col-xs-6">
-              <button type="button" id="sign-up-button" className="btn btn-block btn-default" onClick={this.validateForm} disabled={!this.state.formValid}>SIGN UP</button>
+              <button type="button" id="sign-up-button" className="btn btn-block btn-default" onClick={this.registerUser} disabled={!this.state.formValid}>SIGN UP</button>
             </div>
             <div className="col-xs-6">
               <button type="button" className="btn btn-block btn-default" ><Link to='/'>HOME</Link></button>
