@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router-dom';
 
 import Banner from './banner.jsx';
+import FeatureProducts from './featureProducts.jsx';
 
 class HomePage extends React.Component {
   constructor(props){
@@ -14,6 +15,7 @@ class HomePage extends React.Component {
     return(
       <div>
         <Banner/>
+        <FeatureProducts/>
       </div>
     );
   }
