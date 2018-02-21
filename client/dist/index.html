@@ -15,6 +15,10 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Carousel -->
+    <link rel="stylesheet" href="../../node_modules/react-responsive-carousel/lib/styles/carousel.min.css"/>
+
   </head>
   <body>
     <div id='root'></div>
@@ -22,6 +26,29 @@
     <script type='text/javascript'>
       $(document).ready(function(){
         $('.dropdown-toggle').dropdown();
+
+        //Carousel
+        $('.multi-item-carousel').carousel({
+          interval: false
+        });
+        // for every slide in carousel, copy the next slide's item in the slide.
+        // Do the same for the next, next item.
+        $('.multi-item-carousel .item').each(function(){
+          var next = $(this).next();
+          if (!next.length) {
+            next = $(this).siblings(':first');
+          }
+          next.children(':first-child').clone().appendTo($(this));
+
+          for (var i = 0; i < 4; i++) {
+            next = next.next();
+            if (!next.length) {
+              next = $(this).siblings(':first');
+          }
+           next.children(':first-child').clone().appendTo($(this));
+          }
+
+        });
       });
     </script>
   </body>

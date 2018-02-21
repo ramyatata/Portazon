@@ -25,13 +25,19 @@ class App extends React.Component {
       query: '',
       productDetail: '',
       userInvoice:'',
-      user: ''
+      user: '',
+      featureProducts: null
     }
     this.changeView = this.changeView.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
     this.registerUser = this.registerUser.bind(this);
     this.login = this.login.bind(this);
+    this.getFeatureProducts = this.getFeatureProducts.bind(this);
+
+  }
+
+  getFeatureProducts(){
 
   }
 

@@ -276,3 +276,43 @@
 }
 */
 
+
+/*************************************************
+              Feaute Products
+**************************************************/
+
+.multi-item-carousel{
+  .carousel-inner {
+    > .item{
+      transition: 500ms ease-in-out left;
+    }
+    .active{
+      &.left{
+        left:-33%;
+      }
+      &.right{
+        left:33%;
+      }
+    }
+    .next{
+      left: 33%;
+    }
+    .prev{
+      left: -33%;
+    }
+
+  }
+  .carouse-control{
+    &.left, &.right{
+      background-image: none;
+    }
+  }
+}
+
+.multi-item-carousel{
+  padding-top: 25px;
+  margin-bottom: 25px;
+  height: 5%;
+}
+
+
