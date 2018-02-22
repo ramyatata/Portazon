@@ -104,15 +104,25 @@ class App extends React.Component {
     }
 
   addItemToCart(item) {
-    if (this.state.user) {
-      let obj = {
+    console.log('in addItemToCart', item, this.state.user)
+    var obj;
+    if (this.state.user.id) {
+      obj = {
         userID: this.state.user.id,
         productID: item._id,
         amount: item.quantity,
+        firstname: this.state.user.firstname,
+        lastname: this.state.user.lastname,
         email: this.state.user.email,
         deleteItem: false
       }
     }
+    axios.post('users/updateCart', obj)
+      .then(response => {
+        console.log('response when update cart', response);
+        alert('This item was added to your cart!');
+      })
+      .catch(err => console.log(err))
 
     // let cart = this.state.cart;
     // if (!cart) {
