@@ -13,6 +13,7 @@ class HomePage extends React.Component {
     let changeView = this.props.changeView;
     let submitQuery = this.props.submitQuery;
     console.log(this.props.featuredProducts);
+    console.log('user in homepage', this.props.user)
 
     let featuredProducts = null;
     if(this.props.featuredProducts === null){
@@ -23,6 +24,7 @@ class HomePage extends React.Component {
 
     return(
       <div>
+        <h3> Welcome, {this.props.user.firstname}!</h3>
         <Banner/>
         {featuredProducts}
       </div>
