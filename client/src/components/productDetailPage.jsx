@@ -32,12 +32,22 @@ const ProductDetail = ({item, addItemToCart}) => {
     quantityOptions.push(<option value={i}>{i}</option>);
   }
 
+
   let rating = item._source.rating;
   if (rating === null) {
     rating = 'null';
   }
 
   let save = item._source.retail_price - item._source.discounted_price;
+
+
+  function includeQuantityInItemToAdd(item) {
+    let menu = document.getElementById('detail-quantity');
+    let selected = menu.options[menu.selectedIndex].value;
+    console.log('selected quantity', selected);
+    item.quantity = selected;
+    addItemToCart(item);
+  }
 
   return(
     <div className="col-xs-12" style={{padding: '10px'}}>
@@ -82,11 +92,11 @@ const ProductDetail = ({item, addItemToCart}) => {
           <div className="prod-quant col-xs-12">
             <div className="col-xs-5 form-group">
               <label className="col-xs-6" style={{fontWeight: 'bold', fontSize:'1.2em'}}>Quantity</label>
-              <select style={{padding: '10px', borderRadius: '10px', height:'30px', width: '60px'}}>{quantityOptions}
+              <select id="detail-quantity" style={{padding: '10px', borderRadius: '10px', height:'30px', width: '60px'}}>{quantityOptions}
               </select>
             </div>
             <div className="col-xs-7">
-              <button onClick={() => addItemToCart(item)} type="button" className="btn btn-block" style={{backgroundColor:'#000', color:'White', fontWeight:'bold'}}>ADD TO CART</button>
+              <button onClick={() => includeQuantityInItemToAdd(item)} type="button" className="btn btn-block" style={{backgroundColor:'#000', color:'White', fontWeight:'bold'}}>ADD TO CART</button>
             </div>
           </div>
         </div>
@@ -104,6 +114,8 @@ const ProductDetail = ({item, addItemToCart}) => {
 function limitDescription(description) {
   return description.substring(0, 500)
 }
+
+
 export default ProductDetail;
 
 
