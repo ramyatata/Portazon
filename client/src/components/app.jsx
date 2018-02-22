@@ -68,11 +68,11 @@ class App extends React.Component {
   }
 
   login(user) {
-    alert('in login in app.js', user)
     console.log('user to login:', user)
     axios.post('users/login', user)
       .then(user => {
-        this.setState({user: user, view: 'homePage'});
+        console.log('user response', user)
+        this.setState({user: user.data, view: 'homePage'});
         this.props.history.push('/');
       })
       .catch(err => console.log('error logging in user'));
@@ -144,12 +144,16 @@ class App extends React.Component {
   }
 
   render() {
+    var user = this.state.user;
+    if (!this.state.user) {
+      user = {firstname: 'Guest'}
+    };
     return (
       <div>
         <Header changeView={this.changeView} submitQuery={this.submitQuery} login={this.login}/>
         <Switch>
           <Route exact path='/'
-            render={()=><HomePage changeView={this.changeView} submitQuery={this.submitQuery}featuredProducts={this.state.featuredProducts}/>}>
+            render={()=><HomePage user={user}changeView={this.changeView} submitQuery={this.submitQuery}featuredProducts={this.state.featuredProducts}/>}>
           </Route>
           <Route exact path='/products'
             render={()=><ProductsList products={this.state.searchedItems} query={this.state.query} addItemToCart={this.addItemToCart} submitQuery={this.submitQuery} changeView={this.changeView}/>  }>
