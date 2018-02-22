@@ -11,6 +11,7 @@ import ProductCard from './productCard.jsx';
 import ProductDetail from './productDetailPage.jsx';
 import CheckOut from './checkOut.jsx';
 import RegisterUserForm from './registerUserForm.jsx';
+import RegisterSuccess from './registerSuccess.jsx';
 
 const axios = require('axios');
 
@@ -78,13 +79,10 @@ class App extends React.Component {
   }
 
   registerUser(user) {
-    console.log('in app.js, user to add:', user);
-
     axios.post('users/registerUser', user)
       .then(response => {
-        alert('res', response)
-        console.log('res', response)
-        this.props.history.push('/');
+        this.setState({user: response});
+        this.props.history.push('/register_success');
       })
       .catch(err => console.log('err', err))
   }
@@ -168,6 +166,9 @@ class App extends React.Component {
           </Route>
           <Route exact path='/register_user'
             render={()=><RegisterUserForm registerUser={this.registerUser}/>  }>
+          </Route>
+          <Route exact path='/register_success'
+            render={() =><RegisterSuccess /> }>
           </Route>
           <Route path='*' component={HomePage}></Route>
         </Switch>
