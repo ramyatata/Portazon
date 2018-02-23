@@ -1,42 +1,77 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Carousel } from 'react-responsive-carousel';
 import FeaturedProductCard from './featuredProductCard.jsx';
 
-class FeaturedProducts extends React.Component{
-  constructor(props){
+class FeaturedProducts extends React.Component {
+  constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
-  render() {
+  componentDidMount(){
+    $('#myCarousel').carousel({
+          interval: 2000
+        });
 
-    const items = [];
+    //carousel
+    $('.carousel .item').each(function(){
+      console.log('in each');
+      var next = $(this).next();
+      if (!next.length) {
+        next = $(this).siblings(':first');
+      }
+      next.children(':first-child').clone().appendTo($(this));
 
-    const item = this.props.featuredProducts.map((item, ind)=>{
-      if(ind === 0){
-        return(
-          <div className="item active">
-            <div className="col-xs-2"><img src="http://placehold.it/300/f44336/000000" className="carousel-img"/></div>
-          </div>
-        );
-      } else {
-        return <FeaturedProductCard key={ind} product={item}/>
+      for (var i=0;i<3;i++) {
+        next=next.next();
+        if (!next.length) {
+          next = $(this).siblings(':first');
+        }
+
+        next.children(':first-child').clone().appendTo($(this));
       }
     });
 
+  }
 
+  render() {
     return (
-      <div className="row">
-        <div className="col-md-12">
-          <div className="carousel slide multi-item-carousel" id="theCarousel">
-            <div className="carousel-inner">{items}</div>
+      <div>
+        <div className="col-lg-8 text-center"><h3>High Rated Products</h3></div>
+<div className="col-lg-10 col-md-offset-1">
+<div className="carousel slide" id="myCarousel">
+  <div className="carousel-inner">
+    <div className="item active">
+      <div className="col-lg-2"><a href="#"><img src="http://placehold.it/500/e499e4/fff&amp;text=1" className="img-responsive"/></a></div>
+    </div>
+    <div className="item">
+      <div className="col-lg-2"><a href="#"><img src="http://placehold.it/500/e477e4/fff&amp;text=2" className="img-responsive"/></a></div>
+    </div>
+    <div className="item">
+      <div className="col-lg-2"><a href="#"><img src="http://placehold.it/500/eeeeee&amp;text=3" className="img-responsive"/></a></div>
+    </div>
+    <div className="item">
+      <div className="col-lg-2"><a href="#"><img src="http://placehold.it/500/f4f4f4&amp;text=4" className="img-responsive"/></a></div>
+    </div>
+    <div className="item">
+      <div className="col-lg-2"><a href="#"><img src="http://placehold.it/500/f566f5/333&amp;text=5" className="img-responsive"/></a></div>
+    </div>
+    <div className="item">
+      <div className="col-lg-2"><a href="#"><img src="http://placehold.it/500/f477f4/fff&amp;text=6" className="img-responsive"/></a></div>
+    </div>
+    <div className="item">
+      <div className="col-lg-2"><a href="#"><img src="http://placehold.it/500/eeeeee&amp;text=7" className="img-responsive"/></a></div>
+    </div>
+    <div className="item">
+      <div className="col-lg-2"><a href="#"><img src="http://placehold.it/500/fcfcfc/333&amp;text=8" className="img-responsive"/></a></div>
+    </div>
+  </div>
+  <a className="left carousel-control" href="#myCarousel" data-slide="prev"><i className="glyphicon glyphicon-chevron-left"></i></a>
+  <a className="right carousel-control" href="#myCarousel" data-slide="next"><i className="glyphicon glyphicon-chevron-right"></i></a>
+</div>
+</div>
 
-             {/* right left navigation */}
-            <a className="left carousel-control" href="#theCarousel" data-slide="prev"><i className="glyphicon glyphicon-chevron-left"></i></a>
-            <a className="right carousel-control" href="#theCarousel" data-slide="next"><i className="glyphicon glyphicon-chevron-right"></i></a>
-          </div>
-        </div>
+
       </div>
     );
   }
