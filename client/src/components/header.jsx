@@ -42,6 +42,10 @@
       this.props.login(user);
     }
 
+    handleLogoutClick() {
+      this.props.logout();
+    }
+
     handleSearchClick() {
       let submitQuery = this.props.submitQuery;
       submitQuery(this.state.query);
@@ -85,7 +89,7 @@
              <div className="header-account-dropdown">
                 <h3 style={{color: '#fff'}}>Log Out</h3>
              </div>
-             <button type="button" className="btn btn-block">Log Out!</button>
+             <button type="button" onClick={() => {this.handleLogoutClick()}}className="btn btn-block">Log Out!</button>
            </div>
           </li>
         )
