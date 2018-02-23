@@ -71,7 +71,7 @@ router.get('/facebook', (req, res) => {
 // Logoff
 router.get('/logout', (req, res) => {
   req.session = null;
-  window.location.replace("http://localhost:3000");
+  //window.location.replace("http://localhost:3000");
   res.status(200).send('Session has been destroyed');
 })
 
