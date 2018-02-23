@@ -14,10 +14,13 @@ class ShoppingCart extends React.Component {
 
   componentDidMount(){
     console.log('in shopping cart!')
-    if (this.state.cart) {
-      this.getTotals();
-    }
+
+    // if (this.state.cart) {
+    //   this.getTotals();
+    // }
   }
+
+
 
   handleCheckoutClick() {
     console.log('in checkout click')
