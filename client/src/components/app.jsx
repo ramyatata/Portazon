@@ -26,7 +26,7 @@ class App extends React.Component {
       query: '',
       productDetail: '',
       userInvoice:'',
-      user: '',
+      user: {firstname: 'Guest'},
       featuredProducts: []
     }
     this.changeView = this.changeView.bind(this);
@@ -102,6 +102,10 @@ class App extends React.Component {
       })
     }
 
+  getCartByUser() {
+    console.log('in getCartByUser')
+  }
+
   addItemToCart(item) {
     console.log('in addItemToCart', item, this.state.user)
     var obj;
@@ -153,16 +157,13 @@ class App extends React.Component {
   }
 
   render() {
-    var user = this.state.user;
-    if (!this.state.user) {
-      user = {firstname: 'Guest'}
-    };
+
     return (
       <div>
-        <Header changeView={this.changeView} submitQuery={this.submitQuery} login={this.login}/>
+        <Header changeView={this.changeView} submitQuery={this.submitQuery} login={this.login} user={this.state.user}/>
         <Switch>
           <Route exact path='/'
-            render={()=><HomePage user={user}changeView={this.changeView} submitQuery={this.submitQuery} featuredProducts={this.state.featuredProducts}/>}>
+            render={()=><HomePage user={this.state.user} changeView={this.changeView} submitQuery={this.submitQuery} featuredProducts={this.state.featuredProducts}/>}>
           </Route>
           <Route exact path='/products'
             render={()=><ProductsList products={this.state.searchedItems} query={this.state.query} addItemToCart={this.addItemToCart} submitQuery={this.submitQuery} changeView={this.changeView}/>  }>
