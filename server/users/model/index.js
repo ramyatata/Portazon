@@ -43,13 +43,21 @@ module.exports = {
         if (err) throw 'Error in the GET cart query';
 
         let cart = JSON.parse(data[0].cart);
+        console.log('this is the cart', cart)
 
         if (deleteItem) {
           delete cart[productID]
         } else {
-          cart[productID] = amount;
-          cart[price] = price;
-          cart[image_url] = image_url;
+          let item = {
+            productID: productID,
+            price: price,
+            image: [image_url],
+            amount: amount
+          };
+          cart.push(item);
+          // cart[productID] = amount;
+          // cart[price] = price;
+          // cart[image_url] = image_url;
         }
 
         cart = JSON.stringify(cart);
@@ -95,7 +103,7 @@ module.exports = {
 
       db.query(`
         INSERT INTO shopping_cart (cart, userID)
-        VALUES ('{}', ${data.insertId})`,
+        VALUES ('[]', ${data.insertId})`,
         (err, data) => {
           if (err) throw 'Cart creation Error';
           cb(`${details.firstname} ${details.lastname} user and cart have been created`);

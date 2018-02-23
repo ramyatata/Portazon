@@ -83,6 +83,7 @@ class App extends React.Component {
     let user = this.state.user;
     axios.get('users/logout', user)
       .then(response => {
+        console.log('logout response', response)
         this.setState({user: {firstname: 'Guest'}})
       })
       .catch(err => console.log('err logging out', err))
@@ -130,7 +131,7 @@ class App extends React.Component {
   }
 
   addItemToCart(item) {
-    console.log('in addItemToCart', item, this.state.user)
+    // console.log('in addItemToCart', item, this.state.user)
     var obj;
     var price;
     if (!item._source.discounted_price) {
@@ -144,12 +145,11 @@ class App extends React.Component {
         productID: item._id,
         amount: item.quantity,
         price: price,
-        image: item._source.image[0],
-        firstname: this.state.user.firstname,
-        lastname: this.state.user.lastname,
+        image_url: item._source.image[0],
         email: this.state.user.email,
         deleteItem: false
       }
+      console.log('object to add', obj)
     }
     axios.post('users/updateCart', obj)
       .then(response => {
