@@ -8,7 +8,9 @@ class ProductCard extends React.Component {
   }
 
   handleAddCartClick(item) {
+    console.log('in handleAddCartClick')
     item.quantity = 1;
+    console.log('item to add in productCard', item)
     this.props.addItemToCart(item);
   }
 
