@@ -36,6 +36,7 @@ class App extends React.Component {
     this.login = this.login.bind(this);
     this.getFeaturedProducts = this.getFeaturedProducts.bind(this);
     this.getCartByUser = this.getCartByUser.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   getFeaturedProducts() {
@@ -67,16 +68,24 @@ class App extends React.Component {
   }
 
   login(user) {
-    console.log('user to login:', user)
     axios.post('users/login', user)
       .then(user => {
-        console.log('user response', user)
         this.setState({user: user.data, view: 'homePage'});
         this.props.history.push('/');
         this.getCartByUser();
 
       })
       .catch(err => console.log('error logging in user'));
+  }
+
+  logout() {
+    console.log('in logout!')
+    let user = this.state.user;
+    axios.get('users/logout', user)
+      .then(response => {
+        this.setState({user: {firstname: 'Guest'}})
+      })
+      .catch(err => console.log('err logging out', err))
   }
 
   registerUser(user) {
@@ -105,7 +114,6 @@ class App extends React.Component {
     }
 
   getCartByUser() {
-    console.log('in getCartByUser');
     let curUser = {
       userID: this.state.user.id,
       firstname: this.state.user.firstname,
@@ -184,7 +192,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <Header changeView={this.changeView} submitQuery={this.submitQuery} login={this.login} user={this.state.user}/>
+        <Header changeView={this.changeView} submitQuery={this.submitQuery} login={this.login} user={this.state.user} logout={this.logout}/>
         <Switch>
           <Route exact path='/'
             render={()=><HomePage user={this.state.user} changeView={this.changeView} submitQuery={this.submitQuery} featuredProducts={this.state.featuredProducts}/>}>
