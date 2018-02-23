@@ -75,15 +75,14 @@ class App extends React.Component {
         this.getCartByUser();
 
       })
-      .catch(err => console.log('error logging in user'));
+      .catch(err => alert('Oops! Incorrect Email and/or password combination'));
   }
 
   logout() {
-    console.log('in logout!')
     let user = this.state.user;
     axios.get('users/logout', user)
       .then(response => {
-        console.log('logout response', response)
+        alert('Successfully logged out!')
         this.setState({user: {firstname: 'Guest'}})
       })
       .catch(err => console.log('err logging out', err))
@@ -92,7 +91,6 @@ class App extends React.Component {
   registerUser(user) {
     axios.post('users/registerUser', user)
       .then(response => {
-        this.setState({user: response});
         this.props.history.push('/register_success');
       })
       .catch(err => console.log('err', err))
@@ -124,7 +122,6 @@ class App extends React.Component {
 
     axios.post('users/cart', curUser)
       .then(response => {
-        console.log('items in cart', response.data[0].cart)
         this.setState({cart: JSON.parse(response.data[0].cart)});
       })
       .catch(err => console.log('err getting cart', err))
@@ -150,7 +147,6 @@ class App extends React.Component {
         email: this.state.user.email,
         deleteItem: false
       }
-      console.log('object to add', obj)
     }
     axios.post('users/updateCart', obj)
       .then(response => {
