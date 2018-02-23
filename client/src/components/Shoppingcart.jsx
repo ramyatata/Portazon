@@ -10,6 +10,7 @@ class ShoppingCart extends React.Component {
     }
     this.changeQuantity = this.changeQuantity.bind(this);
     this.handleCheckoutClick = this.handleCheckoutClick.bind(this);
+    this.handleRemoveClick = this.handleRemoveClick.bind(this);
   }
 
   componentWillMount(){
@@ -21,6 +22,10 @@ class ShoppingCart extends React.Component {
   handleCheckoutClick() {
     console.log('in checkout click')
     this.props.changeView('checkOut');
+  }
+
+  handleRemoveClick(item) {
+    this.props.removeItemFromCart(item);
   }
 
   changeQuantity(e, item) {
@@ -59,8 +64,9 @@ class ShoppingCart extends React.Component {
         <img src={item.image[0]} alt="" className="cart-item-img col-sm-3"></img>
         <div className="col-sm-3">{item.productName}</div>
         <div className="col-sm-2">{item.price}</div>
-        <input onChange={e => this.changeQuantity(e, item)} className="col-sm-2" placeholder={item.amount}/>
+        <input onChange={e => this.changeQuantity(e, item)} className="col-sm-1" placeholder={item.amount}/>
         <div className="col-sm-2">{item.indTotal}</div>
+        <button type="button" onClick={() => this.handleRemoveClick(item)}>Remove</button>
       </div>
     ))
 
@@ -80,7 +86,7 @@ class ShoppingCart extends React.Component {
           <h3 className="col-sm-3"></h3>
           <h3 className="col-sm-3">name</h3>
           <h3 className="col-sm-2">price</h3>
-          <h3 className="col-sm-2">quantity</h3>
+          <h3 className="col-sm-1">quantity</h3>
           <h3 className="col-sm-2">total</h3>
         </div>
         <div className="cart-items col-sm-12">

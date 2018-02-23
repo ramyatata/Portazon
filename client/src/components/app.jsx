@@ -37,6 +37,7 @@ class App extends React.Component {
     this.getFeaturedProducts = this.getFeaturedProducts.bind(this);
     this.getCartByUser = this.getCartByUser.bind(this);
     this.logout = this.logout.bind(this);
+    this.removeItemFromCart = this.removeItemFromCart.bind(this);
   }
 
   getFeaturedProducts() {
@@ -166,6 +167,7 @@ class App extends React.Component {
   }
 
   removeItemFromCart(item) {
+    console.log('in removeItemFromCart!')
     if (this.state.user) {
       let obj = {
         userID: this.state.user.id,
@@ -202,7 +204,7 @@ class App extends React.Component {
             addItemToCart={this.addItemToCart}/>  }>
           </Route>
           <Route exact path='/shoppingcart'
-            render={()=><ShoppingCart cart={this.state.cart} changeView={this.changeView} getCart={this.getCartByUser}/>  }>
+            render={()=><ShoppingCart cart={this.state.cart} changeView={this.changeView} getCart={this.getCartByUser} removeItemFromCart={this.removeItemFromCart}/>  }>
           </Route>
           <Route exact path='/checkout'
             render={()=><CheckOut/>  }>
