@@ -31,7 +31,7 @@ module.exports = {
   },
 
   updateCart: (details, cb) => {
-    let { userID, productID, amount, email, deleteItem } = details;
+    let { userID, productID, price, image_url, amount, email, deleteItem } = details;
 
     db.query(`
       SELECT cart FROM shopping_cart
@@ -48,6 +48,8 @@ module.exports = {
           delete cart[productID]
         } else {
           cart[productID] = amount;
+          cart[price] = price;
+          cart[image_url] = image_url;
         }
 
         cart = JSON.stringify(cart);
