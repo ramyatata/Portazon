@@ -125,6 +125,7 @@ class App extends React.Component {
 
     axios.post('users/cart', curUser)
       .then(response => {
+        console.log(response.data)
         this.setState({cart: JSON.parse(response.data[0].cart)});
       })
       .catch(err => console.log('err getting cart', err))
@@ -150,6 +151,7 @@ class App extends React.Component {
         email: this.state.user.email,
         deleteItem: false
       }
+      console.log('obj to add tocart', obj)
     }
     axios.post('users/updateCart', obj)
       .then(response => {
@@ -170,23 +172,24 @@ class App extends React.Component {
 
   removeItemFromCart(item) {
     console.log('in removeItemFromCart!')
+    var obj;
     if (this.state.user) {
-      let obj = {
+      obj = {
         userID: this.state.user.id,
-        productID: item._id,
-        amount: item.quantity,
+        productName: item.productName,
+        productID: item.productID,
+        amount: item.amount,
         email: this.state.user.email,
         deleteItem: true
       }
     }
-    // let cart = this.state.cart;
-    // for (let i = 0; i < cart.length; i++) {
-    //   if (cart[i] === item) {
-    //     cart.splice(i, 1);
-    //     return;
-    //   }
-    // }
-    // return;
+    axios.post('users/updateCart', obj)
+      .then(response => {
+        console.log('deleted item!?', response)
+        this.getCartByUser();
+        alert('This item was removed from your cart!')
+      })
+      .catch(err => console.log('err deleting item', err))
   }
 
   render() {

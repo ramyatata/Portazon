@@ -44,9 +44,16 @@ module.exports = {
 
         let cart = JSON.parse(data[0].cart);
         console.log('this is the cart', cart)
+        console.log('deleteItem', deleteItem)
 
         if (deleteItem) {
-          delete cart[productID]
+          //delete cart[productID]
+          for (let i = 0; i < cart.length; i++) {
+            if (cart[i].productID === productID) {
+              delete cart[i];
+              cart.splice(i, 1);
+            }
+          }
         } else {
           let item = {
             productID: productID,

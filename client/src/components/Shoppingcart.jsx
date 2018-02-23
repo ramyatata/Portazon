@@ -25,6 +25,7 @@ class ShoppingCart extends React.Component {
   }
 
   handleRemoveClick(item) {
+    console.log('item to remove', item)
     this.props.removeItemFromCart(item);
   }
 
@@ -44,6 +45,7 @@ class ShoppingCart extends React.Component {
     let totalPrice = 0;
     let totalItems = 0;
     for (let i = 0; i < items.length; i++) {
+      console.log('in for loop', items[i])
       let price = items[i].price;
       let quantity = items[i].amount;
       let itemTotal = price * quantity;
