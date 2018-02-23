@@ -42,7 +42,9 @@ class App extends React.Component {
   getFeaturedProducts() {
     axios.get('search?q=rating%205')
       .then(items => {
-        this.setState({featuredProducts: items.data, view: 'homePage'});
+        let noDupes = cutDuplicates(items.data);
+        let filteredImages = filterDuplicateImages(noDupes);
+        this.setState({featuredProducts: filteredImages, view: 'homePage'});
       })
       .catch(err => console.log('error fetching five rated products'));
   }
@@ -245,6 +247,19 @@ function cutDuplicates(items) {
     }
   }
   return newItemList;
+}
+
+function filterDuplicateImages(items){
+  let list = [];
+  let noDupesList = [];
+  for(let i = 0; i < items.length; i++) {
+    let images = JSON.parse(items[i]._source.image);
+    if(list.indexOf(images[0]) == -1){
+      list.push(images[0]);
+      noDupesList.push(items[i]);
+    }
+  }
+  return noDupesList;
 }
 
 export default withRouter(App);
