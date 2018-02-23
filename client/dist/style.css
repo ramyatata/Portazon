@@ -281,7 +281,7 @@
               Feaute Products
 **************************************************/
 
-.multi-item-carousel{
+/*.multi-item-carousel{
   .carousel-inner {
     > .item{
       transition: 500ms ease-in-out left;
@@ -318,5 +318,27 @@
 .carousel-img{
   width: 170px;
   height: 170px;
-}
+}*/
+
+
+
+
+
+
+
+/*.   new carousel */
+.carousel-inner .active.left { left: -20%; }
+.carousel-inner .next        { left:  20%; }
+.carousel-control.left,.carousel-control.right {background-image:none;}
+
+.col-lg-2 {width: 20%;}
+
+
+
+
+
+
+
+
+
 

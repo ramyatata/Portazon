@@ -27,7 +27,7 @@ class App extends React.Component {
       productDetail: '',
       userInvoice:'',
       user: '',
-      featuredProducts: null
+      featuredProducts: []
     }
     this.changeView = this.changeView.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
@@ -42,7 +42,6 @@ class App extends React.Component {
     axios.get('search?q=rating%205')
       .then(items => {
         this.setState({featuredProducts: items.data, view: 'homePage'});
-        console.log(this.state.featuredProducts.length);
       })
       .catch(err => console.log('error fetching five rated products'));
   }
@@ -163,7 +162,7 @@ class App extends React.Component {
         <Header changeView={this.changeView} submitQuery={this.submitQuery} login={this.login}/>
         <Switch>
           <Route exact path='/'
-            render={()=><HomePage user={user}changeView={this.changeView} submitQuery={this.submitQuery}featuredProducts={this.state.featuredProducts}/>}>
+            render={()=><HomePage user={user}changeView={this.changeView} submitQuery={this.submitQuery} featuredProducts={this.state.featuredProducts}/>}>
           </Route>
           <Route exact path='/products'
             render={()=><ProductsList products={this.state.searchedItems} query={this.state.query} addItemToCart={this.addItemToCart} submitQuery={this.submitQuery} changeView={this.changeView}/>  }>
@@ -186,7 +185,7 @@ class App extends React.Component {
           </Route>
           <Route path='*' component={HomePage}></Route>
         </Switch>
-        <Footer/>
+
       </div>
     );
   }

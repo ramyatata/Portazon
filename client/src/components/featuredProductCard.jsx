@@ -8,13 +8,14 @@ class FeaturedProductCard extends React.Component {
   }
 
   render() {
+    console.log(this.props.product._source.product_name);
     return (
-      <div className="item">
+      <div className="item active">
         <div className="col-xs-2">
-          <img className="carousel-img" src={this.props.product.source.image[0]}/>
+          <img className="carousel-img" src="http://placehold.it/300/f44336/000000"/>
           <div className="carousel-title">
-            <h6>{`$ ${this.props.product.source.discounted_price}`}</h6>
-            <span>${this.props.product.sourceproduct_name}</span>
+            <h6>{this.props.product._source.discounted_price}</h6>
+            <span>${this.props.product._source.product_name}</span>
           </div>
         </div>
       </div>
