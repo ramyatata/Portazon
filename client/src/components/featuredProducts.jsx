@@ -10,9 +10,11 @@ class FeaturedProducts extends React.Component {
 
   componentDidMount(){
     //carousel
+    $('.carousel .item').siblings(':first').addClass('active');
     $('#myCarousel').carousel({
       interval: false
     });
+
 
     $('.carousel .item').each(function(){
         var next = $(this).next();
@@ -21,7 +23,7 @@ class FeaturedProducts extends React.Component {
       }
       next.children(':first-child').clone().appendTo($(this));
 
-      for (var i=0;i<3;i++) {
+      for (var i=0;i<4;i++) {
         next=next.next();
         if (!next.length) {
           next = $(this).siblings(':first');
@@ -46,9 +48,6 @@ class FeaturedProducts extends React.Component {
         <div className="col-lg-10 col-md-offset-1">
           <div className="carousel slide" id="myCarousel">
             <div className="carousel-inner">
-              <div className="item active">
-                <div className="col-lg-2"><a href="#"><img src="http://placehold.it/500/e499e4/fff&amp;text=1" className="img-responsive"/></a></div>
-              </div>
               {highRatedProducts}
             </div>
             <a className="left carousel-control" href="#myCarousel" data-slide="prev"><i className="glyphicon glyphicon-chevron-left"></i></a>
