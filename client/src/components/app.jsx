@@ -35,7 +35,7 @@ class App extends React.Component {
     this.registerUser = this.registerUser.bind(this);
     this.login = this.login.bind(this);
     this.getFeaturedProducts = this.getFeaturedProducts.bind(this);
-
+    this.getCartByUser = this.getCartByUser.bind(this);
   }
 
   getFeaturedProducts() {
@@ -73,6 +73,8 @@ class App extends React.Component {
         console.log('user response', user)
         this.setState({user: user.data, view: 'homePage'});
         this.props.history.push('/');
+        this.getCartByUser();
+
       })
       .catch(err => console.log('error logging in user'));
   }
@@ -103,17 +105,38 @@ class App extends React.Component {
     }
 
   getCartByUser() {
-    console.log('in getCartByUser')
+    console.log('in getCartByUser');
+    let curUser = {
+      userID: this.state.user.id,
+      firstname: this.state.user.firstname,
+      lastname: this.state.user.lastname,
+      email: this.state.user.email
+    };
+
+    axios.post('users/cart', curUser)
+      .then(response => {
+        console.log('items in cart', response.data[0].cart)
+        //this.setState({cart: response.data.split(',')});
+      })
+      .catch(err => console.log('err getting cart', err))
   }
 
   addItemToCart(item) {
     console.log('in addItemToCart', item, this.state.user)
     var obj;
+    var price;
+    if (!item._source.discounted_price) {
+      price = item._source.retail_price
+    } else {
+      price = item._source.discounted_price;
+    }
     if (this.state.user.id) {
       obj = {
         userID: this.state.user.id,
         productID: item._id,
         amount: item.quantity,
+        price: price,
+        image: item._source.image[0],
         firstname: this.state.user.firstname,
         lastname: this.state.user.lastname,
         email: this.state.user.email,
@@ -123,6 +146,7 @@ class App extends React.Component {
     axios.post('users/updateCart', obj)
       .then(response => {
         console.log('response when update cart', response);
+        this.getCartByUser();
         alert('This item was added to your cart!');
       })
       .catch(err => console.log(err))
@@ -173,7 +197,7 @@ class App extends React.Component {
             addItemToCart={this.addItemToCart}/>  }>
           </Route>
           <Route exact path='/shoppingcart'
-            render={()=><ShoppingCart cart={this.state.cart} changeView={this.changeView}/>  }>
+            render={()=><ShoppingCart cart={this.state.cart} changeView={this.changeView} getCart={this.getCartByUser}/>  }>
           </Route>
           <Route exact path='/checkout'
             render={()=><CheckOut/>  }>
