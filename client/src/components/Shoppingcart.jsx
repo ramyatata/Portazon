@@ -12,12 +12,10 @@ class ShoppingCart extends React.Component {
     this.handleCheckoutClick = this.handleCheckoutClick.bind(this);
   }
 
-  componentDidMount(){
+  componentWillMount(){
     console.log('in shopping cart!')
-
-    // if (this.state.cart) {
-    //   this.getTotals();
-    // }
+    console.log('cart', this.props.cart)
+    this.props.getCart();
   }
 
 
