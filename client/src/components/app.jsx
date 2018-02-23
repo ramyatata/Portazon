@@ -125,7 +125,7 @@ class App extends React.Component {
     axios.post('users/cart', curUser)
       .then(response => {
         console.log('items in cart', response.data[0].cart)
-        //this.setState({cart: response.data.split(',')});
+        this.setState({cart: JSON.parse(response.data[0].cart)});
       })
       .catch(err => console.log('err getting cart', err))
   }
@@ -143,6 +143,7 @@ class App extends React.Component {
       obj = {
         userID: this.state.user.id,
         productID: item._id,
+        productName: item._source.product_name,
         amount: item.quantity,
         price: price,
         image_url: item._source.image[0],

@@ -31,7 +31,7 @@ module.exports = {
   },
 
   updateCart: (details, cb) => {
-    let { userID, productID, price, image_url, amount, email, deleteItem } = details;
+    let { userID, productID, price, productName, image_url, amount, email, deleteItem } = details;
 
     db.query(`
       SELECT cart FROM shopping_cart
@@ -52,7 +52,8 @@ module.exports = {
             productID: productID,
             price: price,
             image: [image_url],
-            amount: amount
+            amount: amount,
+            productName: productName
           };
           cart.push(item);
           // cart[productID] = amount;

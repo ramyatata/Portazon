@@ -4,7 +4,7 @@ class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cart: this.props.cart,
+      cart: '',
       totalAmt: 0,
       totalItems: 0
     }
@@ -13,9 +13,7 @@ class ShoppingCart extends React.Component {
   }
 
   componentWillMount(){
-    console.log('in shopping cart!')
-    console.log('cart', this.props.cart)
-    this.props.getCart();
+    this.getTotals();
   }
 
 
@@ -28,8 +26,8 @@ class ShoppingCart extends React.Component {
   changeQuantity(e, item) {
     let cart = this.state.cart;
     for (let i = 0; i < cart.length; i++) {
-      if (cart[i]._id === item._id) {
-        cart[i].quantity = Number(e.target.value);
+      if (cart[i].productName === item.productName) {
+        cart[i].amount = Number(e.target.value);
       }
     }
     this.setState({cart: cart});
@@ -37,35 +35,31 @@ class ShoppingCart extends React.Component {
   }
 
   getTotals(){
-    let items = this.state.cart;
+    let items = this.props.cart;
     let totalPrice = 0;
     let totalItems = 0;
     for (let i = 0; i < items.length; i++) {
-      let retail = items[i]._source.retail_price;
-      let sale = items[i]._source.discounted_price;
-      let quantity = items[i].quantity;
-      let itemTotal = 0;
-      let indTotal = 0;
-      if (!sale) {
-        itemTotal = quantity * retail;
-      } else {
-        itemTotal = quantity * sale;
-      }
+      let price = items[i].price;
+      let quantity = items[i].amount;
+      let itemTotal = price * quantity;
       items[i].indTotal = itemTotal;
       totalPrice += itemTotal;
-      totalItems = totalItems + quantity;
+      totalItems += quantity;
     }
-    this.setState({totalAmt: totalPrice.toFixed(2), totalItems: totalItems});
+    this.setState({totalAmt: totalPrice.toFixed(2), totalItems: totalItems, cart: items});
   }
 
   createItemList() {
-    let items = this.state.cart;
+    let items = this.props.cart;
+    console.log('items to map', items)
+    console.log(Array.isArray(items))
+
     return items.map((item, ind) => (
       <div className="cart-item-list col-sm-12" key={ind}>
-        <img src={item._source.image[0]} alt="" className="cart-item-img col-sm-3"></img>
-        <div className="col-sm-3">{item._source.product_name}</div>
-        <div className="col-sm-2">{item._source.discounted_price}</div>
-        <input onChange={e => this.changeQuantity(e, item)} className="col-sm-2" placeholder={item.quantity}/>
+        <img src={item.image[0]} alt="" className="cart-item-img col-sm-3"></img>
+        <div className="col-sm-3">{item.productName}</div>
+        <div className="col-sm-2">{item.price}</div>
+        <input onChange={e => this.changeQuantity(e, item)} className="col-sm-2" placeholder={item.amount}/>
         <div className="col-sm-2">{item.indTotal}</div>
       </div>
     ))
