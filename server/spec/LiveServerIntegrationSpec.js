@@ -1,5 +1,6 @@
 const request = require('request');
 const expect = require('chai').expect;
+let token;
 
 describe('Search', () => {
   it('should respond to GET requests for "/" with a 200 status code', (done) => {
@@ -80,6 +81,7 @@ describe('Users', () => {
 
     request(requestParams, (error, response, body) => {
       expect(response.statusCode).to.equal(201);
+      token = body.token
       done();
     });
   });
@@ -88,6 +90,9 @@ describe('Users', () => {
     let requestParams = {
       method: 'POST',
       uri: 'http://localhost:3000/users/updateCart',
+      headers: {
+        "x-access-token": token
+      },
       json: {
         "userID": 1,
         "productID": "XXXXX",
@@ -111,6 +116,9 @@ describe('Users', () => {
     let requestParams = {
       method: 'POST',
       uri: 'http://localhost:3000/users/updateCart',
+      headers: {
+        "x-access-token": token
+      },
       json: {
         "userID": 1,
         "productID": "XXSFDXXX",
@@ -134,6 +142,9 @@ describe('Users', () => {
     let requestParams = {
       method: 'POST',
       uri: 'http://localhost:3000/users/updateInvoices',
+      headers: {
+        "x-access-token": token
+      },
       json: {
         "userID": 1,
         "cart": "{XXXXX}",
@@ -154,6 +165,9 @@ describe('Users', () => {
     let requestParams = {
       method: 'POST',
       uri: 'http://localhost:3000/users/deleteUser',
+      headers: {
+        "x-access-token": token
+      },
       json: {
         "email": "jaymz@met.com",
       }
@@ -169,6 +183,9 @@ describe('Users', () => {
     let requestParams = {
       method: 'POST',
       uri: 'http://localhost:3000/users/login',
+      headers: {
+        "x-access-token": token
+      },
       json: {
         "email": "jaymz@met.com",
         "pw": "666"

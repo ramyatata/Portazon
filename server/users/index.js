@@ -18,17 +18,30 @@ router.use(cookieSession({
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 
+// API Auth Validation
+const JWTvalidation = (header, res) => {
+  let token = header;
+
+  if (!token) {
+    res ? res.status(401).send({ auth: false, message: 'No token provided.' }) : null;
+    return false;
+  }
+
+  jwt.verify(token, keys.API_key, function(err, decoded) {
+    if (err) {
+      res ? res.status(500).send({ auth: false, message: 'Failed to authenticate token.' }) : null;
+      return false;
+    }
+  });
+  return true;
+}
+
+/*++++++++++++++++++
+      ROUTING:
+++++++++++++++++++*/
 
 //*************
-// Cookie Session Check
-//*************
-router.get('/', (req, res) => {
-  res.status(200).send(JSON.stringify(req.session));
-});
-
-
-//*************
-// User Login Routing
+// User Login
 //*************
 
 // Manual Login
@@ -54,7 +67,20 @@ router.post('/login', (req, res) => {
         email: user.email,
         id: user.id
       };
-      res.status(201).send(JSON.stringify(req.session));
+
+      // If user does not have a valid JWT, generate a new one
+      let token = req.headers['x-access-token'];
+      let isRequestValid = JWTvalidation(token);
+
+      if (!isRequestValid) {
+        token = jwt.sign(
+          { id: user.id },
+          keys.API_key,
+          { expiresIn: 86400 } // expires in 24 hours
+        );
+      };
+      console.log('this is toke inside of /login', token)
+      res.status(201).send({auth: true, token});
     } else {
       res.status(401).send(false);
     }
@@ -101,20 +127,21 @@ router.post('/registerUser', (req, res) => {
     req.body.pw = encryptor.hashPW(req.body.pw, req.body.salt);
 
     model.registerUser(req.body, (response, userID) => {
-
       let token = jwt.sign(
         { id: userID },
         keys.API_key,
         { expiresIn: 86400 } // expires in 24 hours
       );
 
-      res.status(201).send({ auth: true, token });
-      //res.status(201).send(`${response}. UserID: ${userID}`);
+      res.status(201).send({ registered: true, token });
     });
   })
 });
 
 router.post('/deleteUser', (req, res) => {
+  let isRequestValid = JWTvalidation(req.headers['x-access-token'], res);
+  if (!isRequestValid) return;
+
   model.deleteUser(req.body, (response) => {
     res.status(201).send(response);
   })
@@ -125,21 +152,11 @@ router.post('/deleteUser', (req, res) => {
 // Shopping Card Routing
 //*************
 router.post('/cart', (req, res) => {
+  console.log('hAHAHAHAHAHHAHAhAHAHAHAHAHHAHAhAHAHAHAHAHHAHAhAHAHAHAHAHHAHAhAHAHAHAHAHHAHA')
+  console.log('this is req.headers from UNIT TEST', req.headers);
 
-  //***********************
-  //**** TESTING JWT TOKENS
-  //***********************
-  let token = req.headers['x-access-token'];
-  if (!token) {return res.status(401).send({ auth: false, message: 'No token provided.' }); }
-
-  jwt.verify(token, keys.API_key, function(err, decoded) {
-    if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
-    console.log(token, 'was great');
-  });
-  //***********************
-  //**** END OF  JWT TOKEN TEST
-  //***********************
-
+  let isRequestValid = JWTvalidation(req.headers['x-access-token'], res);
+  if (!isRequestValid) return;
 
   model.getUserCart(req.body, (response) => {
       res.status(201).send(response);
@@ -147,6 +164,9 @@ router.post('/cart', (req, res) => {
 });
 
 router.post('/updateCart', (req, res) => {
+  let isRequestValid = JWTvalidation(req.headers['x-access-token'], res);
+  if (!isRequestValid) return;
+
   model.updateCart(req.body, (response) => {
     res.status(201).send(response);
   })
@@ -157,12 +177,18 @@ router.post('/updateCart', (req, res) => {
 // Invoices Routing
 //*************
 router.post('/invoices', (req, res) => {
+  let isRequestValid = JWTvalidation(req.headers['x-access-token'], res);
+  if (!isRequestValid) return;
+
   model.getInvoices(req.body, (response) => {
     res.status(201).send(response);
   });
 });
 
 router.post('/updateInvoices', (req, res) => {
+  let isRequestValid = JWTvalidation(req.headers['x-access-token'], res);
+  if (!isRequestValid) return;
+
   model.updateInvoices(req.body, (response) => {
     res.status(201).send(response);
   })
