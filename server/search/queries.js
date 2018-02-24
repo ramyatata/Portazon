@@ -165,7 +165,7 @@ module.exports = {
       type: 'inventory',
       body: {
         from: 0,
-        size: 30,
+        size: 100,
         query: {
           match: {"product_category_tree": category}
         }
