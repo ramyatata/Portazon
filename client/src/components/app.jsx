@@ -12,6 +12,7 @@ import ProductDetail from './productDetailPage.jsx';
 import CheckOut from './checkOut.jsx';
 import RegisterUserForm from './registerUserForm.jsx';
 import RegisterSuccess from './registerSuccess.jsx';
+import UserProfile from './userProfile.jsx';
 
 const axios = require('axios');
 
@@ -69,6 +70,8 @@ class App extends React.Component {
       history.push('/checkout');
     } else if (view === 'registerUserForm') {
       history.push('/register_user');
+    } else if (view === 'userProfile') {
+      history.push('/user_profile');
     }
   }
 
@@ -228,26 +231,29 @@ class App extends React.Component {
         <Header changeView={this.changeView} submitQuery={this.submitQuery} login={this.login} user={this.state.user} logout={this.logout}/>
         <Switch>
           <Route exact path='/'
-            render={()=><HomePage user={this.state.user} changeView={this.changeView} submitQuery={this.submitQuery} featuredProducts={this.state.featuredProducts}/>}>
+            render={() => <HomePage user={this.state.user} changeView={this.changeView} submitQuery={this.submitQuery} featuredProducts={this.state.featuredProducts}/>}>
           </Route>
           <Route exact path='/products'
-            render={()=><ProductsList products={this.state.searchedItems} query={this.state.query} addItemToCart={this.addItemToCart} submitQuery={this.submitQuery} changeView={this.changeView}/>  }>
+            render={() => <ProductsList products={this.state.searchedItems} query={this.state.query} addItemToCart={this.addItemToCart} submitQuery={this.submitQuery} changeView={this.changeView}/>  }>
           </Route>
           <Route exact path='/product_detail'
-            render={()=><ProductDetail item={this.state.productDetail}
+            render={() => <ProductDetail item={this.state.productDetail}
             addItemToCart={this.addItemToCart}/>  }>
           </Route>
           <Route exact path='/shoppingcart'
-            render={()=><ShoppingCart cart={this.state.cart} changeView={this.changeView} getCart={this.getCartByUser} removeItemFromCart={this.removeItemFromCart} changeQuantity={this.changeQuantity}/>  }>
+            render={() => <ShoppingCart cart={this.state.cart} changeView={this.changeView} getCart={this.getCartByUser} removeItemFromCart={this.removeItemFromCart} changeQuantity={this.changeQuantity}/>  }>
           </Route>
           <Route exact path='/checkout'
-            render={()=><CheckOut submitInvoice={this.submitInvoice}/>  }>
+            render={() => <CheckOut submitInvoice={this.submitInvoice}/>  }>
           </Route>
           <Route exact path='/register_user'
-            render={()=><RegisterUserForm registerUser={this.registerUser}/>  }>
+            render={() => <RegisterUserForm registerUser={this.registerUser}/>  }>
           </Route>
           <Route exact path='/register_success'
-            render={() =><RegisterSuccess /> }>
+            render={() => <RegisterSuccess /> }>
+          </Route>
+          <Route exact path='/user_profile'
+            render={() => <UserProfile /> }>
           </Route>
           <Route path='*' component={HomePage}></Route>
         </Switch>
