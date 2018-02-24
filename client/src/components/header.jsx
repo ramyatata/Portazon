@@ -89,6 +89,7 @@
              <div className="header-account-dropdown">
                 <h3 style={{color: '#fff'}}>Log Out</h3>
              </div>
+             <a onClick={() => this.changeView('userProfile')}>your profile</a>
              <button type="button" onClick={() => {this.handleLogoutClick()}}className="btn btn-block">Log Out!</button>
            </div>
           </li>
