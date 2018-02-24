@@ -16,7 +16,7 @@ class CategoryList extends React.Component {
       //                 'Toys & School Supplies','Eyewear','Automotive',
       //                 'Home Entertainment','Tools & Hardware','Pet Supplies',
       //                 'eBooks','Gaming','Watches','Sunglasses','Home & Kitchen']
-      categories: ['Electronics', 'Baby', 'Clothing','Footwear', 'Stationery', 'kitchen' ]
+      categories: ['Electronics', 'Baby', 'Clothing','Footwear', 'Stationery', 'kitchen', 'Home', 'Furniture', 'Automotive' ]
     }
     this.clickHandler = this.clickHandler.bind(this);
   }

@@ -86,7 +86,6 @@ class App extends React.Component {
 
       if (this.state.view !== 'productsList') {
         this.setState({searchedItems: parseImages, view: 'productsList'});
-        alert(this.state.searchedItems.length);
       } else {
         this.setState({searchedItems: parseImages});
       }
