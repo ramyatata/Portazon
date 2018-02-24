@@ -150,6 +150,7 @@ router.post('/deleteUser', (req, res) => {
 // Shopping Card Routing
 //*************
 router.get('/cart', (req, res) => {
+  console.log('THIS IS THE X-ACCESS-TOKEN FROM THE CLIENT', req.headers['x-access-token'])
   let isRequestValid = JWTvalidation(req.headers['x-access-token'], res);
   if (!isRequestValid) return;
 
