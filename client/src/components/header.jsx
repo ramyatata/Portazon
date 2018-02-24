@@ -125,7 +125,7 @@
             <ul className="nav navbar-nav">
               <li className='dropdown'>
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop By <span className="caret"></span></a>
-                  <CategoryList></CategoryList>
+                  <CategoryList getCategoryItems={this.props.getCategoryItems}></CategoryList>
               </li>
             </ul>
 

@@ -42,6 +42,7 @@ class App extends React.Component {
     this.removeItemFromCart = this.removeItemFromCart.bind(this);
     this.changeQuantity = this.changeQuantity.bind(this);
     this.submitInvoice = this.submitInvoice.bind(this);
+    this.getCategoryItems = this.getCategoryItems.bind(this);
   }
 
   getFeaturedProducts() {
@@ -74,6 +75,23 @@ class App extends React.Component {
     } else if (view === 'userProfile') {
       history.push('/user_profile');
     }
+  }
+
+  getCategoryItems(category){
+    axios.get('/search/category?category=' + category)
+    .then(res => {
+      let items = res.data;
+      let noDupes = cutDuplicates(items);
+      let parseImages = parseImageUrls(noDupes);
+
+      if (this.state.view !== 'productsList') {
+        this.setState({searchedItems: parseImages, view: 'productsList'});
+        alert(this.state.searchedItems.length);
+      } else {
+        this.setState({searchedItems: parseImages});
+      }
+      this.props.history.push('/products');
+    })
   }
 
   login(user) {
@@ -115,7 +133,11 @@ class App extends React.Component {
         if (this.state.view !== 'productsList') {
           this.setState({searchedItems: parseImages, query: query, view: 'productsList'})
         } else {
-          this.setState({searchedItems: parseImages, query: query});
+          if(!query) {
+            this.setState({searchedItems: parseImages});
+          } else {
+            this.setState({searchedItems: parseImages, query: query});
+         }
         }
         this.props.history.push('/products');
       })
@@ -252,7 +274,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <Header changeView={this.changeView} submitQuery={this.submitQuery} login={this.login} user={this.state.user} logout={this.logout} badge={this.state.badge}/>
+        <Header changeView={this.changeView} submitQuery={this.submitQuery} login={this.login} user={this.state.user} logout={this.logout} badge={this.state.badge} getCategoryItems={this.getCategoryItems}/>
         <Switch>
           <Route exact path='/'
             render={() => <HomePage user={this.state.user} changeView={this.changeView} submitQuery={this.submitQuery} featuredProducts={this.state.featuredProducts}/>}>
