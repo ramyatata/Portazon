@@ -151,7 +151,7 @@ class App extends React.Component {
     };
 
 
-    axios.post('users/cart', curUser)
+    axios.get('users/cart', curUser)
       .then(response => {
         let userCart = response.data;
         console.log(response.data)
@@ -262,7 +262,7 @@ class App extends React.Component {
       firstname: this.state.user.firstname,
       lastname: this.state.user.lastname,
     }
-    axios.post('users/invoices', user)
+    axios.get('users/invoices', user)
       .then(response => {
         console.log('got invoices!', response.data)
       })
