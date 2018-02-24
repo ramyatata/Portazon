@@ -8,8 +8,16 @@ class UserProfile extends React.Component {
     this.renderPersonalInfo = this.renderPersonalInfo.bind(this);
   }
 
+  componentWillMount() {
+
+  }
+
   renderPersonalInfo() {
     let user = this.props.user;
+    let num = '';
+    if (user.aptNo !== 'undefined') {
+      num = user.aptNo;
+    }
     return(
       <div>
         <Panel bsStyle="info">
@@ -24,7 +32,7 @@ class UserProfile extends React.Component {
             <Panel.Title componentClass="h3">Address</Panel.Title>
           </Panel.Heading>
           <Panel.Body>
-            <p>{user.street} {user.aptNo}</p>
+            <p>{user.street} {num}</p>
             <p>{user.city}, {user.state} {user.zip}</p>
           </Panel.Body>
         </Panel>
