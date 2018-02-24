@@ -21,14 +21,15 @@ class App extends React.Component {
     super(props);
     this.state = {
       view: 'homePage',
-      cart: null,
+      cart: [],
       totalAmt: '',
       searchedItems: null,
       query: '',
       productDetail: '',
       userInvoice:'',
       user: {firstname: 'Guest'},
-      featuredProducts: []
+      featuredProducts: [],
+      badge: 0
     }
     this.changeView = this.changeView.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
@@ -130,14 +131,16 @@ class App extends React.Component {
 
     axios.post('users/cart', curUser)
       .then(response => {
-        console.log(response.data)
-        this.setState({cart: JSON.parse(response.data[0].cart)});
+        let userCart = JSON.parse(response.data[0].cart);
+        this.setState({
+          cart: userCart,
+          badge: userCart.length
+        });
       })
       .catch(err => console.log('err getting cart', err))
   }
 
   changeQuantity(item){
-    console.log('item to change quantity for', item)
     item.userID = this.state.user.id;
     item.email = this.state.user.email;
     item.deleteItem = false;
@@ -170,7 +173,6 @@ class App extends React.Component {
         email: this.state.user.email,
         deleteItem: false
       }
-      console.log('obj to add tocart', obj)
     }
     axios.post('users/updateCart', obj)
       .then(response => {
@@ -228,7 +230,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <Header changeView={this.changeView} submitQuery={this.submitQuery} login={this.login} user={this.state.user} logout={this.logout}/>
+        <Header changeView={this.changeView} submitQuery={this.submitQuery} login={this.login} user={this.state.user} logout={this.logout} badge={this.state.badge}/>
         <Switch>
           <Route exact path='/'
             render={() => <HomePage user={this.state.user} changeView={this.changeView} submitQuery={this.submitQuery} featuredProducts={this.state.featuredProducts}/>}>
