@@ -1,5 +1,6 @@
   import React from 'react';
   import ReactDOM from 'react-dom';
+  import { Badge } from 'react-bootstrap';
 
 
   import CategoryList from './categoryList.jsx';
@@ -18,6 +19,7 @@
       this.changeView = this.changeView.bind(this);
       this.handleSearchClick = this.handleSearchClick.bind(this);
       this.handleLoginClick - this.handleLoginClick.bind(this);
+      this.renderBadge = this.renderBadge.bind(this);
     }
 
     changeView(view){
@@ -55,12 +57,23 @@
       this.setState({query: e.target.value});
     }
 
+    renderBadge() {
+      let num = this.props.badge;
+      if (num === 0) {
+        return null;
+      } else {
+        return (
+          <p><Badge className="badge" style={{'background-color': '#2BABBC', 'padding': '2px 5px 2px 5px', 'top': '0', 'position':'absolute'}}>{num}</Badge></p>
+        )
+      }
+    }
+
     renderLoginOptions() {
       let user = this.props.user;
       if (user.firstname === 'Guest') {
         return (
           <li className="dropdown">
-           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={{'fontSize': '1.5em'}}></span></a>
+           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={{'fontSize': '1.5em','padding-top': '5px', 'padding-right':'5px', 'display':'inline-block'}}></span></a>
            <div className="dropdown-menu">
              <div className="header-account-dropdown">
                 <h3 style={{color: '#fff'}}>Login</h3>
@@ -84,7 +97,7 @@
       } else {
         return (
           <li className="dropdown">
-           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={{'fontSize': '1.5em'}}></span></a>
+           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={{'fontSize': '1.5em', 'padding-top': '5px', 'padding-right':'5px'}}></span></a>
            <div className="dropdown-menu">
              <div className="header-account-dropdown">
                 <h3 style={{color: '#fff'}}>Log Out</h3>
@@ -129,7 +142,13 @@
 
            {/* user account */}
           <ul className="nav navbar-nav navbar-right">
-            <li><button onClick={() => this.changeView('shoppingCart')} style={{marginTop: '15px', backgroundColor: '#222', color:'white', textAlign:'center', border:'none'}}><span className="glyphicon glyphicon-shopping-cart" style={{'fontSize': '1.5em'}}></span></button></li>
+            <li>
+              <button onClick={() => this.changeView('shoppingCart')} style={{marginTop: '15px', backgroundColor: '#222', color:'grey', textAlign:'center', border:'none'}}>
+                <span className="glyphicon glyphicon-shopping-cart" style={{'fontSize': '1.5em'}}>
+                {this.renderBadge()}
+                </span>
+              </button>
+            </li>
             {this.renderLoginOptions()}
           </ul>
           </div>
