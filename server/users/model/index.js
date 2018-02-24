@@ -115,7 +115,6 @@ updateCart: (details, cb) => {
             }
           }
           if (!exists) {
-            console.log('this is pre-cart', cart)
             let item = {
               productID: productID,
               price: price,
@@ -124,7 +123,6 @@ updateCart: (details, cb) => {
               productName: productName
             };
             cart.push(item);
-            console.log('this is post cart', cart)
           }
         }
 
@@ -175,7 +173,7 @@ updateCart: (details, cb) => {
           db.query(`INSERT INTO user_invoices (invoices, userID) VALUES ('[]', ${data.insertId})`, (err, data) => {
             if (err) throw 'Invoice Table creation Error';
 
-            cb(`${details.firstname} ${details.lastname} user and cart have been created`);
+            cb(`${details.firstname} ${details.lastname} user and cart have been created`, data.insertId);
           });
       });
     });
