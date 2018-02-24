@@ -10,7 +10,7 @@
     "elasticsearch": "server/search/elasticsearch/bin/elasticsearch",
     "kibana": "server/search/kibana/bin/kibana",
     "refresh-schema": "mysql -u root < server/users/config/schema.sql",
-    "logstash": "server/search/logstash/bin/logstash -f /Users/lichinshao/Desktop/hr-remote/Portazon/server/data/logstash.conf"
+    "logstash": "server/search/logstash/bin/logstash -f /Users/ramyatata/Desktop/ramya/HR/rpt02-thesis/Portazon/server/data/logstash.conf"
   },
   "repository": {
     "type": "git",
