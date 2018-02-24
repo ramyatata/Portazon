@@ -38,6 +38,8 @@ class App extends React.Component {
     this.getCartByUser = this.getCartByUser.bind(this);
     this.logout = this.logout.bind(this);
     this.removeItemFromCart = this.removeItemFromCart.bind(this);
+    this.changeQuantity = this.changeQuantity.bind(this);
+    this.submitInvoice = this.submitInvoice.bind(this);
   }
 
   getFeaturedProducts() {
@@ -131,6 +133,20 @@ class App extends React.Component {
       .catch(err => console.log('err getting cart', err))
   }
 
+  changeQuantity(item){
+    console.log('item to change quantity for', item)
+    item.userID = this.state.user.id;
+    item.email = this.state.user.email;
+    item.deleteItem = false;
+    axios.post('users/updateCart', item)
+      .then(response => {
+        console.log('changed quantity!', response);
+        this.getCartByUser();
+        alert('Quantity has been updated!')
+      })
+      .catch(err => console.log('err changing quantity', err))
+  }
+
   addItemToCart(item) {
     // console.log('in addItemToCart', item, this.state.user)
     var obj;
@@ -192,6 +208,19 @@ class App extends React.Component {
       .catch(err => console.log('err deleting item', err))
   }
 
+  submitInvoice() {
+    let cart = this.state.cart;
+    let chargedAmt = cart.reduce((sum, item) => {
+      sum += (item.amount * item.price);
+      return sum;
+    }, 0);
+    let invoice = {
+      cart: this.state.cart,
+      charged: chargedAmt
+    }
+    //make axios post request to submit invoice to user.
+  }
+
   render() {
 
     return (
@@ -209,10 +238,10 @@ class App extends React.Component {
             addItemToCart={this.addItemToCart}/>  }>
           </Route>
           <Route exact path='/shoppingcart'
-            render={()=><ShoppingCart cart={this.state.cart} changeView={this.changeView} getCart={this.getCartByUser} removeItemFromCart={this.removeItemFromCart}/>  }>
+            render={()=><ShoppingCart cart={this.state.cart} changeView={this.changeView} getCart={this.getCartByUser} removeItemFromCart={this.removeItemFromCart} changeQuantity={this.changeQuantity}/>  }>
           </Route>
           <Route exact path='/checkout'
-            render={()=><CheckOut/>  }>
+            render={()=><CheckOut submitInvoice={this.submitInvoice}/>  }>
           </Route>
           <Route exact path='/register_user'
             render={()=><RegisterUserForm registerUser={this.registerUser}/>  }>

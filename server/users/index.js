@@ -43,6 +43,11 @@ router.post('/login', (req, res) => {
     if (hashPW === response.pw) {
       req.session = {
         firstname: user.firstname,
+        street: user.street,
+        city: user.city,
+        state: user.state,
+        zip: user.zip,
+        aptNo: user.num,
         lastname: user.lastname,
         email: user.email,
         id: user.id

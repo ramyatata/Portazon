@@ -30,13 +30,8 @@ class ShoppingCart extends React.Component {
   }
 
   changeQuantity(e, item) {
-    let cart = this.state.cart;
-    for (let i = 0; i < cart.length; i++) {
-      if (cart[i].productName === item.productName) {
-        cart[i].amount = Number(e.target.value);
-      }
-    }
-    this.setState({cart: cart});
+    item.amount = Number(e.target.value);
+    this.props.changeQuantity(item);
     this.getTotals();
   }
 
@@ -45,7 +40,6 @@ class ShoppingCart extends React.Component {
     let totalPrice = 0;
     let totalItems = 0;
     for (let i = 0; i < items.length; i++) {
-      console.log('in for loop', items[i])
       let price = items[i].price;
       let quantity = items[i].amount;
       let itemTotal = price * quantity;

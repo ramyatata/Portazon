@@ -55,17 +55,23 @@ module.exports = {
             }
           }
         } else {
-          let item = {
-            productID: productID,
-            price: price,
-            image: [image_url],
-            amount: amount,
-            productName: productName
-          };
-          cart.push(item);
-          // cart[productID] = amount;
-          // cart[price] = price;
-          // cart[image_url] = image_url;
+          let exists = false;
+          for (let i = 0; i < cart.length; i++) {
+            if (cart[i].productID === productID) {
+              cart[i].amount = amount;
+              exists = true;
+            }
+          }
+          if (!exists) {
+            let item = {
+              productID: productID,
+              price: price,
+              image: [image_url],
+              amount: amount,
+              productName: productName
+            };
+            cart.push(item);
+          }
         }
 
         cart = JSON.stringify(cart);
