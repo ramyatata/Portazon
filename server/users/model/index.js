@@ -86,7 +86,17 @@ module.exports = {
   },
 
   updateCart: (details, cb) => {
-    let { userID, productID = '', price = 0, productName = '', image_url = '', amount = 0, email, deleteItem = false, clearCart = false } = details;
+    let {
+      userID,
+      productID = '',
+      price = 0,
+      productName = '',
+      image_url = '',
+      amount = 0,
+      email,
+      deleteItem = false,
+      clearCart = false
+    } = details;
 
     db.query(`
       SELECT cart FROM shopping_cart

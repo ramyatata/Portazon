@@ -80,7 +80,7 @@ router.post('/login', (req, res) => {
         );
       };
       console.log('this is toke inside of /login', token)
-      res.status(201).send({auth: true, token});
+      res.status(201).send({ auth: true, token, user });
     } else {
       res.status(401).send(false);
     }
@@ -104,7 +104,6 @@ router.get('/facebook', (req, res) => {
 // Logoff
 router.get('/logout', (req, res) => {
   req.session = null;
-  //window.location.replace("http://localhost:3000");
   res.status(200).send('Session has been destroyed');
 })
 
@@ -132,7 +131,7 @@ router.post('/registerUser', (req, res) => {
         { expiresIn: 86400 } // expires in 24 hours
       );
 
-      res.status(201).send({ registered: true, token });
+      res.status(201).send({ registered: true, token, user: req.body });
     });
   })
 });
