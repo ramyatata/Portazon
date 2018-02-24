@@ -26,7 +26,7 @@ module.exports = {
       AND users.id = ${userID}`,
       (err, data) => {
         if (err) throw 'Error in the GET cart query';
-        cb(data[0].invoices);
+        cb(data);
       }
     );
   },
@@ -43,11 +43,19 @@ module.exports = {
       (err, data) => {
         if (err) throw 'Error in the pull Invoice query';
 
-        let invoices = JSON.parse(data[0].invoices);
+        let invoices = data[0].invoices;
 
         //****************************************************
         // Placeholder for Payments Microservice Transaction ID
         let transactionID = randomstring.generate(12);
+
+        for (let i = 0; i < invoices.length; i++) {
+          if (invoices[i].hasOwnProperty(transactionID) &&
+            invoices[i].transactionID === transactionID) {
+            cb(`Invoice already exists`);
+            return;
+          }
+        }
         //****************************************************
 
         let item = {
@@ -80,7 +88,7 @@ module.exports = {
       AND users.id = ${userID}`,
       (err, data) => {
         if (err) throw 'Error in the GET cart query';
-        cb(data[0].cart);
+        cb(data);
       }
     );
   },
@@ -97,9 +105,10 @@ updateCart: (details, cb) => {
       (err, data) => {
         if (err) throw 'Error in the pull cart query';
 
-        let cart = JSON.parse(data[0].cart);
+        let cart = data[0].cart;
 
         if (deleteItem) {
+          //delete cart[productID]
           for (let i = 0; i < cart.length; i++) {
             if (cart[i].productID === productID) {
               delete cart[i];
@@ -115,7 +124,6 @@ updateCart: (details, cb) => {
             }
           }
           if (!exists) {
-            console.log('this is pre-cart', cart)
             let item = {
               productID: productID,
               price: price,
@@ -124,7 +132,6 @@ updateCart: (details, cb) => {
               productName: productName
             };
             cart.push(item);
-            console.log('this is post cart', cart)
           }
         }
 

@@ -26,7 +26,7 @@ CREATE TABLE shopping_cart (
 
 CREATE TABLE user_invoices (
   userID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  invoices TEXT
+  invoices VARCHAR (20000)
 );
 
 INSERT INTO users (
@@ -59,7 +59,7 @@ ALTER TABLE shopping_cart ADD FOREIGN KEY (userID) REFERENCES users(id) ON DELET
 
 ALTER TABLE user_invoices ADD FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE;
 
-INSERT INTO shopping_cart (cart, userID) VALUES ('{"666ABCD": 4}', 1);
+INSERT INTO shopping_cart (cart, userID) VALUES ('[{"666ABCD": 4}]', 1);
 
-INSERT INTO user_invoices (invoices, userID) VALUES ('{"XX666ABCDXX": 4}', 1);
+INSERT INTO user_invoices (invoices, userID) VALUES ('[{"XX666ABCDXX": 4}]', 1);
 

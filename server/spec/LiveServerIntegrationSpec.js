@@ -95,6 +95,8 @@ describe('Users', () => {
         "firstname": "John",
         "lastname": "Doe",
         "email": "johndoe@gmail.com",
+        "image_url": "http://www.image.com",
+        "price": 500,
         "deleteItem": false
       }
     }
@@ -111,11 +113,13 @@ describe('Users', () => {
       uri: 'http://localhost:3000/users/updateCart',
       json: {
         "userID": 1,
-        "productID": "XXXXX",
-        "amount": 15,
+        "productID": "XXSFDXXX",
+        "amount": 4,
         "firstname": "John",
         "lastname": "Doe",
         "email": "johndoe@gmail.com",
+        "price": 3500,
+        "image_url": "http://www.image.com",
         "deleteItem": true
       }
     }
@@ -126,6 +130,25 @@ describe('Users', () => {
     });
   });
 
+  it('adds transactions to the user\'s Invoices', (done) => {
+    let requestParams = {
+      method: 'POST',
+      uri: 'http://localhost:3000/users/updateInvoices',
+      json: {
+        "userID": 1,
+        "cart": "{XXXXX}",
+        "firstname": "John",
+        "lastname": "Doe",
+        "email": "johndoe@gmail.com",
+        "charged": 500
+      }
+    }
+
+    request(requestParams, (error, response, body) => {
+      expect(response.statusCode).to.equal(201);
+      done();
+    });
+  });
 
   it('should DELETE the user', (done) => {
     let requestParams = {
@@ -156,7 +179,7 @@ describe('Users', () => {
       expect(body).to.equal(false);
       done();
     })
-  })
+  });
 });
 
 

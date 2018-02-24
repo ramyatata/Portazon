@@ -85,12 +85,8 @@ router.get('/logout', (req, res) => {
 // Shopping Card Routing
 //*************
 router.post('/cart', (req, res) => {
-  model.doesUserExist(req.body, (response) => {
-    if (response) {
-      model.getUserCart(req.body, (response) => {
-        res.status(200).send(response);
-      });
-    }
+  model.getUserCart(req.body, (response) => {
+      res.status(201).send(response);
   });
 });
 
@@ -105,12 +101,8 @@ router.post('/updateCart', (req, res) => {
 // Invoices Routing
 //*************
 router.post('/invoices', (req, res) => {
-  model.doesUserExist(req.body, (response) => {
-    if (response) {
-      model.getInvoices(req.body, (response) => {
-        res.status(200).send(response);
-      });
-    }
+  model.getInvoices(req.body, (response) => {
+    res.status(201).send(response);
   });
 });
 
