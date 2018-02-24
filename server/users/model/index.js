@@ -44,21 +44,34 @@ module.exports = {
 
         let cart = JSON.parse(data[0].cart);
         console.log('this is the cart', cart)
+        console.log('deleteItem', deleteItem)
 
         if (deleteItem) {
-          delete cart[productID]
+          //delete cart[productID]
+          for (let i = 0; i < cart.length; i++) {
+            if (cart[i].productID === productID) {
+              delete cart[i];
+              cart.splice(i, 1);
+            }
+          }
         } else {
-          let item = {
-            productID: productID,
-            price: price,
-            image: [image_url],
-            amount: amount,
-            productName: productName
-          };
-          cart.push(item);
-          // cart[productID] = amount;
-          // cart[price] = price;
-          // cart[image_url] = image_url;
+          let exists = false;
+          for (let i = 0; i < cart.length; i++) {
+            if (cart[i].productID === productID) {
+              cart[i].amount = amount;
+              exists = true;
+            }
+          }
+          if (!exists) {
+            let item = {
+              productID: productID,
+              price: price,
+              image: [image_url],
+              amount: amount,
+              productName: productName
+            };
+            cart.push(item);
+          }
         }
 
         cart = JSON.stringify(cart);

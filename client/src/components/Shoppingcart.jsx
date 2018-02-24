@@ -25,17 +25,13 @@ class ShoppingCart extends React.Component {
   }
 
   handleRemoveClick(item) {
+    console.log('item to remove', item)
     this.props.removeItemFromCart(item);
   }
 
   changeQuantity(e, item) {
-    let cart = this.state.cart;
-    for (let i = 0; i < cart.length; i++) {
-      if (cart[i].productName === item.productName) {
-        cart[i].amount = Number(e.target.value);
-      }
-    }
-    this.setState({cart: cart});
+    item.amount = Number(e.target.value);
+    this.props.changeQuantity(item);
     this.getTotals();
   }
 
