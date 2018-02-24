@@ -129,9 +129,11 @@ class App extends React.Component {
       email: this.state.user.email
     };
 
+
     axios.post('users/cart', curUser)
       .then(response => {
-        let userCart = JSON.parse(response.data[0].cart);
+        let userCart = response.data;
+        console.log(response.data)
         this.setState({
           cart: userCart,
           badge: userCart.length
