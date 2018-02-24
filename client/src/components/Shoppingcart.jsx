@@ -1,4 +1,5 @@
 import React from 'react';
+import { Table } from 'react-bootstrap';
 
 class ShoppingCart extends React.Component {
   constructor(props) {
@@ -52,18 +53,18 @@ class ShoppingCart extends React.Component {
 
   createItemList() {
     let items = this.props.cart;
-    console.log('items to map', items)
-    console.log(Array.isArray(items))
 
     return items.map((item, ind) => (
-      <div className="cart-item-list col-sm-12" key={ind}>
-        <img src={item.image[0]} alt="" className="cart-item-img col-sm-3"></img>
-        <div className="col-sm-3">{item.productName}</div>
-        <div className="col-sm-2">{item.price}</div>
-        <input onChange={e => this.changeQuantity(e, item)} className="col-sm-1" placeholder={item.amount}/>
-        <div className="col-sm-2">{item.indTotal}</div>
-        <button type="button" onClick={() => this.handleRemoveClick(item)}>Remove</button>
-      </div>
+      <tr>
+        <td><img src={item.image[0]} alt="" className="cart-item-img" ></img>
+        </td>
+        <td>{item.productName}</td>
+        <td>{item.price}</td>
+        <td><input onChange={e => this.changeQuantity(e, item)} placeholder={item.amount}/>
+        </td>
+        <td>{item.indTotal}</td>
+        <td><button type="button" className="btn btn-danger" onClick={() => this.handleRemoveClick(item)}>Remove</button></td>
+      </tr>
     ))
 
   }
@@ -78,16 +79,21 @@ class ShoppingCart extends React.Component {
         <div>
           <h3>Your current total amount is: $ {this.state.totalAmt}</h3>
         </div>
-        <div className="cart-item-banner col-sm-12">
-          <h3 className="col-sm-3"></h3>
-          <h3 className="col-sm-3">name</h3>
-          <h3 className="col-sm-2">price</h3>
-          <h3 className="col-sm-1">quantity</h3>
-          <h3 className="col-sm-2">total</h3>
-        </div>
-        <div className="cart-items col-sm-12">
-          {this.createItemList()}
-        </div>
+        <Table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>name</th>
+              <th>price</th>
+              <th>quantity</th>
+              <th>total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.createItemList()}
+          </tbody>
+        </Table>
         <div className="cart-summary col-sm-12">
           <div className="col-sm-5">
           </div>
@@ -132,3 +138,28 @@ class ShoppingCart extends React.Component {
 }
 
 export default ShoppingCart;
+
+/*
+       <div className="cart-item-banner col-sm-12">
+          <h3 className="col-sm-3"></h3>
+          <h3 className="col-sm-3">name</h3>
+          <h3 className="col-sm-2">price</h3>
+          <h3 className="col-sm-2">quantity</h3>
+          <h3 className="col-sm-1">total</h3>
+        </div>
+
+
+
+      <div className="cart-item-list col-sm-12" key={ind}>
+        <img src={item.image[0]} alt="" className="cart-item-img col-sm-3"></img>
+        <div className="col-sm-3">{item.productName}</div>
+        <div className="col-sm-2">{item.price}</div>
+        <input onChange={e => this.changeQuantity(e, item)} className="col-sm-1" placeholder={item.amount}/>
+        <div className="col-sm-2">{item.indTotal}</div>
+        <button type="button" onClick={() => this.handleRemoveClick(item)}>Remove</button>
+      </div>
+*/
+
+
+
+
