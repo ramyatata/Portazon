@@ -253,7 +253,7 @@ class App extends React.Component {
             render={() => <RegisterSuccess /> }>
           </Route>
           <Route exact path='/user_profile'
-            render={() => <UserProfile /> }>
+            render={() => <UserProfile user={this.state.user}/> }>
           </Route>
           <Route path='*' component={HomePage}></Route>
         </Switch>
