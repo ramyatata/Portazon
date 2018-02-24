@@ -99,7 +99,6 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
 // Facebook Login (OAuth)
 router.get('/facebook', (req, res) => {
   res.status(200).send('Not available yet');
-  // TBD
 });
 
 // Logoff
@@ -151,14 +150,11 @@ router.post('/deleteUser', (req, res) => {
 //*************
 // Shopping Card Routing
 //*************
-router.post('/cart', (req, res) => {
-  console.log('hAHAHAHAHAHHAHAhAHAHAHAHAHHAHAhAHAHAHAHAHHAHAhAHAHAHAHAHHAHAhAHAHAHAHAHHAHA')
-  console.log('this is req.headers from UNIT TEST', req.headers);
-
+router.get('/cart', (req, res) => {
   let isRequestValid = JWTvalidation(req.headers['x-access-token'], res);
   if (!isRequestValid) return;
 
-  model.getUserCart(req.body, (response) => {
+  model.getUserCart(req.query, (response) => {
       res.status(201).send(response);
   });
 });
@@ -176,11 +172,11 @@ router.post('/updateCart', (req, res) => {
 //*************
 // Invoices Routing
 //*************
-router.post('/invoices', (req, res) => {
+router.get('/invoices', (req, res) => {
   let isRequestValid = JWTvalidation(req.headers['x-access-token'], res);
   if (!isRequestValid) return;
 
-  model.getInvoices(req.body, (response) => {
+  model.getInvoices(req.query, (response) => {
     res.status(201).send(response);
   });
 });

@@ -85,8 +85,8 @@ module.exports = {
     );
   },
 
-updateCart: (details, cb) => {
-    let { userID, productID, price, productName, image_url, amount, email, deleteItem } = details;
+  updateCart: (details, cb) => {
+    let { userID, productID, price, productName, image_url, amount, email, deleteItem, clearCart } = details;
 
     db.query(`
       SELECT cart FROM shopping_cart
@@ -99,30 +99,34 @@ updateCart: (details, cb) => {
 
         let cart = JSON.parse(data[0].cart);
 
-        if (deleteItem) {
-          for (let i = 0; i < cart.length; i++) {
-            if (cart[i].productID === productID) {
-              delete cart[i];
-              cart.splice(i, 1);
-            }
-          }
+        if (clearCart) {
+          cart = [];
         } else {
-          let exists = false;
-          for (let i = 0; i < cart.length; i++) {
-            if (cart[i].productID === productID) {
-              cart[i].amount = amount;
-              exists = true;
+          if (deleteItem) {
+            for (let i = 0; i < cart.length; i++) {
+              if (cart[i].productID === productID) {
+                delete cart[i];
+                cart.splice(i, 1);
+              }
             }
-          }
-          if (!exists) {
-            let item = {
-              productID: productID,
-              price: price,
-              image: [image_url],
-              amount: amount,
-              productName: productName
-            };
-            cart.push(item);
+          } else {
+            let exists = false;
+            for (let i = 0; i < cart.length; i++) {
+              if (cart[i].productID === productID) {
+                cart[i].amount = amount;
+                exists = true;
+              }
+            }
+            if (!exists) {
+              let item = {
+                productID: productID,
+                price: price,
+                image: [image_url],
+                amount: amount,
+                productName: productName
+              };
+              cart.push(item);
+            }
           }
         }
 
@@ -132,8 +136,7 @@ updateCart: (details, cb) => {
           if (err) throw 'Could not update product in Shopping Cart'
           cb(`Product Id ${productID} has been modified in ${email}'s Shopping Cart`);
         });
-      }
-    );
+    });
   },
 
   registerUser: (details, cb) => {

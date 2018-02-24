@@ -102,7 +102,8 @@ describe('Users', () => {
         "email": "johndoe@gmail.com",
         "image_url": "http://www.image.com",
         "price": 500,
-        "deleteItem": false
+        "deleteItem": false,
+        "clearCart": false
       }
     }
 
