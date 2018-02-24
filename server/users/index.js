@@ -85,6 +85,7 @@ router.get('/logout', (req, res) => {
 // Shopping Card Routing
 //*************
 router.post('/cart', (req, res) => {
+  console.log('req.body', req.body)
   model.getUserCart(req.body, (response) => {
       res.status(201).send(response);
   });
