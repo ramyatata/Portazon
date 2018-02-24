@@ -70,6 +70,7 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
 
 // Facebook Login (OAuth)
 router.get('/facebook', (req, res) => {
+  res.status(200).send('Not available yet');
   // TBD
 });
 
