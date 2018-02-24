@@ -38,6 +38,7 @@ class CheckOut extends React.Component {
   }
 
   handleSubmit() {
+    console.log('in handleSubmit in checkout')
     this.props.submitInvoice();
   }
 

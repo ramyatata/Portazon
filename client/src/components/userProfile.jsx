@@ -16,7 +16,7 @@ class UserProfile extends React.Component {
     let user = this.props.user;
     let num = '';
     if (user.aptNo !== 'undefined') {
-      num = user.aptNo;
+      num = 'Apt. No.' + user.aptNo;
     }
     return(
       <div>
@@ -25,6 +25,13 @@ class UserProfile extends React.Component {
             <Panel.Title componentClass="h3">Name</Panel.Title>
           </Panel.Heading>
           <Panel.Body>{user.firstname} {user.lastname}
+          </Panel.Body>
+        </Panel>
+        <Panel bsStyle="info">
+          <Panel.Heading>
+            <Panel.Title componentClass="h3">Email</Panel.Title>
+          </Panel.Heading>
+          <Panel.Body>{user.email}
           </Panel.Body>
         </Panel>
         <Panel bsStyle="info">

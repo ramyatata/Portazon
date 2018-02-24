@@ -223,11 +223,14 @@ class App extends React.Component {
     }, 0);
     let invoice = {
       cart: this.state.cart,
-      charged: chargedAmt
+      charged: chargedAmt,
+      userID: this.state.user.id,
+      email: this.state.user.email
     }
     axios.post('users/updateInvoices', invoice)
       .then(response => {
-        console.log('added invoice?', response.data)
+        this.getInvoices();
+        alert('success! your order has been processed!');
       })
       .catch(err => console.log('err adding invoice', err))
   }
@@ -237,7 +240,6 @@ class App extends React.Component {
       userID: this.state.user.id,
       firstname: this.state.user.firstname,
       lastname: this.state.user.lastname,
-      email: this.state.user.email
     }
     axios.post('users/invoices', user)
       .then(response => {
