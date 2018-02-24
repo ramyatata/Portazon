@@ -102,6 +102,26 @@ router.post('/updateCart', (req, res) => {
 
 
 //*************
+// Invoices Routing
+//*************
+router.post('/invoices', (req, res) => {
+  model.doesUserExist(req.body, (response) => {
+    if (response) {
+      model.getInvoices(req.body, (response) => {
+        res.status(200).send(response);
+      });
+    }
+  });
+});
+
+router.post('/updateInvoices', (req, res) => {
+  model.updateInvoices(req.body, (response) => {
+    res.status(201).send(response);
+  })
+});
+
+
+//*************
 // Registering Users
 //*************
 router.post('/registerUser', (req, res) => {

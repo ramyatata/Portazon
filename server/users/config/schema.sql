@@ -21,7 +21,12 @@ CREATE TABLE users (
 
 CREATE TABLE shopping_cart (
   userID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  cart VARCHAR (600)
+  cart VARCHAR (10000)
+);
+
+CREATE TABLE user_invoices (
+  userID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  invoices TEXT
 );
 
 INSERT INTO users (
@@ -52,10 +57,9 @@ INSERT INTO users (
 
 ALTER TABLE shopping_cart ADD FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE;
 
+ALTER TABLE user_invoices ADD FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE;
+
 INSERT INTO shopping_cart (cart, userID) VALUES ('{"666ABCD": 4}', 1);
 
-/* Example of Table Altering
-ALTER TABLE tracks ADD FOREIGN KEY (userID) REFERENCES users(id);
+INSERT INTO user_invoices (invoices, userID) VALUES ('{"XX666ABCDXX": 4}', 1);
 
-INSERT INTO users (firstname, lastname, pw, email, genre, salt, file) VALUES ('Ozzy', 'Osbourne', 'porra9090', 'ozzy@gmail.com', 'Metal', '$2a$04$M0zPYwllNPuXydAxYVlsru', '1508984120672_10 Beggin For Thread.mp3');
-*/

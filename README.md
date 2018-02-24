@@ -132,6 +132,8 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
       productID,
       amount,
       email,
+      image_URL,
+      price,
       deleteItem (i.e. this needs to be a boolean)
     }
 
@@ -160,6 +162,29 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
   {
     email
   }
+
+  7 - Get User's previous Invoices: /users/invoices
+    Send an JSON with the following key/values:
+
+    {
+      userID,
+      firstname,
+      lastname
+    }
+
+  8 - Update User's invoices: /users/updateInvoices
+    Send an JSON with the following key/values:
+
+    {
+      userID,
+      productID,
+      amount,
+      email,
+      image_URL,
+      price
+    }
+
+
 
 ## Config files with http://localhost:3000 || local folder settings by default
 package.json
