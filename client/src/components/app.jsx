@@ -96,7 +96,8 @@ class App extends React.Component {
   login(user) {
     axios.post('users/login', user)
       .then(user => {
-        this.setState({user: user.data, view: 'homePage'});
+        console.log('in login', user.data.user)
+        this.setState({user: user.data.user, view: 'homePage'});
         this.props.history.push('/');
         this.getCartByUser();
 
@@ -147,11 +148,12 @@ class App extends React.Component {
       userID: this.state.user.id,
       firstname: this.state.user.firstname,
       lastname: this.state.user.lastname,
-      email: this.state.user.email
     };
 
-
-    axios.post('users/cart', curUser)
+    console.log('curUser in getCartByUser', curUser)
+    axios.get('users/cart', {
+      params: curUser
+    })
       .then(response => {
         let userCart = response.data;
         console.log(response.data)
@@ -262,7 +264,9 @@ class App extends React.Component {
       firstname: this.state.user.firstname,
       lastname: this.state.user.lastname,
     }
-    axios.post('users/invoices', user)
+    axios.get('users/invoices', {
+      params: user
+    })
       .then(response => {
         console.log('got invoices!', response.data)
       })
