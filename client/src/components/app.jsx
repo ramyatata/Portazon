@@ -223,7 +223,25 @@ class App extends React.Component {
       cart: this.state.cart,
       charged: chargedAmt
     }
-    //make axios post request to submit invoice to user.
+    axios.post('users/updateInvoices', invoice)
+      .then(response => {
+        console.log('added invoice?', response.data)
+      })
+      .catch(err => console.log('err adding invoice', err))
+  }
+
+  getInvoices() {
+    let user = {
+      userID: this.state.user.id,
+      firstname: this.state.user.firstname,
+      lastname: this.state.user.lastname,
+      email: this.state.user.email
+    }
+    axios.post('users/invoices', user)
+      .then(response => {
+        console.log('got invoices!', response.data)
+      })
+      .catch(err => console.log('err getting invoices', err))
   }
 
   render() {

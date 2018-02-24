@@ -63,7 +63,7 @@
         return null;
       } else {
         return (
-          <p><Badge className="badge" style={{'background-color': '#2BABBC', 'padding': '2px 5px 2px 5px', 'top': '0', 'position':'absolute'}}>{num}</Badge></p>
+          <p><Badge className="badge" style={{'backgroundColor': '#2BABBC', 'padding': '2px 5px 2px 5px', 'top': '0', 'position':'absolute'}}>{num}</Badge></p>
         )
       }
     }
@@ -73,7 +73,7 @@
       if (user.firstname === 'Guest') {
         return (
           <li className="dropdown">
-           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={{'fontSize': '1.5em','padding-top': '5px', 'padding-right':'5px', 'display':'inline-block'}}></span></a>
+           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={{'fontSize': '1.5em','paddingTop': '5px', 'paddingRight':'5px', 'display':'inline-block'}}></span></a>
            <div className="dropdown-menu">
              <div className="header-account-dropdown">
                 <h3 style={{color: '#fff'}}>Login</h3>
@@ -97,7 +97,7 @@
       } else {
         return (
           <li className="dropdown">
-           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={{'fontSize': '1.5em', 'padding-top': '5px', 'padding-right':'5px'}}></span></a>
+           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={{'fontSize': '1.5em', 'paddingTop': '5px', 'paddingRight':'5px'}}></span></a>
            <div className="dropdown-menu">
              <div className="header-account-dropdown">
                 <h3 style={{color: '#fff'}}>Log Out</h3>

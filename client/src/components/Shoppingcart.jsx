@@ -55,7 +55,7 @@ class ShoppingCart extends React.Component {
     let items = this.props.cart;
 
     return items.map((item, ind) => (
-      <tr>
+      <tr key={ind}>
         <td><img src={item.image[0]} alt="" className="cart-item-img" ></img>
         </td>
         <td>{item.productName}</td>
