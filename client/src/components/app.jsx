@@ -99,6 +99,7 @@ class App extends React.Component {
         console.log('in login', user.data.user)
         this.setState({user: user.data.user, view: 'homePage'});
         this.props.history.push('/');
+        window.localStorage.setItem('token', user.token);
         this.getCartByUser();
 
       })
