@@ -29,7 +29,8 @@ class App extends React.Component {
       userInvoice:'',
       user: {firstname: 'Guest'},
       featuredProducts: [],
-      badge: 0
+      badge: 0,
+      token: ''
     }
     this.changeView = this.changeView.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
@@ -96,14 +97,13 @@ class App extends React.Component {
   login(user) {
     axios.post('users/login', user)
       .then(user => {
-        console.log('in login', user.data.user)
-        this.setState({user: user.data.user, view: 'homePage'});
+        this.setState({user: user.data.user, view: 'homePage', token: user.data.token});
         this.props.history.push('/');
-        window.localStorage.setItem('token', user.token);
+        window.localStorage.setItem('token', user.data.token);
         this.getCartByUser();
-
       })
       .catch(err => alert('Oops! Incorrect Email and/or password combination'));
+
   }
 
   logout() {
@@ -145,6 +145,8 @@ class App extends React.Component {
     }
 
   getCartByUser() {
+    let token = window.localStorage.getItem('token');
+    console.log('token in getCartBy User', token)
     let curUser = {
       userID: this.state.user.id,
       firstname: this.state.user.firstname,
@@ -152,25 +154,30 @@ class App extends React.Component {
     };
 
     console.log('curUser in getCartByUser', curUser)
-    axios.get('users/cart', {
-      params: curUser
-    })
-      .then(response => {
-        let userCart = response.data;
-        console.log(response.data)
-        this.setState({
-          cart: userCart,
-          badge: userCart.length
-        });
+    if (token) {
+      axios.get('users/cart', {
+        params: curUser,
+        headers: {'x-access-token': token}
       })
-      .catch(err => console.log('err getting cart', err))
+        .then(response => {
+          let userCart = response.data;
+          console.log(response.data)
+          this.setState({
+            cart: userCart,
+            badge: userCart.length
+          });
+        })
+        .catch(err => console.log('err getting cart', err))
+    }
   }
 
   changeQuantity(item){
     item.userID = this.state.user.id;
     item.email = this.state.user.email;
     item.deleteItem = false;
-    axios.post('users/updateCart', item)
+    let token = window.localStorage.getItem('token');
+    axios.post('users/updateCart', item, {
+      headers: {'x-access-token': token}})
       .then(response => {
         console.log('changed quantity!', response);
         this.getCartByUser();
@@ -200,7 +207,8 @@ class App extends React.Component {
         deleteItem: false
       }
     }
-    axios.post('users/updateCart', obj)
+    let token = window.localStorage.getItem('token');
+    axios.post('users/updateCart', obj, {headers: {'x-access-token': token}})
       .then(response => {
         console.log('response when update cart', response);
         this.getCartByUser();
@@ -230,7 +238,8 @@ class App extends React.Component {
         deleteItem: true
       }
     }
-    axios.post('users/updateCart', obj)
+    let token = window.localStorage.getItem('token');
+    axios.post('users/updateCart', obj, {headers: {'x-access-token': token}})
       .then(response => {
         console.log('deleted item!?', response)
         this.getCartByUser();
@@ -251,7 +260,8 @@ class App extends React.Component {
       userID: this.state.user.id,
       email: this.state.user.email
     }
-    axios.post('users/updateInvoices', invoice)
+    let token = window.localStorage.getItem('token');
+    axios.post('users/updateInvoices', invoice, {headers: {'x-access-token': token}})
       .then(response => {
         this.getInvoices();
         alert('success! your order has been processed!');
@@ -265,8 +275,10 @@ class App extends React.Component {
       firstname: this.state.user.firstname,
       lastname: this.state.user.lastname,
     }
+    let token = window.localStorage.getItem('token');
     axios.get('users/invoices', {
-      params: user
+      params: user,
+      headers: {'x-access-token': token}
     })
       .then(response => {
         console.log('got invoices!', response.data)
