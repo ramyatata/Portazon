@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import { Panel, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
 class CheckOut extends React.Component {
   constructor(props) {
@@ -42,10 +43,88 @@ class CheckOut extends React.Component {
     this.props.submitInvoice();
   }
 
+  generateShippingForm() {
+    return (
+      <form>
+        <FormGroup controllid="formBasicText">
+          <div>
+            <div className="col-sm-5" style={styles.controlLabel}>
+              <ControlLabel>First name</ControlLabel>
+              <FormControl type="text" placeholder="First name"/>
+            </div>
+            <div className="col-sm-5">
+              <ControlLabel >Last name</ControlLabel>
+              <FormControl type="text" placeholder="Last name"/>
+            </div>
+            <div className="col-sm-2"></div>
+          </div>
+          <div>
+            <div className="col-sm-5">
+              <ControlLabel>Street</ControlLabel>
+              <FormControl type="text" placeholder="Street"/>
+            </div>
+            <div className="col-sm-2">
+              <ControlLabel>State</ControlLabel>
+              <FormControl type="text" placeholder="Abbrev"/>
+            </div>
+            <div className="col-sm-3">
+              <ControlLabel>Postal Code</ControlLabel>
+              <FormControl type="text" placeholder="postal code"/>
+            </div>
+          </div>
+        </FormGroup>
+      </form>
+    )
+  }
+
   render() {
-    return(
-      <div className="container-fluid">
-        <form>
+    var aptNo = '';
+    if (this.props.user.id) {
+      if (this.props.user.num !== 'undefined') {
+        aptNo = this.props.user.num;
+      }
+      return(
+        <div className="container-fluid col-sm-12">
+          <div>
+            <Panel bsStyle="info">
+              <Panel.Heading>
+                <Panel.Title componentClass="h3">Shipping Address</Panel.Title>
+              </Panel.Heading>
+              <Panel.Body>
+                <p>{this.props.user.street} {aptNo}</p>
+                <p>{this.props.user.city}, {this.props.user.state} {this.props.user.zip}</p>
+                <p>{this.props.user.country}</p>
+              </Panel.Body>
+            <button type="button" className="btn btn-success" onClick={() => this.handleSubmit()}>Submit!</button>
+            </Panel>
+          </div>
+          <div>
+            <Panel id="collapsible-panel">
+              <Panel.Heading>
+                <Panel.Title toggle>Use different shipping address</Panel.Title>
+              </Panel.Heading>
+              <Panel.Collapse>
+                <Panel.Body>
+                  {this.generateShippingForm()}
+                </Panel.Body>
+              </Panel.Collapse>
+            </Panel>
+          </div>
+        </div>
+      )
+    }
+  }
+}
+
+const styles = {
+  controlLabel: {'textAlign': 'left'}
+}
+
+export default CheckOut;
+
+
+/*
+      <form>
           <div className="checkout-shipping col-sm-7">
             Shipping Address:
             <div>
@@ -72,11 +151,4 @@ class CheckOut extends React.Component {
           <div className="checkout-payment col-sm-5">
           </div>
         </form>
-        <button type="button" className="btn btn-success" onClick={() => this.handleSubmit()}>Submit!</button>
-      </div>
-    )
-  }
-}
-
-
-export default CheckOut;
+*/
