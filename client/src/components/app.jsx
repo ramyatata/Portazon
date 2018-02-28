@@ -54,7 +54,6 @@ class App extends React.Component {
   }
 
   createGuestUser() {
-    console.log('this.state.', this.state.guestNum)
     var guestNo = 0;
     var Guest = function() {
       this.cart = [];
@@ -63,8 +62,7 @@ class App extends React.Component {
     }
     var newGuest = new Guest();
     console.log('new guest', newGuest)
-    guestNo++;
-    this.setState({guestNum: next, user: newGuest})
+    this.setState({guestNum: guestNo, user: newGuest})
   }
 
   getFeaturedProducts() {
