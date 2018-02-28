@@ -71,7 +71,8 @@ class ShoppingCart extends React.Component {
 
   render() {
     var body;
-    if (!this.state.cart) {
+    let cart = this.state.cart;
+    if (cart.length === 0) {
       body = <div>There are no items in your cart.</div>
     } else {
       body =
@@ -101,7 +102,7 @@ class ShoppingCart extends React.Component {
             <Table>
              <tbody>
               <tr>
-                <td>Subtotal {this.state.totalItems} items: </td>
+                <td>Subtotal ({this.state.totalItems} items): </td>
                 <td>${this.state.totalAmt}</td>
               </tr>
               <tr>
