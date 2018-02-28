@@ -27,10 +27,12 @@ class App extends React.Component {
       query: '',
       productDetail: '',
       userInvoice:'',
-      user: {firstname: 'Guest'},
+      user: '',
       featuredProducts: [],
       badge: 0,
-      token: ''
+      token: '',
+      guestNum: 0,
+
     }
     this.changeView = this.changeView.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
@@ -44,6 +46,27 @@ class App extends React.Component {
     this.changeQuantity = this.changeQuantity.bind(this);
     this.submitInvoice = this.submitInvoice.bind(this);
     this.getCategoryItems = this.getCategoryItems.bind(this);
+    this.createGuestUser = this.createGuestUser.bind(this);
+    // this.createGuestUser();
+  }
+
+  componentDidMount(){
+    console.log('in component WIll mount')
+    this.createGuestUser();
+  }
+
+  createGuestUser() {
+    console.log('this.state.', this.state.guestNum)
+    var guestNo = this.state.guestNum;
+    var Guest = function() {
+      this.cart = [];
+      this.guestNumber = guestNo;
+      this.firstname = 'Guest';
+    }
+    var newGuest = new Guest();
+    console.log('new guest', newGuest)
+    var next = guestNo++;
+    this.setState({guestNum: next, user: newGuest})
   }
 
   getFeaturedProducts() {
@@ -146,15 +169,12 @@ class App extends React.Component {
 
   getCartByUser() {
     let token = window.localStorage.getItem('token');
-    console.log('token in getCartBy User', token)
     let curUser = {
       userID: this.state.user.id,
       firstname: this.state.user.firstname,
       lastname: this.state.user.lastname,
     };
-
-    console.log('curUser in getCartByUser', curUser)
-    if (token) {
+    if (this.state.user.id) {
       axios.get('users/cart', {
         params: curUser,
         headers: {'x-access-token': token}
@@ -168,6 +188,12 @@ class App extends React.Component {
           });
         })
         .catch(err => console.log('err getting cart', err))
+    } else {
+      let gCart = this.state.user.cart;
+      this.setState({
+        cart: gCart,
+        badge: gCart.length
+      })
     }
   }
 
@@ -188,41 +214,49 @@ class App extends React.Component {
 
   addItemToCart(item) {
     // console.log('in addItemToCart', item, this.state.user)
-    var obj;
     var price;
     if (!item._source.discounted_price) {
       price = item._source.retail_price
     } else {
       price = item._source.discounted_price;
     }
-    if (this.state.user.id) {
-      obj = {
-        userID: this.state.user.id,
-        productID: item._id,
-        productName: item._source.product_name,
-        amount: item.quantity,
-        price: price,
-        image_url: item._source.image[0],
-        email: this.state.user.email,
-        deleteItem: false
-      }
-    }
-    let token = window.localStorage.getItem('token');
-    axios.post('users/updateCart', obj, {headers: {'x-access-token': token}})
-      .then(response => {
-        console.log('response when update cart', response);
-        this.getCartByUser();
-        alert('This item was added to your cart!');
-      })
-      .catch(err => console.log(err))
 
-    // let cart = this.state.cart;
-    // if (!cart) {
-    //   this.setState({cart: [item]})
-    // } else {
-    //   let update = cart.push(item);
-    //   this.setState({cart: cart});
-    // }
+    var obj = {
+      productID: item._id,
+      productName: item._source.product_name,
+      amount: item.quantity,
+      price: price,
+      image_url: item._source.image[0],
+      deleteItem: false
+    };
+
+    if (this.state.user.id) {
+      obj.userID = this.state.user.id;
+      obj.email = this.state.user.email;
+      //obj = {
+        //userID: this.state.user.id,
+        // productID: item._id,
+        // productName: item._source.product_name,
+        // amount: item.quantity,
+        // price: price,
+        // image_url: item._source.image[0],
+        //email: this.state.user.email,
+        // deleteItem: false
+      //}
+      let token = window.localStorage.getItem('token');
+      axios.post('users/updateCart', obj, {headers: {'x-access-token': token}})
+        .then(response => {
+          console.log('response when update cart', response);
+          this.getCartByUser();
+          alert('This item was added to your cart!');
+        })
+        .catch(err => console.log(err))
+    } else {
+      let user = this.state.user;
+      obj.image = [item._source.image[0]];
+      user.cart.push(obj);
+      this.getCartByUser();
+    }
   }
 
   removeItemFromCart(item) {

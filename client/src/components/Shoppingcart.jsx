@@ -37,6 +37,7 @@ class ShoppingCart extends React.Component {
   }
 
   getTotals(){
+    console.log('items', this.props.cart)
     let items = this.props.cart;
     let totalPrice = 0;
     let totalItems = 0;
@@ -53,7 +54,6 @@ class ShoppingCart extends React.Component {
 
   createItemList() {
     let items = this.props.cart;
-
     return items.map((item, ind) => (
       <tr key={ind}>
         <td><img src={item.image[0]} alt="" className="cart-item-img" ></img>
