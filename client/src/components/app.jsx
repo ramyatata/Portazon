@@ -347,7 +347,7 @@ class App extends React.Component {
             render={() => <ShoppingCart cart={this.state.cart} changeView={this.changeView} getCart={this.getCartByUser} removeItemFromCart={this.removeItemFromCart} changeQuantity={this.changeQuantity}/>  }>
           </Route>
           <Route exact path='/checkout'
-            render={() => <CheckOut submitInvoice={this.submitInvoice}/>  }>
+            render={() => <CheckOut user={this.state.user} totalAmt={this.state.totalAmt} submitInvoice={this.submitInvoice}/>  }>
           </Route>
           <Route exact path='/register_user'
             render={() => <RegisterUserForm registerUser={this.registerUser}/>  }>
