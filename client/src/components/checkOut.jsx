@@ -50,26 +50,30 @@ class CheckOut extends React.Component {
           <div>
             <div className="col-sm-5" style={styles.controlLabel}>
               <ControlLabel>First name</ControlLabel>
-              <FormControl type="text" placeholder="First name"/>
+              <FormControl type="text" placeholder="First name" onClick={(e) => this.handleChange('firstname', e)}/>
             </div>
             <div className="col-sm-5">
               <ControlLabel >Last name</ControlLabel>
-              <FormControl type="text" placeholder="Last name"/>
+              <FormControl type="text" placeholder="Last name" onClick={(e) => this.handleChange('lastname', e)}/>
             </div>
             <div className="col-sm-2"></div>
           </div>
           <div>
             <div className="col-sm-5">
               <ControlLabel>Street</ControlLabel>
-              <FormControl type="text" placeholder="Street"/>
+              <FormControl type="text" placeholder="Street" onClick={(e) => this.handleChange('street', e)}/>
+            </div>
+            <div className="col-sm-2">
+              <ControlLabel>Apt. No.</ControlLabel>
+              <FormControl type="text" placeholder="Apt.No" onClick={(e) => this.handleChange('aptNo', e)}/>
             </div>
             <div className="col-sm-2">
               <ControlLabel>State</ControlLabel>
-              <FormControl type="text" placeholder="Abbrev"/>
+              <FormControl type="text" placeholder="Abbrev" onClick={(e) => this.handleChange('state', e)}/>
             </div>
             <div className="col-sm-3">
               <ControlLabel>Postal Code</ControlLabel>
-              <FormControl type="text" placeholder="postal code"/>
+              <FormControl type="text" placeholder="Postal Code" onClick={(e) => this.handleZipChange('zip', e)}/>
             </div>
           </div>
         </FormGroup>
