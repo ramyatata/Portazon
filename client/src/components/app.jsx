@@ -194,18 +194,29 @@ class App extends React.Component {
   }
 
   changeQuantity(item){
-    item.userID = this.state.user.id;
-    item.email = this.state.user.email;
-    item.deleteItem = false;
-    let token = window.localStorage.getItem('token');
-    axios.post('users/updateCart', item, {
-      headers: {'x-access-token': token}})
-      .then(response => {
-        console.log('changed quantity!', response);
-        this.getCartByUser();
-        alert('Quantity has been updated!')
-      })
-      .catch(err => console.log('err changing quantity', err))
+    if (this.state.user.id) {
+      item.userID = this.state.user.id;
+      item.email = this.state.user.email;
+      item.deleteItem = false;
+      let token = window.localStorage.getItem('token');
+      axios.post('users/updateCart', item, {
+        headers: {'x-access-token': token}})
+        .then(response => {
+          console.log('changed quantity!', response);
+          this.getCartByUser();
+          alert('Quantity has been updated!')
+        })
+        .catch(err => console.log('err changing quantity', err));
+    } else {
+      let cart = this.state.user.cart;
+      console.log('item to change quantity', item)
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].productID === item.productID) {
+          cart[i] = item;
+        }
+      }
+      this.getCartByUser();
+    }
   }
 
   addItemToCart(item) {
