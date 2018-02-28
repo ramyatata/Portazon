@@ -30,9 +30,7 @@ class App extends React.Component {
       user: '',
       featuredProducts: [],
       badge: 0,
-      token: '',
-      guestNum: 0,
-
+      token: ''
     }
     this.changeView = this.changeView.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
@@ -57,7 +55,7 @@ class App extends React.Component {
 
   createGuestUser() {
     console.log('this.state.', this.state.guestNum)
-    var guestNo = this.state.guestNum;
+    var guestNo = 0;
     var Guest = function() {
       this.cart = [];
       this.guestNumber = guestNo;
@@ -65,7 +63,7 @@ class App extends React.Component {
     }
     var newGuest = new Guest();
     console.log('new guest', newGuest)
-    var next = guestNo++;
+    guestNo++;
     this.setState({guestNum: next, user: newGuest})
   }
 
