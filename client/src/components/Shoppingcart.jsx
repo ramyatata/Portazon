@@ -98,29 +98,26 @@ class ShoppingCart extends React.Component {
           <div className="col-sm-5">
           </div>
           <div className="col-sm-7">
-            <div>
-              <input placeholder="enter promo code here"/>
-              <button>Apply</button>
-            </div>
-            <div className="cart-summary-row">
-              <h4> Subtotal ({this.state.totalItems} items):</h4>
-              <span> ${this.state.totalAmt}</span>
-            </div>
-            <div className="cart-summary-row">
-              <h4>Shipping & Handling:</h4>
-              <span>$0.00</span>
-            </div>
-            <div className="cart-summary-row">
-              <h4>Estimated Taxes:</h4>
-              <span>$0.00 **</span>
-            </div>
-            <div className="cart-summary-row">
-              <h4>Estimated Order Total:</h4>
-              <span>${this.state.totalAmt}</span>
-            </div>
-            <div>
-              <h4>** Actual sales tax will be calculated at time of shipment</h4>
-            </div>
+            <Table>
+             <tbody>
+              <tr>
+                <td>Subtotal {this.state.totalItems} items: </td>
+                <td>${this.state.totalAmt}</td>
+              </tr>
+              <tr>
+                <td>Shipping & Handling:</td>
+                <td>$0.00</td>
+              </tr>
+              <tr>
+                <td>Estimated Taxes:</td>
+                <td>$0.00</td>
+              </tr>
+              <tr>
+                <td>Order Total:</td>
+                <td>${this.state.totalAmt}</td>
+              </tr>
+             </tbody>
+            </Table>
             <button onClick={this.handleCheckoutClick}>Checkout</button>
           </div>
         </div>
@@ -160,6 +157,31 @@ export default ShoppingCart;
       </div>
 */
 
+/*
+<div>
+              <input placeholder="enter promo code here"/>
+              <button>Apply</button>
+            </div>
+            <div className="cart-summary-row">
+              <h4> Subtotal ({this.state.totalItems} items):</h4>
+              <span> ${this.state.totalAmt}</span>
+            </div>
+            <div className="cart-summary-row">
+              <h4>Shipping & Handling:</h4>
+              <span>$0.00</span>
+            </div>
+            <div className="cart-summary-row">
+              <h4>Estimated Taxes:</h4>
+              <span>$0.00 **</span>
+            </div>
+            <div className="cart-summary-row">
+              <h4>Estimated Order Total:</h4>
+              <span>${this.state.totalAmt}</span>
+            </div>
+            <div>
+              <h4>** Actual sales tax will be calculated at time of shipment</h4>
+            </div>
+*/
 
 
 
