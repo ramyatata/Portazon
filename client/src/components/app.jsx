@@ -14,6 +14,7 @@ import RegisterUserForm from './registerUserForm.jsx';
 import RegisterSuccess from './registerSuccess.jsx';
 import UserProfile from './userProfile.jsx';
 
+
 const axios = require('axios');
 
 class App extends React.Component {
@@ -54,7 +55,6 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    console.log('in component WIll mount')
     this.createGuestUser();
   }
 
@@ -66,7 +66,6 @@ class App extends React.Component {
       this.firstname = 'Guest';
     }
     var newGuest = new Guest();
-    console.log('new guest', newGuest)
     this.setState({guestNum: guestNo, user: newGuest})
   }
 
@@ -82,9 +81,7 @@ class App extends React.Component {
 
   changeView(view, item, invoice){
     this.setState({view: view, productDetail: item, userInvoice: invoice});
-
     let history = this.props.history;
-
     if(view === 'productDetail'){
       history.push('/product_detail');
     } else if (view === 'shoppingCart') {
@@ -210,7 +207,6 @@ class App extends React.Component {
         .catch(err => console.log('err changing quantity', err));
     } else {
       let cart = this.state.user.cart;
-      console.log('item to change quantity', item)
       for (let i = 0; i < cart.length; i++) {
         if (cart[i].productID === item.productID) {
           cart[i] = item;
@@ -227,7 +223,6 @@ class App extends React.Component {
     } else {
       price = item._source.discounted_price;
     }
-
     var obj = {
       productID: item._id,
       productName: item._source.product_name,
@@ -236,24 +231,12 @@ class App extends React.Component {
       image_url: item._source.image[0],
       deleteItem: false
     };
-
     if (this.state.user.id) {
       obj.userID = this.state.user.id;
       obj.email = this.state.user.email;
-      //obj = {
-        //userID: this.state.user.id,
-        // productID: item._id,
-        // productName: item._source.product_name,
-        // amount: item.quantity,
-        // price: price,
-        // image_url: item._source.image[0],
-        //email: this.state.user.email,
-        // deleteItem: false
-      //}
       let token = window.localStorage.getItem('token');
       axios.post('users/updateCart', obj, {headers: {'x-access-token': token}})
         .then(response => {
-          console.log('response when update cart', response);
           this.getCartByUser();
           alert('This item was added to your cart!');
         })
@@ -267,7 +250,6 @@ class App extends React.Component {
   }
 
   removeItemFromCart(item) {
-    console.log('in removeItemFromCart!')
     var obj;
     if (this.state.user) {
       obj = {
