@@ -53,7 +53,7 @@ module.exports = {
         let item = {
           transactionID,
           cart,
-          charged,
+          totalAmt,
           date
         };
 
@@ -228,9 +228,12 @@ module.exports = {
 
     let item = {
       transactionID,
-      cart,
-      charged,
+      firstname,
+      lastname,
       email,
+      shipping address,
+      cart,
+      totalAmt,
       date
     };
 
