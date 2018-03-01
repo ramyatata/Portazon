@@ -26,7 +26,6 @@ class ShoppingCart extends React.Component {
   }
 
   handleRemoveClick(item) {
-    console.log('item to remove', item)
     this.props.removeItemFromCart(item);
   }
 

@@ -8,15 +8,21 @@ class ProductCard extends React.Component {
   }
 
   handleAddCartClick(item) {
-    console.log('in handleAddCartClick')
     item.quantity = 1;
-    console.log('item to add in productCard', item)
     this.props.addItemToCart(item);
   }
 
   handleCardClick(item) {
     this.props.changeView('productDetail', item);
   }
+
+  // renderAlert() {
+  //   let setParentState = this.props.setParentState;
+  //   console.log('in render alert roduct card', this.props.itemAdded);
+  //   // if (this.props.itemAdded) {
+
+  //   // }
+  // }
 
   render(){
     let item = this.props.item;
