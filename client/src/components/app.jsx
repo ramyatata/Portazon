@@ -330,9 +330,8 @@ class App extends React.Component {
   }
 
   render() {
-
     return (
-      <div>
+      <div className="container-fluid">
         <Header changeView={this.changeView} submitQuery={this.submitQuery} login={this.login} user={this.state.user} logout={this.logout} badge={this.state.badge} getCategoryItems={this.getCategoryItems}/>
         <Switch>
           <Route exact path='/'
@@ -362,7 +361,6 @@ class App extends React.Component {
           </Route>
           <Route path='*' component={HomePage}></Route>
         </Switch>
-
       </div>
     );
   }
