@@ -297,7 +297,7 @@ class App extends React.Component {
     }
   }
 
-  submitInvoice() {
+  submitInvoice(guest) {
     let cart = this.state.cart;
     let chargedAmt = cart.reduce((sum, item) => {
       sum += (item.amount * item.price);
@@ -306,16 +306,29 @@ class App extends React.Component {
     let invoice = {
       cart: this.state.cart,
       charged: chargedAmt,
-      userID: this.state.user.id,
-      email: this.state.user.email,
       date: new Date()
+    };
+
+    if (this.state.user.id) {
+      invoice.userID = this.state.user.id;
+      invoice.email = this.state.user.email;
+      let token = window.localStorage.getItem('token');
+      axios.post('users/updateInvoices', invoice, {headers: {'x-access-token': token}})
+        .then(response => {
+          this.getInvoices('showAddInvoiceAlert');
+        })
+        .catch(err => console.log('err adding invoice', err))
+    } else {
+      invoice.firstname = guest.firstname;
+      invoice.lastname = guest.lastname;
+      invoice.shippingAddress = guest.shippingAddress;
+      invoice.email = guest.email;
+      axios.post('users/guestUpdateInvoices', invoice)
+        .then(response => {
+          console.log('successfully submited guest invoice')
+        })
+        .catch(err => console.log('err submitting guest invoice'))
     }
-    let token = window.localStorage.getItem('token');
-    axios.post('users/updateInvoices', invoice, {headers: {'x-access-token': token}})
-      .then(response => {
-        this.getInvoices('showAddInvoiceAlert');
-      })
-      .catch(err => console.log('err adding invoice', err))
   }
 
   getInvoices(field) {
@@ -391,7 +404,7 @@ class App extends React.Component {
             render={() => <ShoppingCart cart={this.state.cart} changeView={this.changeView} getCart={this.getCartByUser} removeItemFromCart={this.removeItemFromCart} changeQuantity={this.changeQuantity}/>  }>
           </Route>
           <Route exact path='/checkout'
-            render={() => <CheckOut user={this.state.user} totalAmt={this.state.totalAmt} submitInvoice={this.submitInvoice}/>  }>
+            render={() => <CheckOut user={this.state.user} submitInvoice={this.submitInvoice}/>  }>
           </Route>
           <Route exact path='/register_user'
             render={() => <RegisterUserForm registerUser={this.registerUser}/>  }>

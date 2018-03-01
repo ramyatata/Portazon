@@ -39,11 +39,9 @@ class CheckOut extends React.Component {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
         email: this.state.email,
-        shippingAddress: address,
-        cart: this.props.cart,
-        charged: this.props.totalAmt
+        shippingAddress: address
       }
-      console.log('guest invoice to add', info)
+      this.props.submitInvoice(info);
     }
   }
 
