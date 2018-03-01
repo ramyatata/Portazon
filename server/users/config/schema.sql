@@ -29,6 +29,11 @@ CREATE TABLE user_invoices (
   invoices VARCHAR (20000)
 );
 
+CREATE TABLE guest_invoices (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  invoices VARCHAR (20000)
+);
+
 INSERT INTO users (
   firstname,
   lastname,
@@ -62,4 +67,6 @@ ALTER TABLE user_invoices ADD FOREIGN KEY (userID) REFERENCES users(id) ON DELET
 INSERT INTO shopping_cart (cart, userID) VALUES ('[{"666ABCD": 4}]', 1);
 
 INSERT INTO user_invoices (invoices, userID) VALUES ('[{"XX666ABCDXX": 4}]', 1);
+
+INSERT INTO guest_invoices (invoices) VALUES ('[{"XX6DSSFDS66ABCDXX": 2}]');
 

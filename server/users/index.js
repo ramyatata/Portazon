@@ -79,7 +79,7 @@ router.post('/login', (req, res) => {
           { expiresIn: 86400 } // expires in 24 hours
         );
       };
-      console.log('this is toke inside of /login', token)
+
       res.status(201).send({ auth: true, token, user });
     } else {
       res.status(401).send(false);
@@ -131,6 +131,9 @@ router.post('/registerUser', (req, res) => {
         { expiresIn: 86400 } // expires in 24 hours
       );
 
+      // Delete user sensitive credentials
+      delete req.body.pw;
+      delete req.body.salt;
       res.status(201).send({ registered: true, token, user: req.body });
     });
   })
@@ -177,7 +180,7 @@ router.get('/invoices', (req, res) => {
   if (!isRequestValid) return;
 
   model.getInvoices(req.query, (response) => {
-    res.status(201).send(response);
+    res.status(200).send(response);
   });
 });
 
@@ -189,5 +192,18 @@ router.post('/updateInvoices', (req, res) => {
     res.status(201).send(response);
   })
 });
+
+router.get('/guestInvoices', (req, res) => {
+  model.getGuestInvoices(req.query, (response) => {
+    res.status(200).send(response);
+  });
+});
+
+router.post('/guestUpdateInvoices', (req, res) => {
+  model.updateGuestInvoices(req.body, (response) => {
+    res.status(201).send(response);
+  })
+});
+
 
 module.exports = router;

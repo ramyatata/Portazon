@@ -32,7 +32,7 @@ module.exports = {
   },
 
   updateInvoices: (details, cb) => {
-    let { userID, cart, charged, email } = details;
+    let { userID, cart, charged, email, date } = details;
 
     db.query(`
       SELECT invoices FROM user_invoices
@@ -53,7 +53,8 @@ module.exports = {
         let item = {
           transactionID: transactionID,
           cart: cart,
-          charged: charged
+          charged: charged,
+          date: date
         };
 
         invoices.push(item);
@@ -207,6 +208,39 @@ module.exports = {
         cb('User does not exist to be deleted');
       }
     });
+  },
+
+  getGuestInvoices: (details, cb) => {
+    db.query(`SELECT invoices FROM guest_invoices`, (err, data) => {
+        if (err) throw 'Error in the GET cart query';
+        cb(data[0].invoices);
+      }
+    );
+  },
+
+  updateGuestInvoices: (details, cb) => {
+    let { cart, charged, email, date } = details;
+
+    //****************************************************
+    // Placeholder for Payments Microservice Transaction ID
+    let transactionID = randomstring.generate(12);
+    //****************************************************
+
+    let item = {
+      transactionID,
+      cart,
+      charged,
+      email,
+      date
+    };
+
+    let invoices = JSON.stringify([item]);
+
+    db.query(`INSERT INTO guest_invoices (invoices) VALUES ('${invoices}')`, (err, data) => {
+      if (err) throw 'Could not update product in Invoices'
+      cb(`TransactionID Id ${transactionID} has been modified in Guest Invoices`);
+    });
   }
+
 };
 
