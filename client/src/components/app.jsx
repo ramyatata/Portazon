@@ -38,7 +38,8 @@ class App extends React.Component {
       token: '',
       guestNum:'',
       showAddAlert: false,
-      showRemoveAlert: false
+      showRemoveAlert: false,
+      showAddInvoiceAlert: false
 
     }
     this.changeView = this.changeView.bind(this);
@@ -270,7 +271,6 @@ class App extends React.Component {
   }
 
   removeItemFromCart(item) {
-    console.log('remove item', item)
     var obj = {
       productName: item.productName,
       productID: item.productID,
@@ -284,7 +284,6 @@ class App extends React.Component {
       axios.post('users/updateCart', obj, {headers: {'x-access-token': token}})
         .then(response => {
           this.getCartByUser('showRemoveAlert');
-          alert('This item was removed from your cart!')
         })
         .catch(err => console.log('err deleting item', err))
     } else {
@@ -314,13 +313,12 @@ class App extends React.Component {
     let token = window.localStorage.getItem('token');
     axios.post('users/updateInvoices', invoice, {headers: {'x-access-token': token}})
       .then(response => {
-        this.getInvoices();
-        alert('success! your order has been processed!');
+        this.getInvoices('showAddInvoiceAlert');
       })
       .catch(err => console.log('err adding invoice', err))
   }
 
-  getInvoices() {
+  getInvoices(field) {
     let user = {
       userID: this.state.user.id,
       firstname: this.state.user.firstname,
@@ -332,13 +330,14 @@ class App extends React.Component {
       headers: {'x-access-token': token}
     })
       .then(response => {
-        this.setState({invoices: response.data})
+        let obj = {invoices: response.data};
+        obj[field] = true;
+        this.setState(obj)
       })
       .catch(err => console.log('err getting invoices', err))
   }
 
   renderAlert() {
-    console.log('in render alert', this.state.showAddAlert)
     if (this.state.showAddAlert) {
       return (
         <Alert bsStyle="success" onDismiss={() => this.handleDismissAlert('showAddAlert')}>
@@ -351,6 +350,13 @@ class App extends React.Component {
         <Alert bsStyle="success" onDismiss={() => this.handleDismissAlert('showRemoveAlert')}>
           <h4>Success!!</h4>
           <p>The item was removed to your cart!</p>
+        </Alert>
+      )
+    } else if (this.state.showAddInvoiceAlert) {
+      return (
+        <Alert bsStyle="success" onDismiss={() => this.handleDismissAlert('showAddInvoiceAlert')}>
+          <h4>Success!!</h4>
+          <p>Your order has been processed!</p>
         </Alert>
       )
     }
