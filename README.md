@@ -97,7 +97,9 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
 
   1 - Search Query && Categories: /search?q=[QUERY]&category=[SELECTEDCATEGORY]
   2 - Get all Category specific: /search/category?category=[SELECTEDCATEGORY]
-
+  3 - Get All Guests previous Invoices: /users/guestInvoices
+  4 - Get User's previous Invoices: /users/invoices?userId=[USERID]&firstname=[FIRSTNAME]&lastname=[LASTNAME]
+  5 - Get User's Shopping Cart: /users/cart?userId=[USERID]&firstname=[FIRSTNAME]&lastname=[LASTNAME]
 
   POST REQUEST:
 
@@ -115,16 +117,7 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
         country
       }
 
-  2 - Get User's Shopping Cart: /users/cart
-    Send an JSON with the following key/values:
-
-    {
-      userID,
-      firstname,
-      lastname
-    }
-
-  3 - Update Shopping Cart: /users/updateCart
+  2 - Update Shopping Cart: /users/updateCart
     Send an JSON with the following key/values:
 
     {
@@ -138,8 +131,7 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
     }
 
 
-
-  4 - Check if UN/PW match
+  3 - Check if UN/PW match
     {
       firstname,
       lastname,
@@ -147,7 +139,7 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
       pw
     }
 
-  5 - Add a new review: /search/review:
+  4 - Add a new review: /search/review:
   {
     id,
     reviews: [{
@@ -158,32 +150,30 @@ For Payments to work, you will have to sign up on Stripe.com and enter your Test
     }]
   }
 
-  6 - Delete user: /search/deleteUser:
+  5 - Delete user: /search/deleteUser:
+  { email }
+
+  6 - Update User's invoices: /users/updateInvoices
+    Send an JSON with the following key/values:
+
   {
-    email
+    userID,
+    cart,
+    charged,
+    email,
+    date
   }
 
-  7 - Get User's previous Invoices: /users/invoices
+  7 - Update Guest invoices: /users/guestUpdateInvoices
     Send an JSON with the following key/values:
 
     {
-      userID,
-      firstname,
-      lastname
-    }
-
-  8 - Update User's invoices: /users/updateInvoices
-    Send an JSON with the following key/values:
-
-    {
-      userID,
-      productID,
-      amount,
+      transactionID,
+      cart,
+      charged,
       email,
-      image_URL,
-      price
+      date
     }
-
 
 
 ## Config files with http://localhost:3000 || local folder settings by default
@@ -195,8 +185,6 @@ server/data/logstash.config
 server/search/index.js
 server/users/config/index.js
 server/users/config/passport-config.js
-
-
 
 
 ### Roadmap

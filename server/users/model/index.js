@@ -51,10 +51,10 @@ module.exports = {
         //****************************************************
 
         let item = {
-          transactionID: transactionID,
-          cart: cart,
-          charged: charged,
-          date: date
+          transactionID,
+          cart,
+          charged,
+          date
         };
 
         invoices.push(item);
