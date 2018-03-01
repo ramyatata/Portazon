@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Redirect, Route, withRouter, Switch} from 'react-router-dom';
+import { Alert } from 'react-bootstrap';
 
 import Header from './header.jsx';
 import Footer from './footer.jsx';
@@ -15,6 +16,7 @@ import RegisterSuccess from './registerSuccess.jsx';
 import UserProfile from './userProfile.jsx';
 
 //import services from '../../dist/services';
+
 
 
 const axios = require('axios');
@@ -34,7 +36,10 @@ class App extends React.Component {
       featuredProducts: [],
       badge: 0,
       token: '',
-      guestNum:''
+      guestNum:'',
+      showAddAlert: false,
+      showRemoveAlert: false
+
     }
     this.changeView = this.changeView.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
@@ -50,6 +55,7 @@ class App extends React.Component {
     this.getCategoryItems = this.getCategoryItems.bind(this);
     this.createGuestUser = this.createGuestUser.bind(this);
     this.getInvoices = this.getInvoices.bind(this);
+    // this.setParentState = this.setParentState.bind(this);
   }
 
 
@@ -61,17 +67,6 @@ class App extends React.Component {
     this.createGuestUser();
   }
 
-  createGuestUser() {
-    var guestNo = 0;
-    var Guest = function() {
-      this.cart = [];
-      this.guestNumber = guestNo;
-      this.firstname = 'Guest';
-    }
-    var newGuest = new Guest();
-    this.setState({guestNum: guestNo, user: newGuest})
-  }
-
   getFeaturedProducts() {
     axios.get('search?q=rating%205')
       .then(items => {
@@ -80,6 +75,10 @@ class App extends React.Component {
         this.setState({featuredProducts: filteredImages, view: 'homePage'});
       })
       .catch(err => console.log('error fetching five rated products'));
+  }
+
+  setParentState(field, value) {
+    this.setState({field, value})
   }
 
   changeView(view, item, invoice){
@@ -144,6 +143,18 @@ class App extends React.Component {
       .catch(err => console.log('err', err))
   }
 
+  createGuestUser() {
+    var guestNo = 0;
+    var Guest = function() {
+      this.cart = [];
+      this.guestNumber = guestNo;
+      this.firstname = 'Guest';
+    }
+    var newGuest = new Guest();
+    this.setState({guestNum: guestNo, user: newGuest})
+  }
+
+
   submitQuery(query) {
     axios.get('search/?q=' + query)
       .then(res => {
@@ -164,7 +175,7 @@ class App extends React.Component {
       })
     }
 
-  getCartByUser() {
+  getCartByUser(field) {
     let token = window.localStorage.getItem('token');
     let curUser = {
       userID: this.state.user.id,
@@ -178,19 +189,26 @@ class App extends React.Component {
       })
         .then(response => {
           let userCart = response.data;
-          console.log(response.data)
-          this.setState({
-            cart: userCart,
-            badge: userCart.length
-          });
+          let newState = {cart: userCart, badge: userCart.length};
+          if (field) {
+            newState[field] = true;
+          }
+          this.setState(newState);
         })
         .catch(err => console.log('err getting cart', err))
     } else {
       let gCart = this.state.user.cart;
-      this.setState({
-        cart: gCart,
-        badge: gCart.length
-      })
+      // console.log('field', this.state[field] ,field)
+      let newState = {cart: gCart, badge: gCart.length};
+      if (field) {
+        newState[field] = true;
+        this.setState(newState);
+      } else {
+        this.setState({
+          cart: gCart,
+          badge: gCart.length
+        })
+      }
     }
   }
 
@@ -240,38 +258,44 @@ class App extends React.Component {
       let token = window.localStorage.getItem('token');
       axios.post('users/updateCart', obj, {headers: {'x-access-token': token}})
         .then(response => {
-          this.getCartByUser();
-          alert('This item was added to your cart!');
+          this.getCartByUser('showAddAlert');
         })
         .catch(err => console.log(err))
     } else {
       let user = this.state.user;
       obj.image = [item._source.image[0]];
       user.cart.push(obj);
-      this.getCartByUser();
+      this.getCartByUser('showAddAlert');
     }
   }
 
   removeItemFromCart(item) {
-    var obj;
-    if (this.state.user) {
-      obj = {
-        userID: this.state.user.id,
-        productName: item.productName,
-        productID: item.productID,
-        amount: item.amount,
-        email: this.state.user.email,
-        deleteItem: true
-      }
+    console.log('remove item', item)
+    var obj = {
+      productName: item.productName,
+      productID: item.productID,
+      amount: item.amount,
+      deleteItem: true
     }
-    let token = window.localStorage.getItem('token');
-    axios.post('users/updateCart', obj, {headers: {'x-access-token': token}})
-      .then(response => {
-        console.log('deleted item!?', response)
-        this.getCartByUser();
-        alert('This item was removed from your cart!')
-      })
-      .catch(err => console.log('err deleting item', err))
+    if (this.state.user.id) {
+      obj.userID = this.state.user.id;
+      obj.email = this.state.user.email;
+      let token = window.localStorage.getItem('token');
+      axios.post('users/updateCart', obj, {headers: {'x-access-token': token}})
+        .then(response => {
+          this.getCartByUser('showRemoveAlert');
+          alert('This item was removed from your cart!')
+        })
+        .catch(err => console.log('err deleting item', err))
+    } else {
+      let user = this.state.user;
+      for (let i = 0; i < user.cart.length; i++) {
+        if (user.cart[i].productName === item.productName) {
+          user.cart.splice(i, 1);
+        }
+      }
+      this.getCartByUser('showRemoveAlert');
+    }
   }
 
   submitInvoice() {
@@ -313,16 +337,45 @@ class App extends React.Component {
       .catch(err => console.log('err getting invoices', err))
   }
 
+  renderAlert() {
+    console.log('in render alert', this.state.showAddAlert)
+    if (this.state.showAddAlert) {
+      return (
+        <Alert bsStyle="success" onDismiss={() => this.handleDismissAlert('showAddAlert')}>
+          <h4>Success!!</h4>
+          <p>The item was added to your cart!</p>
+        </Alert>
+      )
+    } else if (this.state.showRemoveAlert) {
+      return (
+        <Alert bsStyle="success" onDismiss={() => this.handleDismissAlert('showRemoveAlert')}>
+          <h4>Success!!</h4>
+          <p>The item was removed to your cart!</p>
+        </Alert>
+      )
+    }
+    return null;
+  }
+
+  handleDismissAlert(alert) {
+    let obj = {};
+    obj[alert] = false;
+    this.setState(obj);
+  }
+
   render() {
     return (
       <div className="container-fluid">
         <Header changeView={this.changeView} submitQuery={this.submitQuery} login={this.login} user={this.state.user} logout={this.logout} badge={this.state.badge} getCategoryItems={this.getCategoryItems}/>
+        {this.renderAlert()}
         <Switch>
           <Route exact path='/'
             render={() => <HomePage user={this.state.user} changeView={this.changeView} submitQuery={this.submitQuery} featuredProducts={this.state.featuredProducts}/>}>
           </Route>
           <Route exact path='/products'
-            render={() => <ProductsList products={this.state.searchedItems} query={this.state.query} addItemToCart={this.addItemToCart} submitQuery={this.submitQuery} changeView={this.changeView}/>  }>
+            render={() => <ProductsList products={this.state.searchedItems} query={this.state.query} addItemToCart={this.addItemToCart} submitQuery={this.submitQuery} changeView={this.changeView}
+              setParentState={this.setParentState}
+            />  }>
           </Route>
           <Route exact path='/product_detail'
             render={() => <ProductDetail item={this.state.productDetail}
