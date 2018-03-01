@@ -53,7 +53,7 @@ module.exports = {
         let item = {
           transactionID,
           cart,
-          totalAmt,
+          charged,
           date
         };
 
