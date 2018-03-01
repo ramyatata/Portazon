@@ -221,7 +221,6 @@ class App extends React.Component {
   }
 
   addItemToCart(item) {
-    // console.log('in addItemToCart', item, this.state.user)
     var price;
     if (!item._source.discounted_price) {
       price = item._source.retail_price
