@@ -128,7 +128,6 @@
               </li>
             </ul>
 
-
           {/* search bar */}
             <ul className="nav navbar-nav" style={{width: '50%'}}>
               <div className="input-group" style={{paddingTop: '10px'}}>
@@ -141,16 +140,13 @@
 
            {/* user account */}
           <ul className="nav navbar-nav navbar-right">
-            <li style={{'color': 'white', 'padding-right': '10px', 'padding-top': '20px'}}>
+            <li style={{'color': 'white', 'paddingRight': '10px', 'paddingTop': '25px'}}>
               <span >Hello, {this.props.user.firstname}!</span>
             </li>
             {this.renderLoginOptions()}
-            <li>
-              <button onClick={() => this.changeView('shoppingCart')} style={{marginTop: '15px', backgroundColor: '#222', color:'grey', textAlign:'center', border:'none'}}>
-                <span className="glyphicon glyphicon-shopping-cart" style={{'fontSize': '1.5em'}}>
-                {this.renderBadge()}
-                </span>
-              </button>
+            <li style={{'paddingRight': '20px'}}>
+              <span onClick={() => this.changeView('shoppingCart')} style={{marginTop: '20px', color:'grey', textAlign:'center', border:'none', 'fontSize': '1.6em', 'paddingRight': '10px', 'cursor': 'pointer'}} className="glyphicon glyphicon-shopping-cart">
+              </span>
             </li>
           </ul>
           </div>
@@ -161,3 +157,13 @@
   }
 
 export default Header;
+
+{/*
+<li>
+  <button onClick={() => this.changeView('shoppingCart')} style={{marginTop: '15px', backgroundColor: '#222', color:'grey', textAlign:'center', border:'none'}}>
+    <span className="glyphicon glyphicon-shopping-cart" style={{'fontSize': '1.5em'}}>
+    {this.renderBadge()}
+    </span>
+  </button>
+</li>
+*/}
