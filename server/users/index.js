@@ -155,7 +155,7 @@ router.get('/cart', (req, res) => {
   if (!isRequestValid) return;
 
   model.getUserCart(req.query, (response) => {
-      res.status(201).send(response);
+    res.status(201).send(response);
   });
 });
 
