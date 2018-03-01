@@ -6,10 +6,16 @@ class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.renderPersonalInfo = this.renderPersonalInfo.bind(this);
+    this.renderPastInvoices = this.renderPastInvoices.bind(this);
   }
 
   componentWillMount() {
+    this.props.getInvoices();
+  }
 
+  renderPastInvoices() {
+    let invoices = this.props.invoices;
+    console.log('invoices in profile', invoices)
   }
 
   renderPersonalInfo() {
@@ -58,6 +64,7 @@ class UserProfile extends React.Component {
           </Tab>
           <Tab eventKey={2} title="Orders">
             <h4>Your orders</h4>
+            {this.renderPastInvoices()}
           </Tab>
         </Tabs>
       </div>

@@ -45,7 +45,12 @@ class App extends React.Component {
     this.submitInvoice = this.submitInvoice.bind(this);
     this.getCategoryItems = this.getCategoryItems.bind(this);
     this.createGuestUser = this.createGuestUser.bind(this);
-    // this.createGuestUser();
+    this.getInvoices = this.getInvoices.bind(this);
+  }
+
+
+  componentWillMount(){
+    this.getFeaturedProducts();
   }
 
   componentDidMount(){
@@ -73,10 +78,6 @@ class App extends React.Component {
         this.setState({featuredProducts: filteredImages, view: 'homePage'});
       })
       .catch(err => console.log('error fetching five rated products'));
-  }
-
-  componentWillMount(){
-    this.getFeaturedProducts();
   }
 
   changeView(view, item, invoice){
@@ -299,7 +300,8 @@ class App extends React.Component {
       cart: this.state.cart,
       charged: chargedAmt,
       userID: this.state.user.id,
-      email: this.state.user.email
+      email: this.state.user.email,
+      date: new Date()
     }
     let token = window.localStorage.getItem('token');
     axios.post('users/updateInvoices', invoice, {headers: {'x-access-token': token}})
@@ -322,7 +324,7 @@ class App extends React.Component {
       headers: {'x-access-token': token}
     })
       .then(response => {
-        console.log('got invoices!', response.data)
+        this.setState({invoices: response.data})
       })
       .catch(err => console.log('err getting invoices', err))
   }
@@ -356,7 +358,7 @@ class App extends React.Component {
             render={() => <RegisterSuccess /> }>
           </Route>
           <Route exact path='/user_profile'
-            render={() => <UserProfile user={this.state.user}/> }>
+            render={() => <UserProfile user={this.state.user} invoices={this.state.invoices} getInvoices={this.getInvoices}/> }>
           </Route>
           <Route path='*' component={HomePage}></Route>
         </Switch>

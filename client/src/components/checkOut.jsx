@@ -99,7 +99,7 @@ class CheckOut extends React.Component {
                 <p>{this.props.user.city}, {this.props.user.state} {this.props.user.zip}</p>
                 <p>{this.props.user.country}</p>
               </Panel.Body>
-            <button type="button" className="btn btn-success" onClick={() => this.handleSubmit()}>Submit!</button>
+            <button type="button" className="submit-user-shipping" onClick={() => this.handleSubmit()}>Use this address</button>
             </Panel>
           </div>
           <div>
