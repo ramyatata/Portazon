@@ -105,8 +105,15 @@
 .cart-summary {
   margin-bottom: 200px;
 }
-.cart-summary-row {
 
+.cart-checkout-button {
+  background-color: 'white';
+  color: #2BABBC;
+  border-width: 2px;
+  border-color: #2BABBC;
+  border-radius: 8px;
+  margin-left: 15px;
+  margin-bottom: 15px;
 }
 
 /*************************************************
