@@ -2,7 +2,6 @@
   import ReactDOM from 'react-dom';
   import { Badge } from 'react-bootstrap';
 
-
   import CategoryList from './categoryList.jsx';
 
   var axios = require('axios');
@@ -110,11 +109,11 @@
       }
     }
 
-
     render() {
       return (
+        <div className="container-fluid">
         <nav className="navbar navbar-inverse">
-          <div className="container-fluid">
+          <div className="">
 
             {/* Logo */}
             <div className="navbar-header logo">
@@ -131,17 +130,21 @@
 
 
           {/* search bar */}
-             <ul className="nav navbar-nav" style={{width: '50%'}}>
-               <div className="input-group" style={{paddingTop: '10px'}}>
-                 <input onChange={e => this.handleChange(e)} type = "text" className ="form-control" placeholder="Search for something fun ..." />
-                 <div onClick={this.handleSearchClick} className="input-group-addon">
-                   <span className="glyphicon glyphicon-search"></span>
-                 </div>
+            <ul className="nav navbar-nav" style={{width: '50%'}}>
+              <div className="input-group" style={{paddingTop: '10px'}}>
+                <input onChange={e => this.handleChange(e)} type = "text" className ="form-control" placeholder="Search for something fun ..." />
+                <div onClick={this.handleSearchClick} className="input-group-addon">
+                  <span className="glyphicon glyphicon-search"></span>
                 </div>
-             </ul>
+              </div>
+            </ul>
 
            {/* user account */}
           <ul className="nav navbar-nav navbar-right">
+            <li style={{'color': 'white', 'padding-right': '10px', 'padding-top': '20px'}}>
+              <span >Hello, {this.props.user.firstname}!</span>
+            </li>
+            {this.renderLoginOptions()}
             <li>
               <button onClick={() => this.changeView('shoppingCart')} style={{marginTop: '15px', backgroundColor: '#222', color:'grey', textAlign:'center', border:'none'}}>
                 <span className="glyphicon glyphicon-shopping-cart" style={{'fontSize': '1.5em'}}>
@@ -149,10 +152,10 @@
                 </span>
               </button>
             </li>
-            {this.renderLoginOptions()}
           </ul>
           </div>
         </nav>
+        </div>
       );
     }
   }
