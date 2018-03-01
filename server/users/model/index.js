@@ -219,7 +219,7 @@ module.exports = {
   },
 
   updateGuestInvoices: (details, cb) => {
-    let { cart, charged, email, date } = details;
+    let { firstname, lastname, shippingAddress, cart, charged, email, date } = details;
 
     //****************************************************
     // Placeholder for Payments Microservice Transaction ID
@@ -231,9 +231,9 @@ module.exports = {
       firstname,
       lastname,
       email,
-      shipping address,
+      shippingAddress,
       cart,
-      totalAmt,
+      charged,
       date
     };
 

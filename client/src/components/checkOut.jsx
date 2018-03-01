@@ -8,13 +8,14 @@ class CheckOut extends React.Component {
     this.state = {
       items: '',
       totalAmt: '',
-      firstName: '',
-      lastName: '',
+      firstname: '',
+      lastname: '',
       street: '',
       aptNo:'',
       city: '',
       state: '',
       zip: '',
+      email: '',
       bStreet: '',
       bAptNo: '',
       bCity: '',
@@ -26,54 +27,70 @@ class CheckOut extends React.Component {
   }
 
   handleChange(field, e) {
-    this.setState({field: e.target.value});
-  }
-
-  handleZipChange(e){
-    let zip = e.target.value;
-    if (typeof zip !== 'number') {
-      alert('zip code must be a valid number');
-      return;
-    }
-    this.setState({zip: e.target.value})
+    this.setState({[field]: e.target.value});
   }
 
   handleSubmit() {
-    console.log('in handleSubmit in checkout')
-    this.props.submitInvoice();
+    if (this.props.user.id) {
+      this.props.submitInvoice();
+    } else {
+      let address = this.state.street + ' ' + this.state.aptNo + ', ' + this.state.city + ', ' + this.state.state + ' ' + this.state.zip;
+      let info = {
+        firstname: this.state.firstname,
+        lastname: this.state.lastname,
+        email: this.state.email,
+        shippingAddress: address,
+        cart: this.props.cart,
+        charged: this.props.totalAmt
+      }
+      console.log('guest invoice to add', info)
+    }
   }
 
   generateShippingForm() {
     return (
       <form>
-        <FormGroup controllid="formBasicText">
+        <FormGroup controllid="shippingForm">
           <div>
             <div className="col-sm-5" style={styles.controlLabel}>
               <ControlLabel>First name</ControlLabel>
-              <FormControl type="text" placeholder="First name" onClick={(e) => this.handleChange('firstname', e)}/>
+              <FormControl type="text" placeholder="First name" onChange={(e) => this.handleChange('firstname', e)}/>
             </div>
             <div className="col-sm-5">
               <ControlLabel >Last name</ControlLabel>
-              <FormControl type="text" placeholder="Last name" onClick={(e) => this.handleChange('lastname', e)}/>
+              <FormControl type="text" placeholder="Last name" onChange={(e) => this.handleChange('lastname', e)}/>
             </div>
-            <div className="col-sm-2"></div>
           </div>
           <div>
-            <div className="col-sm-5">
-              <ControlLabel>Street</ControlLabel>
-              <FormControl type="text" placeholder="Street" onClick={(e) => this.handleChange('street', e)}/>
+            <div className="col-sm-8">
+               <ControlLabel >Email</ControlLabel>
+              <FormControl type="text" placeholder="Email" onChange={(e) => this.handleChange('email', e)}/>
             </div>
-            <div className="col-sm-2">
+            <div className="col-sm-4">
+            </div>
+          </div>
+          <div>
+            <div className="col-sm-6">
+              <ControlLabel>Street</ControlLabel>
+              <FormControl type="text" placeholder="Street" onChange={(e) => this.handleChange('street', e)}/>
+            </div>
+            <div className="col-sm-3">
               <ControlLabel>Apt. No.</ControlLabel>
-              <FormControl type="text" placeholder="Apt.No" onClick={(e) => this.handleChange('aptNo', e)}/>
+              <FormControl type="text" placeholder="Apt.No" onChange={(e) => this.handleChange('aptNo', e)}/>
+            </div>
+          </div>
+          <div>
+            <div className="col-sm-4">
+              <ControlLabel>City</ControlLabel>
+              <FormControl type="text" placeholder="City" onChange={(e) => this.handleChange('city', e)}/>
             </div>
             <div className="col-sm-2">
               <ControlLabel>State</ControlLabel>
-              <FormControl type="text" placeholder="Abbrev" onClick={(e) => this.handleChange('state', e)}/>
+              <FormControl type="text" placeholder="Abbr." onChange={(e) => this.handleChange('state', e)}/>
             </div>
             <div className="col-sm-3">
               <ControlLabel>Postal Code</ControlLabel>
-              <FormControl type="text" placeholder="Postal Code" onClick={(e) => this.handleZipChange('zip', e)}/>
+              <FormControl type="text" placeholder="Postal Code" onChange={(e) => this.handleChange('zip', e)}/>
             </div>
           </div>
         </FormGroup>
@@ -90,7 +107,7 @@ class CheckOut extends React.Component {
       return(
         <div className="container-fluid col-sm-12">
           <div>
-            <Panel bsStyle="info">
+            <Panel style={styles.panel}>
               <Panel.Heading>
                 <Panel.Title componentClass="h3">Shipping Address</Panel.Title>
               </Panel.Heading>
@@ -116,12 +133,37 @@ class CheckOut extends React.Component {
           </div>
         </div>
       )
+    } else {
+      return (
+        <div className="col-sm-12">
+          <div className="col-sm-1">
+          </div>
+          <div className="col-sm-10">
+            <Panel bsStyle="info">
+              <Panel.Heading>
+                <Panel.Title componentClass="h3">Shipping Info</Panel.Title>
+              </Panel.Heading>
+              <Panel.Body>
+                {this.generateShippingForm()}
+              </Panel.Body>
+            </Panel>
+            <button className="submit-user-shipping" onClick={() => this.handleSubmit()}>Submit Info!
+            </button>
+          </div>
+          <div className="col-sm-1">
+          </div>
+        </div>
+
+      )
     }
   }
 }
 
 const styles = {
-  controlLabel: {'textAlign': 'left'}
+  controlLabel: {'textAlign': 'left'},
+  panel: {
+    'textAlign': 'left'
+  }
 }
 
 export default CheckOut;
