@@ -14,6 +14,8 @@ import RegisterUserForm from './registerUserForm.jsx';
 import RegisterSuccess from './registerSuccess.jsx';
 import UserProfile from './userProfile.jsx';
 
+//import services from '../../dist/services';
+
 
 const axios = require('axios');
 
@@ -31,7 +33,8 @@ class App extends React.Component {
       user: '',
       featuredProducts: [],
       badge: 0,
-      token: ''
+      token: '',
+      guestNum:''
     }
     this.changeView = this.changeView.bind(this);
     this.submitQuery = this.submitQuery.bind(this);

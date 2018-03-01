@@ -140,7 +140,7 @@ class CheckOut extends React.Component {
           </div>
           <div className="col-sm-10">
             <Panel bsStyle="info">
-              <Panel.Heading className="panel-heading">
+              <Panel.Heading>
                 <Panel.Title componentClass="h3">Shipping Info</Panel.Title>
               </Panel.Heading>
               <Panel.Body>
@@ -161,7 +161,9 @@ class CheckOut extends React.Component {
 
 const styles = {
   controlLabel: {'textAlign': 'left'},
-  panel: {'backgroundColor': '#2BABBC'}
+  panel: {
+    'textAlign': 'left'
+  }
 }
 
 export default CheckOut;
