@@ -80,6 +80,9 @@ router.post('/login', (req, res) => {
         );
       };
 
+      // Delete user sensitive credentials
+      delete user.pw;
+      delete user.salt;
       res.status(201).send({ auth: true, token, user });
     } else {
       res.status(401).send(false);
@@ -131,9 +134,6 @@ router.post('/registerUser', (req, res) => {
         { expiresIn: 86400 } // expires in 24 hours
       );
 
-      // Delete user sensitive credentials
-      delete req.body.pw;
-      delete req.body.salt;
       res.status(201).send({ registered: true, token, user: req.body });
     });
   })
