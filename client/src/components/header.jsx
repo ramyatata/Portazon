@@ -30,11 +30,6 @@
       this.props.changeView('productslist');
     }
 
-
-    populateCategoriesMenu(){
-
-    }
-
     handleLoginClick() {
       let user = {
         email: document.getElementById('email').value,
@@ -62,7 +57,7 @@
         return null;
       } else {
         return (
-          <p><Badge className="badge" style={{'backgroundColor': '#2BABBC', 'padding': '2px 5px 2px 5px', 'top': '0', 'position':'absolute'}}>{num}</Badge></p>
+          <p><Badge className="badge" style={styles.badge}>{num}</Badge></p>
         )
       }
     }
@@ -72,10 +67,10 @@
       if (user.firstname === 'Guest') {
         return (
           <li className="dropdown">
-           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={{'fontSize': '1.5em','paddingTop': '5px', 'paddingRight':'5px', 'display':'inline-block'}}></span></a>
+           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={styles.loginBox}></span></a>
            <div className="dropdown-menu">
              <div className="header-account-dropdown">
-                <h3 style={{color: '#fff'}}>Login</h3>
+                <h3 style={styles.loginText}>Login</h3>
              </div>
              <form method="post" action="/account/login" className='header-account-dropdown'>
                <div className="form-group ">
@@ -96,13 +91,13 @@
       } else {
         return (
           <li className="dropdown">
-           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={{'fontSize': '1.5em', 'paddingTop': '5px', 'paddingRight':'5px'}}></span></a>
+           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user" style={styles.loginDropDown}></span></a>
            <div className="dropdown-menu">
              <div className="header-account-dropdown">
-                <h3 style={{color: '#fff'}}>Log Out</h3>
+                <h3 style={styles.loginText}>Log Out</h3>
              </div>
              <a onClick={() => this.changeView('userProfile')}>your profile</a>
-             <button type="button" onClick={() => {this.handleLogoutClick()}}className="btn btn-block">Log Out!</button>
+             <button type="button" onClick={() => {this.handleLogoutClick()}} className="btn btn-block">Log Out!</button>
            </div>
           </li>
         )
@@ -117,20 +112,20 @@
 
             {/* Logo */}
             <div className="navbar-header logo">
-              <a className="navbar-brand" href="#">PORTAZON</a>
+              <a className="navbar-brand" href="#" style={styles.logo}>PORTAZON</a>
             </div>
 
             {/* category menu */}
             <ul className="nav navbar-nav">
               <li className='dropdown'>
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop By <span className="caret"></span></a>
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style={styles.logo}>Shop By <span className="caret"></span></a>
                   <CategoryList getCategoryItems={this.props.getCategoryItems}></CategoryList>
               </li>
             </ul>
 
           {/* search bar */}
-            <ul className="nav navbar-nav" style={{width: '50%'}}>
-              <div className="input-group" style={{paddingTop: '10px'}}>
+            <ul className="nav navbar-nav" style={styles.search}>
+              <div className="input-group" style={styles.searchInput}>
                 <input onChange={e => this.handleChange(e)} type = "text" className ="form-control" placeholder="Search for something fun ..." />
                 <div onClick={this.handleSearchClick} className="input-group-addon">
                   <span className="glyphicon glyphicon-search"></span>
@@ -140,12 +135,13 @@
 
            {/* user account */}
           <ul className="nav navbar-nav navbar-right">
-            <li style={{'color': 'white', 'paddingRight': '10px', 'paddingTop': '25px'}}>
+            <li style={styles.greet}>
               <span >Hello, {this.props.user.firstname}!</span>
             </li>
             {this.renderLoginOptions()}
-            <li style={{'paddingRight': '20px'}}>
-              <span onClick={() => this.changeView('shoppingCart')} style={{marginTop: '20px', color:'grey', textAlign:'center', border:'none', 'fontSize': '1.6em', 'paddingRight': '10px', 'cursor': 'pointer'}} className="glyphicon glyphicon-shopping-cart">
+            <li style={styles.cartView}>
+              <span onClick={() => this.changeView('shoppingCart')} style={styles.cart} className="glyphicon glyphicon-shopping-cart">
+                {this.renderBadge()}
               </span>
             </li>
           </ul>
@@ -155,6 +151,51 @@
       );
     }
   }
+
+const styles = {
+  badge: {
+    'backgroundColor': '#2BABBC',
+    'padding': '2px 5px 2px 5px',
+    'top': '0',
+    'position':'absolute'
+  },
+  cart: {
+    marginTop: '20px',
+    color:'grey',
+    textAlign:'center',
+    border:'none',
+    'fontSize': '1.6em',
+    'paddingRight': '10px',
+    'cursor': 'pointer'
+  },
+  greet: {
+    'color': '#2BABBC',
+    'paddingRight': '10px',
+    'paddingTop': '25px'
+  },
+  search: {
+    width: '50%'
+  },
+  searchInput: {
+    paddingTop: '10px'
+  },
+  loginDropDown: {
+    'fontSize': '1.5em',
+    'paddingTop': '5px',
+    'paddingRight':'5px'
+  },
+  loginBox: {
+    'fontSize': '1.5em',
+    'paddingTop': '5px',
+     'paddingRight':'5px',
+     'display':'inline-block'
+  },
+  loginText: {color: '#2BABBC'},
+  cartView: {'paddingRight': '20px'},
+  logo: {'color': '#2BABBC'}
+}
+
+//change font in CSS for portazon!!
 
 export default Header;
 

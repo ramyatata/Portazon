@@ -61,6 +61,7 @@
 
 
 
+
 /*************************************************
                   Footer
 **************************************************/
@@ -106,7 +107,12 @@
   margin-bottom: 200px;
 }
 
-.cart-checkout-button {
+.cart-summary-table {
+    border-width: 2px,
+    border-color: #2BABBC
+}
+
+.cart-button {
   background-color: 'white';
   color: #2BABBC;
   border-width: 2px;
@@ -114,6 +120,20 @@
   border-radius: 8px;
   margin-left: 15px;
   margin-bottom: 15px;
+}
+
+.cart-button:hover {
+  background-color: #2BABBC;
+  color: white;
+  border-width: 2px;
+  border-color: ;
+  border-radius: 8px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+
+.cart-text {
+  color: #2BABBC;
 }
 
 /*************************************************
@@ -274,8 +294,30 @@
   float: right;
 }
 .signup-title {
-  font-family: 'myriad-pro,BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif';
+  font-family: 'Josefin-Sans',  sans-serif;;
   font-size: '20px' !important;
+  color: #2BABBC;
+  font-weight: bold;
+}
+
+.register-button {
+  background-color: 'white';
+  color: #2BABBC;
+  border-width: 2px;
+  border-color: #2BABBC;
+  border-radius: 8px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+
+.register-button:hover {
+  background-color: #2BABBC;
+  color: white;
+  border-width: 2px;
+  border-color: ;
+  border-radius: 8px;
+  margin-left: 15px;
+  margin-bottom: 15px;
 }
 /* need to check why this is not working when placed in style sheet */
 /*.prod-primaryPrice {

@@ -18,10 +18,7 @@ class ShoppingCart extends React.Component {
     this.getTotals();
   }
 
-
-
   handleCheckoutClick() {
-    console.log('in checkout click')
     this.props.changeView('checkOut');
   }
 
@@ -36,7 +33,6 @@ class ShoppingCart extends React.Component {
   }
 
   getTotals(){
-    console.log('items', this.props.cart)
     let items = this.props.cart;
     let totalPrice = 0;
     let totalItems = 0;
@@ -58,11 +54,11 @@ class ShoppingCart extends React.Component {
         <td><img src={item.image[0]} alt="" className="cart-item-img" ></img>
         </td>
         <td>{item.productName}</td>
-        <td>{item.price}</td>
-        <td><input onChange={e => this.changeQuantity(e, item)} placeholder={item.amount}/>
+        <td>{item.price.toFixed(2)}</td>
+        <td><input className="input-sm" style={styles.quantityInput}onChange={e => this.changeQuantity(e, item)} placeholder={item.amount}/>
         </td>
-        <td>{item.indTotal}</td>
-        <td><button type="button" className="btn btn-danger" onClick={() => this.handleRemoveClick(item)}>Remove</button></td>
+        <td>{item.indTotal.toFixed(2)}</td>
+        <td><button type="button" className="cart-button" onClick={() => this.handleRemoveClick(item)}>Remove</button></td>
       </tr>
     ))
 
@@ -77,7 +73,7 @@ class ShoppingCart extends React.Component {
       body =
       <div>
         <div>
-          <h3>Your current total amount is: $ {this.state.totalAmt}</h3>
+          <h3>Your current total amount is: ${this.state.totalAmt}</h3>
         </div>
         <Table>
           <thead>
@@ -95,10 +91,10 @@ class ShoppingCart extends React.Component {
           </tbody>
         </Table>
         <div className="cart-summary col-sm-12">
-          <div className="col-sm-5">
+          <div className="col-sm-6">
           </div>
-          <div className="col-sm-7">
-            <Table>
+          <div className="col-sm-6" style={styles.summaryTable}>
+            <Table className="cart-summary-table">
              <tbody>
               <tr>
                 <td>Subtotal ({this.state.totalItems} items): </td>
@@ -112,25 +108,37 @@ class ShoppingCart extends React.Component {
                 <td>Estimated Taxes:</td>
                 <td>$0.00</td>
               </tr>
-              <tr>
-                <td>Order Total:</td>
-                <td>${this.state.totalAmt}</td>
+              <tr style={styles.strongText}>
+                <td><h4>Order Total:</h4></td>
+                <td><h4>${this.state.totalAmt}</h4></td>
               </tr>
              </tbody>
             </Table>
-            <button className="cart-checkout-button" onClick={this.handleCheckoutClick}>Checkout</button>
+            <button className="cart-button" onClick={this.handleCheckoutClick}>Checkout</button>
           </div>
         </div>
       </div>
     }
     return(
-      <div className="shopping-cart container-fluid">
+      <div className="shopping-cart container">
         <div>
-          <h2>shopping cart</h2>
+          <h2 className="cart-text">shopping cart</h2>
         </div>
         {body}
       </div>
     )
+  }
+}
+
+const styles = {
+  quantityInput: {
+    'width': '70px'
+  },
+  summaryTable: {
+    'backgroundColor': '#EDEDED',
+  },
+  strongText: {
+    'fontWeight': 'bold'
   }
 }
 
