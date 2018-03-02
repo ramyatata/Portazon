@@ -30,10 +30,6 @@ class CheckOut extends React.Component {
     this.setState({[name]: value});
   }
 
-  handleChange(field, e) {
-    this.setState({[field]: e.target.value});
-  }
-
   handleSubmit() {
     if (this.props.user.id) {
       this.props.submitInvoice();
@@ -46,18 +42,7 @@ class CheckOut extends React.Component {
         shippingAddress: address
       }
       this.props.submitInvoice(info);
-      this.setState({
-        firstname: '',
-        lastname: '',
-        street: '',
-        aptNo: '',
-        city: '',
-        state: '',
-        zip: '',
-        email: ''
-      })
     }
-    this.generateShippingForm();
   }
 
   generateShippingForm() {}
