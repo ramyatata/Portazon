@@ -256,6 +256,7 @@ class App extends React.Component {
     if (this.state.user.id) {
       obj.userID = this.state.user.id;
       obj.email = this.state.user.email;
+      console.log('in addItem', obj)
       let token = window.localStorage.getItem('token');
       axios.post('users/updateCart', obj, {headers: {'x-access-token': token}})
         .then(response => {

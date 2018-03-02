@@ -34,21 +34,26 @@ class ShoppingCart extends React.Component {
 
   getTotals(){
     let items = this.props.cart;
+    console.log('items', items)
     let totalPrice = 0;
     let totalItems = 0;
     for (let i = 0; i < items.length; i++) {
       let price = items[i].price;
       let quantity = items[i].amount;
       let itemTotal = price * quantity;
+      console.log('itemTotal', itemTotal, items[i])
       items[i].indTotal = itemTotal;
+      console.log('item indTotal', items[i].indTotal)
       totalPrice += itemTotal;
       totalItems += quantity;
     }
+
     this.setState({totalAmt: totalPrice.toFixed(2), totalItems: totalItems, cart: items});
   }
 
   createItemList() {
     let items = this.props.cart;
+    console.log('in create List', items)
     return items.map((item, ind) => (
       <tr key={ind}>
         <td><img src={item.image[0]} alt="" className="cart-item-img" ></img>
@@ -121,8 +126,8 @@ class ShoppingCart extends React.Component {
     }
     return(
       <div className="shopping-cart container">
-        <div>
-          <h2 className="cart-text">shopping cart</h2>
+        <div className="cart-text">
+          <h2>shopping cart</h2>
         </div>
         {body}
       </div>
