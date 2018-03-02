@@ -200,7 +200,6 @@ router.get('/guestInvoices', (req, res) => {
 });
 
 router.post('/guestUpdateInvoices', (req, res) => {
-  console.log('invoice in server post request', req.body)
   model.updateGuestInvoices(req.body, (response) => {
     res.status(201).send(response);
   })
