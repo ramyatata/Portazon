@@ -83,6 +83,7 @@ class App extends React.Component {
   }
 
   changeView(view, item, invoice){
+    alert(`changing view ${item._source.product_name}`);
     this.setState({view: view, productDetail: item, userInvoice: invoice});
     let history = this.props.history;
     if(view === 'productDetail'){

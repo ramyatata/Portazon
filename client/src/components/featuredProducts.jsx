@@ -39,7 +39,7 @@ class FeaturedProducts extends React.Component {
     if(this.props.featuredProducts.length === 0){
       highRatedProducts = <div></div>
     } else {
-      highRatedProducts = this.props.featuredProducts.map((prod, ind)=><FeaturedProductCard product={prod} key={ind}/>)
+      highRatedProducts = this.props.featuredProducts.map((prod, ind)=><FeaturedProductCard product={prod} key={ind} changeView={this.props.changeView}/>)
     }
 
     return (
