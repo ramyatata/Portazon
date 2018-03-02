@@ -32,7 +32,7 @@ module.exports = {
   },
 
   updateInvoices: (details, cb) => {
-    let { userID, cart, charged, email, date } = details;
+    let { userID, cart, totalAmt, email, date } = details;
 
     db.query(`
       SELECT invoices FROM user_invoices
@@ -219,7 +219,15 @@ module.exports = {
   },
 
   updateGuestInvoices: (details, cb) => {
-    let { cart, charged, email, date } = details;
+    let {
+      firstname,
+      lastname,
+      email,
+      shipping address,
+      cart,
+      totalAmt,
+      date
+    } = details;
 
     //****************************************************
     // Placeholder for Payments Microservice Transaction ID
