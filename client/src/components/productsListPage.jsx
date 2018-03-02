@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import ProductCard from './productCard.jsx';
 
 const ProductsListPage = ({products, query, addItemToCart, changeView, setParentState}) => (
-  <div className="container">
+  <div>
     <h3 style={styles.searchText}>searched: {query}</h3>
     <div className="col-xs-12" style={styles.background}>
     {products.map((item, ind) => (
