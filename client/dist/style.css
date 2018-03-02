@@ -319,6 +319,14 @@
   margin-left: 15px;
   margin-bottom: 15px;
 }
+
+.reg-success-text {
+  color: #2BABBC;
+}
+
+.reg-success {
+  text-align: center
+}
 /* need to check why this is not working when placed in style sheet */
 /*.prod-primaryPrice {
   display: inline;
