@@ -32,7 +32,7 @@ module.exports = {
   },
 
   updateInvoices: (details, cb) => {
-    let { userID, cart, totalAmt, email, date } = details;
+    let { userID, cart, charged, email, date } = details;
 
     db.query(`
       SELECT invoices FROM user_invoices
@@ -53,7 +53,7 @@ module.exports = {
         let item = {
           transactionID,
           cart,
-          totalAmt,
+          charged,
           date
         };
 
@@ -225,7 +225,7 @@ module.exports = {
       email,
       shipping address,
       cart,
-      totalAmt,
+      charged,
       date
     } = details;
 
@@ -241,7 +241,7 @@ module.exports = {
       email,
       shipping address,
       cart,
-      totalAmt,
+      charged,
       date
     };
 
