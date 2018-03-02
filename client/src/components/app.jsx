@@ -423,7 +423,7 @@ class App extends React.Component {
           </Route>
           <Route path='*' component={HomePage}></Route>
         </Switch>
-
+        <Footer/>
       </div>
     );
   }

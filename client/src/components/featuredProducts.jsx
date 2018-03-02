@@ -43,7 +43,7 @@ class FeaturedProducts extends React.Component {
     }
 
     return (
-      <div className="col-xs-12">
+      <div className="col-xs-12" style={{marginBottom: '15px'}}>
         <div className="col-xs-12 text-center"><h3>High Rated Products</h3></div>
         <div className="col-xs-12">
           <div className="carousel slide" id="myCarousel">

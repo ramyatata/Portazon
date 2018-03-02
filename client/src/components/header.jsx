@@ -107,7 +107,7 @@
     render() {
       return (
         <div className="container-fluid">
-        <nav className="navbar navbar-inverse">
+        <nav className="navbar navbar-inverse fixed-top">
           <div className="">
 
             {/* Logo */}
