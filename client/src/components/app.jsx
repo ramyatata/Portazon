@@ -353,17 +353,21 @@ class App extends React.Component {
   renderAlert() {
     if (this.state.showAddAlert) {
       return (
-        <Alert bsStyle="success" onDismiss={() => this.handleDismissAlert('showAddAlert')}>
-          <h4>Success!!</h4>
-          <p>The item was added to your cart!</p>
-        </Alert>
+        <div className="container">
+          <Alert bsStyle="success" onDismiss={() => this.handleDismissAlert('showAddAlert')}>
+            <h4>Success!!</h4>
+            <p>The item was added to your cart!</p>
+          </Alert>
+        </div>
       )
     } else if (this.state.showRemoveAlert) {
       return (
-        <Alert bsStyle="success" onDismiss={() => this.handleDismissAlert('showRemoveAlert')}>
-          <h4>Success!!</h4>
-          <p>The item was removed to your cart!</p>
-        </Alert>
+        <div className="container">
+          <Alert bsStyle="success" onDismiss={() => this.handleDismissAlert('showRemoveAlert')}>
+            <h4>Success!!</h4>
+            <p>The item was removed to your cart!</p>
+          </Alert>
+        </div>
       )
     } else if (this.state.showAddInvoiceAlert) {
       return (
@@ -404,7 +408,7 @@ class App extends React.Component {
             render={() => <ShoppingCart cart={this.state.cart} changeView={this.changeView} getCart={this.getCartByUser} removeItemFromCart={this.removeItemFromCart} changeQuantity={this.changeQuantity}/>  }>
           </Route>
           <Route exact path='/checkout'
-            render={() => <CheckOut user={this.state.user} submitInvoice={this.submitInvoice}/>  }>
+            render={() => <CheckOut user={this.state.user} submitInvoice={this.submitInvoice} changeView={this.changeView}/>  }>
           </Route>
           <Route exact path='/register_user'
             render={() => <RegisterUserForm registerUser={this.registerUser}/>  }>

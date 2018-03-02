@@ -144,8 +144,8 @@ class RegisterUserForm extends React.Component {
   render() {
     return (
     <form className="col-xs-12">
-      <div className="col-xs-6 col-xs-offset-5 signup-title"><h3>Create Your Account</h3></div>
-      <div className="col-xs-6 col-xs-offset-3" style={{border: 'solid 1px lightgrey'}}>
+      <div className="col-xs-6 col-xs-offset-4 signup-title"><h2>Create Your Account</h2></div>
+      <div className="col-xs-6 col-xs-offset-3" style={styles.form}>
 
       <div style={{paddingTop: '20px'}}>
         <div className={`form-group col-xs-12
@@ -153,7 +153,7 @@ class RegisterUserForm extends React.Component {
           <label className="control-label col-xs-2">First Name</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
-              <span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
+              <span className="input-group-addon"  style={styles.icon}><i className="glyphicon glyphicon-user"></i></span>
               <input name="firstname" placeholder="First Name" className="form-control" type="text" value={this.state.firstname} onChange={(event) => this.handleUserInput(event)}/>
             </div>
           </div>
@@ -164,7 +164,7 @@ class RegisterUserForm extends React.Component {
           <label className="col-md-2 control-label" >Last Name</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
-              <span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
+              <span className="input-group-addon"  style={styles.icon}><i className="glyphicon glyphicon-user"></i></span>
               <input name="lastname" placeholder="Last Name" className="form-control" type="text"
               value={this.state.lastname} onChange={(event) => this.handleUserInput(event)}/>
             </div>
@@ -176,7 +176,7 @@ class RegisterUserForm extends React.Component {
           <label className="col-md-2 control-label">Street</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
-              <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
+              <span className="input-group-addon"  style={styles.icon}><i className="glyphicon glyphicon-home"></i></span>
               <input name="street" placeholder="Street" className="form-control" type="text"
               value={this.state.street} onChange={(event) => this.handleUserInput(event)}/>
             </div>
@@ -188,7 +188,7 @@ class RegisterUserForm extends React.Component {
           <label className="col-md-2 control-label">Apt No</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
-              <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
+              <span className="input-group-addon"  style={styles.icon}><i className="glyphicon glyphicon-home"></i></span>
               <input name="aptNo" placeholder="Apt No" className="form-control" type="text"
               value={this.state.aptNo} onChange={(event) => this.handleUserInput(event)}/>
             </div>
@@ -200,7 +200,7 @@ class RegisterUserForm extends React.Component {
           <label className="col-md-2 control-label">City</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
-              <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
+              <span className="input-group-addon"  style={styles.icon}><i className="glyphicon glyphicon-home"></i></span>
               <input name="city" placeholder="city" className="form-control"  type="text"
               value={this.state.city} onChange={(event) => this.handleUserInput(event)}/>
             </div>
@@ -212,7 +212,7 @@ class RegisterUserForm extends React.Component {
           <label className="col-md-2 control-label">State</label>
           <div className="col-md-10 selectContainer">
             <div className="input-group">
-              <span className="input-group-addon"><i className="glyphicon glyphicon-list"></i></span>
+              <span className="input-group-addon"  style={styles.icon}><i className="glyphicon glyphicon-list"></i></span>
               <select name="state" className="form-control selectpicker"
                 value={this.state.state} onChange={(event) => this.handleUserInput(event)}>
                 <option value=" " >Please select your state</option>
@@ -277,7 +277,7 @@ class RegisterUserForm extends React.Component {
           <label className="col-md-2 control-label">Zip Code</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
-              <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
+              <span className="input-group-addon"  style={styles.icon}><i className="glyphicon glyphicon-home"></i></span>
               <input name="zip" placeholder="Zip Code" className="form-control" type="text"
               value={this.state.zip} onChange={(event) => this.handleUserInput(event)}/>
             </div>
@@ -288,7 +288,7 @@ class RegisterUserForm extends React.Component {
           <label className="col-md-2 control-label">Country</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
-              <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
+              <span className="input-group-addon"  style={styles.icon}><i className="glyphicon glyphicon-home"></i></span>
               <input name="country" placeholder="Country" className="form-control" type="text"
               value={this.state.country} onChange={(event) => this.handleUserInput(event)}/>
             </div>
@@ -300,7 +300,7 @@ class RegisterUserForm extends React.Component {
           <label className="col-md-2 control-label">Email</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
-              <span className="input-group-addon"><i className="glyphicon glyphicon-envelope"></i></span>
+              <span className="input-group-addon"  style={styles.icon}><i className="glyphicon glyphicon-envelope"></i></span>
               <input name="email" name="email" placeholder="E-Mail Address" className="form-control" type="text" value={this.state.email} onChange={(event) => this.handleUserInput(event)}/>
             </div>
           </div>
@@ -311,7 +311,7 @@ class RegisterUserForm extends React.Component {
           <label className="col-md-2 control-label">Password</label>
           <div className="col-md-10 inputGroupContainer">
             <div className="input-group">
-              <span className="input-group-addon"><i className="glyphicon glyphicon-pencil"></i></span>
+              <span className="input-group-addon"  style={styles.icon}><i className="glyphicon glyphicon-pencil"></i></span>
               <input name="password" type="password" placeholder="Password" className="form-control"
               value={this.state.password} onChange={(event) => this.handleUserInput(event)}/>
             </div>
@@ -322,10 +322,10 @@ class RegisterUserForm extends React.Component {
           <label className="col-md-2 control-label"></label>
           <div className="col-md-10">
             <div className="col-xs-6">
-              <button type="button" id="sign-up-button" className="btn btn-block btn-default" onClick={this.registerUser} disabled={!this.state.formValid}>SIGN UP</button>
+              <button type="button" id="sign-up-button" className="btn-lg register-button" onClick={this.registerUser} disabled={!this.state.formValid}>SIGN UP</button>
             </div>
             <div className="col-xs-6">
-              <button type="button" className="btn btn-block btn-default" ><Link to='/'>HOME</Link></button>
+              <button type="button" className="btn-lg register-button" ><Link to='/'>HOME</Link></button>
             </div>
           </div>
         </div>
@@ -336,6 +336,14 @@ class RegisterUserForm extends React.Component {
  }
 }
 
+const styles = {
+  icon: {'backgroundColor': '#2BABBC'},
+  form: {
+    'border': 'solid 1px lightgrey',
+    'backgroundColor': '#ededed',
+    'borderRadius': '8px'
+  }
+}
 
 // const RegisterUserForm = ({registerUser}) => {
 
