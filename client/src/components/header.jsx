@@ -2,7 +2,6 @@
   import ReactDOM from 'react-dom';
   import { Badge } from 'react-bootstrap';
 
-
   import CategoryList from './categoryList.jsx';
 
   var axios = require('axios');
@@ -110,11 +109,11 @@
       }
     }
 
-
     render() {
       return (
+        <div className="container-fluid">
         <nav className="navbar navbar-inverse">
-          <div className="container-fluid">
+          <div className="">
 
             {/* Logo */}
             <div className="navbar-header logo">
@@ -129,32 +128,42 @@
               </li>
             </ul>
 
-
           {/* search bar */}
-             <ul className="nav navbar-nav" style={{width: '50%'}}>
-               <div className="input-group" style={{paddingTop: '10px'}}>
-                 <input onChange={e => this.handleChange(e)} type = "text" className ="form-control" placeholder="Search for something fun ..." />
-                 <div onClick={this.handleSearchClick} className="input-group-addon">
-                   <span className="glyphicon glyphicon-search"></span>
-                 </div>
+            <ul className="nav navbar-nav" style={{width: '50%'}}>
+              <div className="input-group" style={{paddingTop: '10px'}}>
+                <input onChange={e => this.handleChange(e)} type = "text" className ="form-control" placeholder="Search for something fun ..." />
+                <div onClick={this.handleSearchClick} className="input-group-addon">
+                  <span className="glyphicon glyphicon-search"></span>
                 </div>
-             </ul>
+              </div>
+            </ul>
 
            {/* user account */}
           <ul className="nav navbar-nav navbar-right">
-            <li>
-              <button onClick={() => this.changeView('shoppingCart')} style={{marginTop: '15px', backgroundColor: '#222', color:'grey', textAlign:'center', border:'none'}}>
-                <span className="glyphicon glyphicon-shopping-cart" style={{'fontSize': '1.5em'}}>
-                {this.renderBadge()}
-                </span>
-              </button>
+            <li style={{'color': 'white', 'paddingRight': '10px', 'paddingTop': '25px'}}>
+              <span >Hello, {this.props.user.firstname}!</span>
             </li>
             {this.renderLoginOptions()}
+            <li style={{'paddingRight': '20px'}}>
+              <span onClick={() => this.changeView('shoppingCart')} style={{marginTop: '20px', color:'grey', textAlign:'center', border:'none', 'fontSize': '1.6em', 'paddingRight': '10px', 'cursor': 'pointer'}} className="glyphicon glyphicon-shopping-cart">
+              </span>
+            </li>
           </ul>
           </div>
         </nav>
+        </div>
       );
     }
   }
 
 export default Header;
+
+{/*
+<li>
+  <button onClick={() => this.changeView('shoppingCart')} style={{marginTop: '15px', backgroundColor: '#222', color:'grey', textAlign:'center', border:'none'}}>
+    <span className="glyphicon glyphicon-shopping-cart" style={{'fontSize': '1.5em'}}>
+    {this.renderBadge()}
+    </span>
+  </button>
+</li>
+*/}

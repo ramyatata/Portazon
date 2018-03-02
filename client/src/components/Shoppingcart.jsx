@@ -26,7 +26,6 @@ class ShoppingCart extends React.Component {
   }
 
   handleRemoveClick(item) {
-    console.log('item to remove', item)
     this.props.removeItemFromCart(item);
   }
 
@@ -119,7 +118,7 @@ class ShoppingCart extends React.Component {
               </tr>
              </tbody>
             </Table>
-            <button onClick={this.handleCheckoutClick}>Checkout</button>
+            <button className="cart-checkout-button" onClick={this.handleCheckoutClick}>Checkout</button>
           </div>
         </div>
       </div>

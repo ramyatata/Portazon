@@ -105,8 +105,15 @@
 .cart-summary {
   margin-bottom: 200px;
 }
-.cart-summary-row {
 
+.cart-checkout-button {
+  background-color: 'white';
+  color: #2BABBC;
+  border-width: 2px;
+  border-color: #2BABBC;
+  border-radius: 8px;
+  margin-left: 15px;
+  margin-bottom: 15px;
 }
 
 /*************************************************
@@ -123,6 +130,9 @@
   width: 200px;
   height: 200px;
   overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 .card-title{
   height: 40px;
@@ -138,7 +148,15 @@
   font-weight: 600;
   font-size: 1.75rem;
 }
-
+.btn-cart {
+  border-color: ##ea7125;
+  background-color: rgb(0, 0, 0);
+  color: #fff;
+  border: 2px solid;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: '25%';
+}
 /*************************************************
                   Home page
 **************************************************/

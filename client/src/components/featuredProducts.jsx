@@ -43,9 +43,9 @@ class FeaturedProducts extends React.Component {
     }
 
     return (
-      <div>
-        <div className="col-lg-8 text-center"><h3>High Rated Products</h3></div>
-        <div className="col-lg-10 col-md-offset-1">
+      <div className="col-xs-12">
+        <div className="col-xs-12 text-center"><h3>High Rated Products</h3></div>
+        <div className="col-xs-12">
           <div className="carousel slide" id="myCarousel">
             <div className="carousel-inner">
               {highRatedProducts}
