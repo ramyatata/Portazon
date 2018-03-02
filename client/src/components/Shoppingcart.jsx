@@ -15,6 +15,7 @@ class ShoppingCart extends React.Component {
   }
 
   componentWillMount(){
+    console.log('in shipping cart')
     this.getTotals();
   }
 
