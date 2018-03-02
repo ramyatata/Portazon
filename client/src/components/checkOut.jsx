@@ -6,8 +6,6 @@ class CheckOut extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: '',
-      totalAmt: '',
       firstname: '',
       lastname: '',
       street: '',
@@ -48,7 +46,18 @@ class CheckOut extends React.Component {
         shippingAddress: address
       }
       this.props.submitInvoice(info);
+      this.setState({
+        firstname: '',
+        lastname: '',
+        street: '',
+        aptNo: '',
+        city: '',
+        state: '',
+        zip: '',
+        email: ''
+      })
     }
+    this.generateShippingForm();
   }
 
   generateShippingForm() {}

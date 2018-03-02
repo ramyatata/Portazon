@@ -325,7 +325,7 @@ class App extends React.Component {
       invoice.email = guest.email;
       axios.post('users/guestUpdateInvoices', invoice)
         .then(response => {
-          console.log('successfully submited guest invoice')
+          this.setState({showAddInvoiceAlert: true});
         })
         .catch(err => console.log('err submitting guest invoice'))
     }

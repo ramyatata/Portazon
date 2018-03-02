@@ -236,7 +236,6 @@ module.exports = {
       charged,
       date
     };
-    console.log('item in users/model', item)
     let invoices = JSON.stringify([item]);
 
     db.query(`INSERT INTO guest_invoices (invoices) VALUES ('${invoices}')`, (err, data) => {
