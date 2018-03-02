@@ -3,9 +3,9 @@ import ReactDom from 'react-dom';
 
 const RegisterSuccess = () => {
   return (
-    <div>
-      <h2>Success! Your account has been created.</h2>
-      <h3>Please Log In to continue.</h3>
+    <div className="reg-success container">
+      <h2 className="reg-success-text">Success! Your account has been created.</h2>
+      <h3 className="reg-success-text">Please log in to continue.</h3>
     </div>
   )
 }
