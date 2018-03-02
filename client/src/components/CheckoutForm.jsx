@@ -1,7 +1,4 @@
 import React from 'react';
-//import {injectStripe, CardCVCElement} from 'react-stripe-elements';
-
-// import AddressSection from './AddressSection.jsx';
 import CardSection from './CardSection.jsx';
 import axios from 'axios';
 
