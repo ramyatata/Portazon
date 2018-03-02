@@ -83,7 +83,7 @@ class App extends React.Component {
   }
 
   changeView(view, item, invoice){
-    alert(`changing view ${item._source.product_name}`);
+    // alert(`changing view ${item._source.product_name}`);
     this.setState({view: view, productDetail: item, userInvoice: invoice});
     let history = this.props.history;
     if(view === 'productDetail'){
@@ -191,6 +191,7 @@ class App extends React.Component {
       })
         .then(response => {
           let userCart = response.data;
+          console.log('reponse getting cart', response)
           let newState = {cart: userCart, badge: userCart.length};
           if (field) {
             newState[field] = true;
@@ -246,9 +247,12 @@ class App extends React.Component {
     } else {
       price = item._source.discounted_price;
     }
+    let productName = item._source.product_name;
+    let name = productName.replace(/"/g, '');
+
     var obj = {
       productID: item._id,
-      productName: item._source.product_name,
+      productName: name,
       amount: item.quantity,
       price: price,
       image_url: item._source.image[0],
@@ -265,6 +269,7 @@ class App extends React.Component {
         })
         .catch(err => console.log(err))
     } else {
+      console.log('obj to add to user', obj)
       let user = this.state.user;
       obj.image = [item._source.image[0]];
       user.cart.push(obj);
