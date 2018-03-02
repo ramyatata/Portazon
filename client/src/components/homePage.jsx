@@ -18,7 +18,7 @@ class HomePage extends React.Component {
     if(this.props.featuredProducts.length === 0) {
       featuredProducts = <div></div>
     } else {
-      featuredProducts = <FeaturedProducts featuredProducts={this.props.featuredProducts}/>
+      featuredProducts = <FeaturedProducts featuredProducts={this.props.featuredProducts} changeView={changeView}/>
     }
 
     return (
