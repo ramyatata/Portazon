@@ -170,7 +170,7 @@
 }
 .btn-cart {
   border-color: ##ea7125;
-  background-color: rgb(0, 0, 0);
+  background-color: #2BABBC;
   color: #fff;
   border: 2px solid;
   cursor: pointer;
@@ -325,7 +325,7 @@
 }
 
 .reg-success {
-  text-align: center
+  text-align: center;
 }
 /* need to check why this is not working when placed in style sheet */
 /*.prod-primaryPrice {
