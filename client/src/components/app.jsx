@@ -57,6 +57,7 @@ class App extends React.Component {
     this.createGuestUser = this.createGuestUser.bind(this);
     this.getInvoices = this.getInvoices.bind(this);
     // this.setParentState = this.setParentState.bind(this);
+    this.clearUserCart - this.clearUserCart.bind(this);
   }
 
 
@@ -124,6 +125,7 @@ class App extends React.Component {
         this.props.history.push('/');
         window.localStorage.setItem('token', user.data.token);
         this.getCartByUser();
+        this.getInvoices();
       })
       .catch(err => alert('Oops! Incorrect Email and/or password combination'));
 
@@ -228,7 +230,7 @@ class App extends React.Component {
         .then(response => {
           console.log('changed quantity!', response);
           this.getCartByUser();
-          alert('Quantity has been updated!')
+          // alert('Quantity has been updated!')
         })
         .catch(err => console.log('err changing quantity', err));
     } else {
@@ -323,6 +325,8 @@ class App extends React.Component {
       axios.post('users/updateInvoices', invoice, {headers: {'x-access-token': token}})
         .then(response => {
           this.getInvoices('showAddInvoiceAlert');
+          this.clearUserCart();
+
         })
         .catch(err => console.log('err adding invoice', err))
     } else {
@@ -338,6 +342,17 @@ class App extends React.Component {
     }
   }
 
+  clearUserCart() {
+    let token = window.localStorage.getItem('token');
+    let obj = {clearCart: true, userID: this.state.user.id, email: this.state.user.email}
+    axios.post('users/updateCart', obj, {headers: {'x-access-token': token}})
+    .then(response => {
+      this.getCartByUser();
+    })
+    .catch(err => {console.log('err clearing cart', err)})
+  }
+
+
   getInvoices(field) {
     let user = {
       userID: this.state.user.id,
@@ -350,6 +365,7 @@ class App extends React.Component {
       headers: {'x-access-token': token}
     })
       .then(response => {
+        console.log('respose geting invoices', response.data)
         let obj = {invoices: response.data};
         obj[field] = true;
         this.setState(obj)
@@ -377,9 +393,17 @@ class App extends React.Component {
         </div>
       )
     } else if (this.state.showAddInvoiceAlert) {
+      return (
+        <div>
+          <Alert bsStyle="success" onDismiss={() => this.handleDismissAlert('showAddInvoiceAlert')}>
+            <h4>Success!!</h4>
+            <p>Your order has been processed!</p>
+          </Alert>
+        </div>
+        )
+    } else {
       return null;
     }
-    return null;
   }
 
   handleDismissAlert(alert) {
