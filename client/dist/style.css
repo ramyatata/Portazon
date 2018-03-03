@@ -224,7 +224,8 @@
 }
 .prod-otherImage {
   border: solid 1px #f5f5f5;
-  width: 90px;
+  width: 100px;
+  margin: 2px;
   cursor: pointer;
   padding: 5px 6px;
   border-radius: 5px;

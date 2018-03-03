@@ -6,6 +6,8 @@ const ProductDetail = ({item, addItemToCart}) => {
   //ratings
   let ratingStars = [];
 
+  console.log(item);
+
   for(let i = 0; i < item._source.rating; i++) {
     ratingStars.push(<span><i className="fa fa-star"></i></span>);
   }
@@ -50,6 +52,8 @@ const ProductDetail = ({item, addItemToCart}) => {
   }
 
   return(
+
+
     <div className="col-xs-12" style={{padding: '10px'}}>
       <div className="col-xs-7 prod-leftContainer" >
         <div className="prod-detailTitle">
@@ -62,7 +66,7 @@ const ProductDetail = ({item, addItemToCart}) => {
           </div>
         </div>
         <div className="prod-imageContainer">
-          <div className="prod-otherImagesCarousel col-xs-3">
+          <div className="prod-otherImagesCarousel col-xs-3" style={{overflow: 'auto', width: '120px', textAlign: 'center', padding: '10px'}}>
             <ul className="prod-otherImagesList" style={{'marginLeft': '-50px', padding: 'none'}}>
               {thumbnails}
             </ul>
@@ -82,12 +86,10 @@ const ProductDetail = ({item, addItemToCart}) => {
             <p style={{display: 'inline', color: 'red'}}>Save ${save}</p>
           </div>
           <div className="prod-description">
-            <h6>Description</h6>
+            <h5>Description</h5>
+            <ul>
             {limitDescription(item._source.description)}
-          </div>
-          <div className="prod-details">
-            <h6>Details</h6>
-            <ul></ul>
+            </ul>
           </div>
           <div className="prod-quant col-xs-12">
             <div className="col-xs-5 form-group">
@@ -112,7 +114,9 @@ const ProductDetail = ({item, addItemToCart}) => {
 }
 
 function limitDescription(description) {
-  return description.substring(0, 500)
+  let desc = description.substring(0, 500).split('. ');
+  return desc.map((item)=><li>{item}</li>)
+
 }
 
 
