@@ -26,7 +26,7 @@ class UserProfile extends React.Component {
       return (
         <tr key={ind}>
           <td>
-          {item.productName}{'       '}<span style={styles.calculate}>({item.price} x {item.amount} = {item.price * item.amount})</span>
+          {item.productName}{'       '}<span style={styles.calculate}>(${item.price} x {item.amount} = ${item.price * item.amount})</span>
           </td>
         </tr>
         )
@@ -38,8 +38,8 @@ class UserProfile extends React.Component {
           <Table>
             <tbody>
               {mappedItems}
-              <tr><td>Total Amount: {invoice.charged}</td></tr>
-              <tr><td>TransactionID: {invoice.transactionID}</td></tr>
+              <tr><td>Total Amount: ${invoice.charged}</td></tr>
+              <tr><td>TransactionID: #{invoice.transactionID}</td></tr>
             </tbody>
           </Table>
         </div>
@@ -49,7 +49,7 @@ class UserProfile extends React.Component {
   }
 
   renderPastInvoices() {
-    let invoices = this.props.invoices;
+    let invoices = this.props.invoices.reverse();
     console.log('invoices in profile', invoices)
     return (
       invoices.map((invoice, ind) => {

@@ -198,7 +198,11 @@ class App extends React.Component {
         .then(response => {
           let userCart = response.data;
           console.log('reponse getting cart', response)
-          let newState = {cart: userCart, badge: userCart.length};
+          let num = 0;
+          for (let i = 0; i < userCart.length; i++) {
+            num += userCart[i].amount;
+          }
+          let newState = {cart: userCart, badge: num};
           if (field) {
             newState[field] = true;
           }
