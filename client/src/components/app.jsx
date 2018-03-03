@@ -104,6 +104,7 @@ class App extends React.Component {
       history.push('/user_profile');
     } else if (view === 'homePage'){
       history.push('/');
+      //reloading page
       location.reload();
     }
   }
