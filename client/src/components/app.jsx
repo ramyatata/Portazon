@@ -57,6 +57,7 @@ class App extends React.Component {
     this.createGuestUser = this.createGuestUser.bind(this);
     this.getInvoices = this.getInvoices.bind(this);
     // this.setParentState = this.setParentState.bind(this);
+    this.clearUserCart - this.clearUserCart.bind(this);
   }
 
 
@@ -227,7 +228,7 @@ class App extends React.Component {
         .then(response => {
           console.log('changed quantity!', response);
           this.getCartByUser();
-          alert('Quantity has been updated!')
+          // alert('Quantity has been updated!')
         })
         .catch(err => console.log('err changing quantity', err));
     } else {
@@ -322,6 +323,8 @@ class App extends React.Component {
       axios.post('users/updateInvoices', invoice, {headers: {'x-access-token': token}})
         .then(response => {
           this.getInvoices('showAddInvoiceAlert');
+          this.clearUserCart();
+
         })
         .catch(err => console.log('err adding invoice', err))
     } else {
@@ -336,6 +339,18 @@ class App extends React.Component {
         .catch(err => console.log('err submitting guest invoice'))
     }
   }
+
+  clearUserCart() {
+    let token = window.localStorage.getItem('token');
+    let obj = {clearCart: true, userID: this.state.user.id, email: this.state.user.email}
+    axios.post('users/updateCart', obj, {headers: {'x-access-token': token}})
+    .then(response => {
+      console.log('response in clear cart', response)
+      this.getCartByUser();
+    })
+    .catch(err => {console.log('err clearing cart', err)})
+  }
+
 
   getInvoices(field) {
     let user = {
@@ -376,9 +391,17 @@ class App extends React.Component {
         </div>
       )
     } else if (this.state.showAddInvoiceAlert) {
+      return (
+        <div>
+          <Alert bsStyle="success" onDismiss={() => this.handleDismissAlert('showAddInvoiceAlert')}>
+            <h4>Success!!</h4>
+            <p>Your order has been processed!</p>
+          </Alert>
+        </div>
+        )
+    } else {
       return null;
     }
-    return null;
   }
 
   handleDismissAlert(alert) {

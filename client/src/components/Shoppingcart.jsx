@@ -18,6 +18,7 @@ class ShoppingCart extends React.Component {
     this.getTotals();
   }
 
+
   handleCheckoutClick() {
     console.log('in handle checkout click')
     this.props.changeView('checkOut');
@@ -39,13 +40,14 @@ class ShoppingCart extends React.Component {
     let totalItems = 0;
     for (let i = 0; i < items.length; i++) {
       let price = items[i].price;
+      price = price.toFixed(2);
       let quantity = items[i].amount;
       let itemTotal = price * quantity;
-      items[i].indTotal = itemTotal;
+      items[i]['indTotal'] = itemTotal;
       totalPrice += itemTotal;
       totalItems += quantity;
     }
-
+    console.log('totalPrice', totalPrice)
     this.setState({totalAmt: totalPrice.toFixed(2), totalItems: totalItems, cart: items});
   }
 
@@ -57,10 +59,10 @@ class ShoppingCart extends React.Component {
         <td><img src={item.image[0]} alt="" className="cart-item-img" ></img>
         </td>
         <td>{item.productName}</td>
-        <td>{item.price.toFixed(2)}</td>
+        <td>{item.price}</td>
         <td><input className="input-sm" style={styles.quantityInput}onChange={e => this.changeQuantity(e, item)} placeholder={item.amount}/>
         </td>
-        <td>{item.indTotal.toFixed(2)}</td>
+        <td>{item.indTotal}</td>
         <td><button type="button" className="cart-button" onClick={() => this.handleRemoveClick(item)}>Remove</button></td>
       </tr>
     ))
