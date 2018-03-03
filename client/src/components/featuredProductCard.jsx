@@ -19,7 +19,7 @@ class FeaturedProductCard extends React.Component {
 
     return (
       <div className="item" >
-        <div className="col-xs-2" style={{'padding': '20px'}}>
+        <div className="col-xs-2" style={{'padding': '20px'}} onClick={() => this.handleClick}>
           <img className="carousel-img" src={image} style={{'width': '150px', 'height': '150px', overflow: 'hidden'}}/>
           <div className="carousel-title">
             <h5>$ {this.props.product._source.discounted_price}</h5>
