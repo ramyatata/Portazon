@@ -15,11 +15,12 @@ const ProductDetail = ({item, addItemToCart}) => {
   //thumbnails
   let thumbnails = [];
   let images = item._source.image;
+  console.log(images.length);
   for(let i = 0; i < images.length; i++) {
     thumbnails.push(
       <li style={{left: '0px', top: '0px'}}>
         <div className="prod-otherImage">
-          <img src={images[i]} role="button"></img>
+          <img src={images[i]} role="button" key={i}></img>
         </div>
       </li>
     );
@@ -52,7 +53,6 @@ const ProductDetail = ({item, addItemToCart}) => {
   }
 
   return(
-
 
     <div className="col-xs-12" style={{padding: '10px'}}>
       <div className="col-xs-7 prod-leftContainer" >
@@ -114,7 +114,7 @@ const ProductDetail = ({item, addItemToCart}) => {
 }
 
 function limitDescription(description) {
-  let desc = description.substring(0, 500).split('. ');
+  let desc = description.substring(0, 1000).split('. ');
   return desc.map((item)=><li>{item}</li>)
 
 }

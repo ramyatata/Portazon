@@ -88,6 +88,7 @@ class App extends React.Component {
     this.setState({view: view, productDetail: item, userInvoice: invoice});
     let history = this.props.history;
     if(view === 'productDetail'){
+      console.log('view');
       history.push('/product_detail');
     } else if (view === 'shoppingCart') {
       history.push('/shoppingcart');
