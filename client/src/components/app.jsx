@@ -84,6 +84,7 @@ class App extends React.Component {
 
   changeView(view, item, invoice){
     // alert(`changing view ${item._source.product_name}`);
+    console.log(view, item, invoice)
     this.setState({view: view, productDetail: item, userInvoice: invoice});
     let history = this.props.history;
     if(view === 'productDetail'){
@@ -261,7 +262,6 @@ class App extends React.Component {
     if (this.state.user.id) {
       obj.userID = this.state.user.id;
       obj.email = this.state.user.email;
-      console.log('in addItem', obj)
       let token = window.localStorage.getItem('token');
       axios.post('users/updateCart', obj, {headers: {'x-access-token': token}})
         .then(response => {
@@ -269,7 +269,6 @@ class App extends React.Component {
         })
         .catch(err => console.log(err))
     } else {
-      console.log('obj to add to user', obj)
       let user = this.state.user;
       obj.image = [item._source.image[0]];
       user.cart.push(obj);
@@ -360,7 +359,7 @@ class App extends React.Component {
   renderAlert() {
     if (this.state.showAddAlert) {
       return (
-        <div className="container">
+        <div>
           <Alert bsStyle="success" onDismiss={() => this.handleDismissAlert('showAddAlert')}>
             <h4>Success!!</h4>
             <p>The item was added to your cart!</p>
@@ -369,7 +368,7 @@ class App extends React.Component {
       )
     } else if (this.state.showRemoveAlert) {
       return (
-        <div className="container">
+        <div >
           <Alert bsStyle="success" onDismiss={() => this.handleDismissAlert('showRemoveAlert')}>
             <h4>Success!!</h4>
             <p>The item was removed to your cart!</p>
@@ -377,12 +376,7 @@ class App extends React.Component {
         </div>
       )
     } else if (this.state.showAddInvoiceAlert) {
-      return (
-        <Alert bsStyle="success" onDismiss={() => this.handleDismissAlert('showAddInvoiceAlert')}>
-          <h4>Success!!</h4>
-          <p>Your order has been processed!</p>
-        </Alert>
-      )
+      return null;
     }
     return null;
   }
@@ -476,4 +470,13 @@ function filterDuplicateImages(items){
 export default withRouter(App);
 
 
+
+/*
+      { <div>
+        <Alert bsStyle="success" onDismiss={() => this.handleDismissAlert('showAddInvoiceAlert')}>
+          <h4>Success!!</h4>
+          <p>Your order has been processed!</p>
+        </Alert>
+        </div>
+*/
 

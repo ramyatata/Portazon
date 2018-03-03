@@ -15,11 +15,11 @@ class ShoppingCart extends React.Component {
   }
 
   componentWillMount(){
-    console.log('in shipping cart')
     this.getTotals();
   }
 
   handleCheckoutClick() {
+    console.log('in handle checkout click')
     this.props.changeView('checkOut');
   }
 
@@ -35,16 +35,13 @@ class ShoppingCart extends React.Component {
 
   getTotals(){
     let items = this.props.cart;
-    console.log('items', items)
     let totalPrice = 0;
     let totalItems = 0;
     for (let i = 0; i < items.length; i++) {
       let price = items[i].price;
       let quantity = items[i].amount;
       let itemTotal = price * quantity;
-      console.log('itemTotal', itemTotal, items[i])
       items[i].indTotal = itemTotal;
-      console.log('item indTotal', items[i].indTotal)
       totalPrice += itemTotal;
       totalItems += quantity;
     }
