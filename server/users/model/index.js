@@ -63,7 +63,7 @@ module.exports = {
 
         db.query(`UPDATE user_invoices SET invoices = '${invoices}' WHERE userID = '${userID}'`, (err, data) => {
           if (err) throw 'Could not update product in Invoices'
-          cb(`TransactionID Id ${transactionID} has been modified in ${email}'s Invoices`);
+          cb({email, transactionID});
         });
       }
     );
@@ -240,7 +240,7 @@ module.exports = {
 
     db.query(`INSERT INTO guest_invoices (invoices) VALUES ('${invoices}')`, (err, data) => {
       if (err) throw 'Could not update product in Invoices'
-      cb(`TransactionID Id ${transactionID} has been modified in Guest Invoices`);
+      cb({email, transactionID});
     });
   }
 
