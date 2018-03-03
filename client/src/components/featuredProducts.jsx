@@ -5,8 +5,14 @@ import FeaturedProductCard from './featuredProductCard.jsx';
 class FeaturedProducts extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
 
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+
+  handleClick(ind) {
+    let item = this.props.featuredProducts[ind + 1];
+    this.props.changeView('productDetail', item);
   }
 
   componentDidMount(){
@@ -35,9 +41,15 @@ class FeaturedProducts extends React.Component {
     });
 
 
-    $('.carousel').on('click', '.item', function () {
-      alert($(this).index());
-    });
+    // $('.carousel').on('click', '.item', () => {
+    //   let ind = $(this).index();
+    //   alert(ind);
+    //   console.log(this.state.featuredProducts);
+    //   let item = this.state.featuredProducts[ind];
+    //   console.log(item);
+    //   item._source.image = JSON.parse(item._source.image);
+    //   this.handleClick(item)
+    // });
   }
 
   render() {
@@ -49,7 +61,7 @@ class FeaturedProducts extends React.Component {
       highRatedProducts = this.props.featuredProducts.map(
         (prod, ind)=> {
           return (
-            <div className="item" onClick={()=> alert(ind)}>
+            <div className="item" onClick={()=>this.handleClick(ind)}>
               <FeaturedProductCard product={prod} key={ind} changeView={this.props.changeView} index={ind}/>
             </div>
           );
