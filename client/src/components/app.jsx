@@ -345,7 +345,6 @@ class App extends React.Component {
     let obj = {clearCart: true, userID: this.state.user.id, email: this.state.user.email}
     axios.post('users/updateCart', obj, {headers: {'x-access-token': token}})
     .then(response => {
-      console.log('response in clear cart', response)
       this.getCartByUser();
     })
     .catch(err => {console.log('err clearing cart', err)})

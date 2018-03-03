@@ -165,9 +165,7 @@ router.get('/cart', (req, res) => {
 router.post('/updateCart', (req, res) => {
   let isRequestValid = JWTvalidation(req.headers['x-access-token'], res);
   if (!isRequestValid) return;
-  console.log('in updatecart', req.body)
   model.updateCart(req.body, (response) => {
-    console.log('response clearing cart', response)
     res.status(201).send(response);
   })
 });
