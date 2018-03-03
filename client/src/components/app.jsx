@@ -39,7 +39,8 @@ class App extends React.Component {
       guestNum:'',
       showAddAlert: false,
       showRemoveAlert: false,
-      showAddInvoiceAlert: false
+      showAddInvoiceAlert: false,
+      showIncorrectLogin: false
 
     }
     this.changeView = this.changeView.bind(this);
@@ -127,7 +128,7 @@ class App extends React.Component {
         this.getCartByUser();
         this.getInvoices();
       })
-      .catch(err => alert('Oops! Incorrect Email and/or password combination'));
+      .catch(err => this.setState({showIncorrectLogin: true}));
 
   }
 
@@ -144,6 +145,7 @@ class App extends React.Component {
   registerUser(user) {
     axios.post('users/registerUser', user)
       .then(response => {
+        console.log('reponse in register user', response)
         this.props.history.push('/register_success');
       })
       .catch(err => console.log('err', err))
@@ -196,7 +198,11 @@ class App extends React.Component {
         .then(response => {
           let userCart = response.data;
           console.log('reponse getting cart', response)
-          let newState = {cart: userCart, badge: userCart.length};
+          let num = 0;
+          for (let i = 0; i < userCart.length; i++) {
+            num += userCart[i].amount;
+          }
+          let newState = {cart: userCart, badge: num};
           if (field) {
             newState[field] = true;
           }
@@ -401,7 +407,15 @@ class App extends React.Component {
           </Alert>
         </div>
         )
-    } else {
+    } else if (this.state.showIncorrectLogin) {
+      return (
+        <div>
+          <Alert bsStyle="danger" onDismiss={() => this.handleDismissAlert('showIncorrectLogin')}>
+            <h4>Error!!</h4>
+            <p>Incorrect log in credentials. Please check email and password again. </p>
+          </Alert>
+        </div>)
+    }else {
       return null;
     }
   }

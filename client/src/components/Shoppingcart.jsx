@@ -12,6 +12,7 @@ class ShoppingCart extends React.Component {
     this.changeQuantity = this.changeQuantity.bind(this);
     this.handleCheckoutClick = this.handleCheckoutClick.bind(this);
     this.handleRemoveClick = this.handleRemoveClick.bind(this);
+
   }
 
   componentWillMount(){
