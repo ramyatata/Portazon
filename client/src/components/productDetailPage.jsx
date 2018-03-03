@@ -38,10 +38,10 @@ const ProductDetail = ({item, addItemToCart}) => {
 
   let rating = item._source.rating;
   if (rating === null) {
-    rating = 'null';
+    rating = 'null';9
   }
 
-  let save = item._source.retail_price - item._source.discounted_price;
+  let save = parseInt(item._source.retail_price - item._source.discounted_price).toFixed(2);
 
 
   function includeQuantityInItemToAdd(item) {
@@ -81,8 +81,8 @@ const ProductDetail = ({item, addItemToCart}) => {
       <div className="col-xs-5" style={{paddingRight: '50px', paddingTop: '20px'}}>
         <div className="prod-rightContainer col-xs-12">
           <div className="prod-price">
-            <h3 style={{display: 'inline', fontWeight:'600', lineHeight: '1', textTransform: 'uppercase'}}>${item._source.discounted_price}</h3>
-            <p style={{margin: '0px 15px', display: 'inline'}}>Was ${item._source.retail_price}</p>
+            <h3 style={{display: 'inline', fontWeight:'600', lineHeight: '1', textTransform: 'uppercase'}}>${parseInt(item._source.discounted_price).toFixed(2)}</h3>
+            <p style={{margin: '0px 15px', display: 'inline'}}>Was ${parseInt(item._source.retail_price).toFixed(2)}</p>
             <p style={{display: 'inline', color: 'red'}}>Save ${save}</p>
           </div>
           <div className="prod-description">
