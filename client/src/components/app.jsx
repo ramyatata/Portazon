@@ -124,6 +124,7 @@ class App extends React.Component {
         this.props.history.push('/');
         window.localStorage.setItem('token', user.data.token);
         this.getCartByUser();
+        this.getInvoices();
       })
       .catch(err => alert('Oops! Incorrect Email and/or password combination'));
 
@@ -363,6 +364,7 @@ class App extends React.Component {
       headers: {'x-access-token': token}
     })
       .then(response => {
+        console.log('respose geting invoices', response.data)
         let obj = {invoices: response.data};
         obj[field] = true;
         this.setState(obj)

@@ -1,21 +1,75 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { Tabs, Tab, Panel } from 'react-bootstrap';
+import { Tabs, Tab, Panel, Table } from 'react-bootstrap';
 
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.renderPersonalInfo = this.renderPersonalInfo.bind(this);
     this.renderPastInvoices = this.renderPastInvoices.bind(this);
+    // this.mapCart = this.mapCart.bind(this);
   }
 
   componentWillMount() {
-    this.props.getInvoices();
+    // this.props.getInvoices();
+  }
+
+
+
+  generateInvoiceBody(invoice) {
+    let cart = invoice.cart;
+    let mappedItems = cart.map((item, ind) => mapCart(item, ind))
+    let date = invoice.date.replace(/T|\:\d\dZ/g,' ');
+    console.log('mapped', mappedItems)
+
+    function mapCart(item, ind){
+      return (
+        <tr key={ind}>
+          <td>
+          {item.productName}{'       '}<span style={styles.calculate}>({item.price} x {item.amount} = {item.price * item.amount})</span>
+          </td>
+        </tr>
+        )
+    }
+
+    return(
+      <div>
+        <div>
+          <Table>
+            <tbody>
+              {mappedItems}
+              <tr><td>Total Amount: {invoice.charged}</td></tr>
+              <tr><td>TransactionID: {invoice.transactionID}</td></tr>
+            </tbody>
+          </Table>
+        </div>
+
+      </div>
+    )
   }
 
   renderPastInvoices() {
     let invoices = this.props.invoices;
     console.log('invoices in profile', invoices)
+    return (
+      invoices.map((invoice, ind) => {
+        let date = invoice.date.replace(/T|\:\d\dZ/g,' ').substring(0, 10);
+        return (
+        <div key={ind}>
+          <Panel id="collapsible-panel" bsStyle="info" >
+            <Panel.Heading>
+              <Panel.Title toggle>{date}</Panel.Title>
+            </Panel.Heading>
+            <Panel.Collapse>
+              <Panel.Body>
+               {this.generateInvoiceBody(invoice)}
+              </Panel.Body>
+            </Panel.Collapse>
+          </Panel>
+        </div>
+      )
+      })
+    )
   }
 
   renderPersonalInfo() {
@@ -69,6 +123,13 @@ class UserProfile extends React.Component {
         </Tabs>
       </div>
     )
+  }
+}
+
+
+const styles = {
+  calculate: {
+    'color': '#2BABBC'
   }
 }
 
