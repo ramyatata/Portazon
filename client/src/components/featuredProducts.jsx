@@ -33,6 +33,11 @@ class FeaturedProducts extends React.Component {
         next.children(':first-child').clone().appendTo($(this));
       }
     });
+
+
+    $('.carousel').on('click', '.item', function () {
+      alert($(this).index());
+    });
   }
 
   render() {
@@ -41,7 +46,16 @@ class FeaturedProducts extends React.Component {
     if(this.props.featuredProducts.length === 0){
       highRatedProducts = <div></div>
     } else {
-      highRatedProducts = this.props.featuredProducts.map((prod, ind)=><FeaturedProductCard product={prod} key={ind} changeView={this.props.changeView} />)
+      highRatedProducts = this.props.featuredProducts.map(
+        (prod, ind)=> {
+          return (
+            <div className="item" onClick={()=> alert(ind)}>
+              <FeaturedProductCard product={prod} key={ind} changeView={this.props.changeView} index={ind}/>
+            </div>
+          );
+        }
+
+        )
     }
 
     return (
