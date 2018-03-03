@@ -85,12 +85,15 @@ class App extends React.Component {
   }
 
   changeView(view, item, invoice){
-    // alert(`changing view ${item._source.product_name}`);
-    console.log(view, item, invoice)
-    this.setState({view: view, productDetail: item, userInvoice: invoice});
+    if(item){
+      this.setState({view: view, productDetail: item, userInvoice: invoice});
+    } else {
+      this.setState({view: view});
+    }
+
     let history = this.props.history;
+
     if(view === 'productDetail'){
-      console.log('view');
       history.push('/product_detail');
     } else if (view === 'shoppingCart') {
       history.push('/shoppingcart');
@@ -100,6 +103,10 @@ class App extends React.Component {
       history.push('/register_user');
     } else if (view === 'userProfile') {
       history.push('/user_profile');
+    } else if (view === 'homePage'){
+      history.push('/');
+      //reloading page
+      location.reload();
     }
   }
 
@@ -451,7 +458,7 @@ class App extends React.Component {
             render={() => <CheckOut user={this.state.user} submitInvoice={this.submitInvoice} changeView={this.changeView}/>  }>
           </Route>
           <Route exact path='/register_user'
-            render={() => <RegisterUserForm registerUser={this.registerUser}/>  }>
+            render={() => <RegisterUserForm registerUser={this.registerUser} changeView={this.changeView}/>  }>
           </Route>
           <Route exact path='/register_success'
             render={() => <RegisterSuccess /> }>

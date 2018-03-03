@@ -49,6 +49,7 @@ class RegisterUserForm extends React.Component {
     this.validateForm = this.validateForm.bind(this);
     this.errorClass = this.errorClass.bind(this);
     this.registerUser = this.registerUser.bind(this);
+    this.changeView = this.changeView.bind(this);
   }
 
   registerUser() {
@@ -73,6 +74,10 @@ class RegisterUserForm extends React.Component {
 
   validateForm(){
     this.setState({formValid: this.state.emailValid && this.state.firstnameValid})
+  }
+
+  changeView(){
+    this.props.changeView('homePage');
   }
 
   validateField(fieldName, value){
@@ -325,7 +330,7 @@ class RegisterUserForm extends React.Component {
               <button type="button" id="sign-up-button" className="btn-md register-button" onClick={this.registerUser} disabled={!this.state.formValid}>SIGN UP</button>
             </div>
             <div className="col-xs-6">
-              <button type="button" className="btn-md register-button" ><Link to='/'>HOME</Link></button>
+              <button type="button" className="btn-md register-button" onClick={()=> this.changeView()}>HOME</button>
             </div>
           </div>
         </div>
